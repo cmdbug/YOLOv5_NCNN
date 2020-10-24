@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ocr.OcrActivity">
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/image_result"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:src="@drawable/ic_launcher_foreground"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/image_src"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/image_result"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/imageResultbg"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toTopOf="@id/image_src"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_src"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,4:3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_info"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#FFFFFFFF"
+        android:editable="true"
+        android:focusable="false"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:padding="3dp"
+        android:text="Please choose photo..."
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_src"
+        app:layout_constraintTop_toBottomOf="@id/image_result"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Switch
+        android:id="@+id/sw_show_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:checked="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_src"/>
+
+    <Button
+        android:id="@+id/btn_photo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Photo"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sw_show_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,76 @@
+//
+//  YoloV5.hpp
+//  YOLOv5NCNN
+//
+//  Created by WZTENG on 2020/7/6.
+//  Copyright © 2020 TENG. All rights reserved.
+//
+
+#ifndef YoloV5_hpp
+#define YoloV5_hpp
+
+#include <stdio.h>
+#include "ncnn/ncnn/net.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <UIKit/UIImage.h>
+#import <functional>
+
+namespace cv {
+    typedef struct {
+        int width;
+        int height;
+    }Size;
+}
+
+typedef struct {
+    std::string name;
+    int stride;
+    std::vector<cv::Size> anchors;
+}YoloLayerData;
+
+typedef struct BoxInfo {
+    float x1;
+    float y1;
+    float x2;
+    float y2;
+    float score;
+    int label;
+}BoxInfo;
+
+class YoloV5 {
+public:
+    YoloV5(const char* param, const char* bin);
+    ~YoloV5();
+    std::vector<BoxInfo> dectect(UIImage *image, float threshold, float nms_threshold);
+    std::vector<std::string> labels{"person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
+        "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow",
+        "elephant", "bear", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
+        "skis", "snowboard", "sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard",
+        "tennis racket", "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl", "banana", "apple",
+        "sandwich", "orange", "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch",
+        "potted plant", "bed", "dining table", "toilet", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone",
+        "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
+        "hair drier", "toothbrush"};
+
+private:
+    static std::vector<BoxInfo> decode_infer(ncnn::Mat &data, int stride, const cv::Size& frame_size, int net_size, int num_classes, const std::vector<cv::Size>& anchors, float threshold);
+    static void nms(std::vector<BoxInfo>& result, float nms_threshold);
+    
+    ncnn::Net* Net;
+    int input_size = 640;
+    int num_class = 80;
+    std::vector<YoloLayerData> layers{
+        {"394", 32, {{116, 90}, {156, 198}, {373, 326}}},
+        {"375", 16, {{30, 61}, {62, 45}, {59, 119}}},
+        {"output", 8, {{10, 13}, {16, 30}, {33, 23}}},
+    };
+    
+public:
+    static YoloV5 *detector;
+    static bool hasGPU;
+    
+};
+
+
+#endif /* YoloV5_hpp */

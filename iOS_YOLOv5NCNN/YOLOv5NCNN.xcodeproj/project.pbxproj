@@ -1,0 +1,432 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5F37E19E24B97F9600BF9E94 /* yolov4-tiny-opt.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E19C24B97F9400BF9E94 /* yolov4-tiny-opt.param */; };
+		5F37E19F24B97F9600BF9E94 /* yolov4-tiny-opt.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E19D24B97F9600BF9E94 /* yolov4-tiny-opt.bin */; };
+		5F37E1A224B97FD900BF9E94 /* YoloV4.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E1A024B97FD900BF9E94 /* YoloV4.mm */; };
+		5F40C2AC24B1647800C84041 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F40C2AB24B1647800C84041 /* AppDelegate.m */; };
+		5F40C2B224B1647800C84041 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F40C2B124B1647800C84041 /* ViewController.mm */; };
+		5F40C2B724B1647C00C84041 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2B624B1647C00C84041 /* Assets.xcassets */; };
+		5F40C2BA24B1647C00C84041 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2B824B1647C00C84041 /* LaunchScreen.storyboard */; };
+		5F40C2BD24B1647D00C84041 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F40C2BC24B1647D00C84041 /* main.m */; };
+		5F40C2D924B16B0B00C84041 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2D824B16B0B00C84041 /* Main.storyboard */; };
+		5F40C2E524B18C5700C84041 /* yolov5.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2E324B18C5700C84041 /* yolov5.bin */; };
+		5F40C2E624B18C5700C84041 /* yolov5.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2E424B18C5700C84041 /* yolov5.param */; };
+		5F50870724B300720088E326 /* ncnn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F50870624B300720088E326 /* ncnn.framework */; };
+		5F50870924B3007C0088E326 /* openmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F50870824B3007C0088E326 /* openmp.framework */; };
+		5F50870C24B309F30088E326 /* YoloV5.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F50870A24B309F30088E326 /* YoloV5.mm */; };
+		5F87CD3124FFA41C00B60518 /* WelcomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F87CD3024FFA41C00B60518 /* WelcomeVC.m */; };
+		5FD3E2CB24B3FDF70049450B /* 000000000650.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5FD3E2CA24B3FDF70049450B /* 000000000650.jpg */; };
+		5FD3E2D924B417AA0049450B /* ELCameraControlCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD3E2D524B417AA0049450B /* ELCameraControlCapture.m */; };
+		5FD3E2DA24B417AA0049450B /* ELCameraBaseCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD3E2D824B417AA0049450B /* ELCameraBaseCapture.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5F37E19C24B97F9400BF9E94 /* yolov4-tiny-opt.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "yolov4-tiny-opt.param"; sourceTree = "<group>"; };
+		5F37E19D24B97F9600BF9E94 /* yolov4-tiny-opt.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "yolov4-tiny-opt.bin"; sourceTree = "<group>"; };
+		5F37E1A024B97FD900BF9E94 /* YoloV4.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YoloV4.mm; sourceTree = "<group>"; };
+		5F37E1A124B97FD900BF9E94 /* YoloV4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoloV4.h; sourceTree = "<group>"; };
+		5F40C2A724B1647800C84041 /* NCNN Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NCNN Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F40C2AA24B1647800C84041 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5F40C2AB24B1647800C84041 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5F40C2B024B1647800C84041 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		5F40C2B124B1647800C84041 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		5F40C2B624B1647C00C84041 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5F40C2B924B1647C00C84041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5F40C2BB24B1647D00C84041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F40C2BC24B1647D00C84041 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5F40C2D824B16B0B00C84041 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		5F40C2E324B18C5700C84041 /* yolov5.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = yolov5.bin; sourceTree = "<group>"; };
+		5F40C2E424B18C5700C84041 /* yolov5.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yolov5.param; sourceTree = "<group>"; };
+		5F50870624B300720088E326 /* ncnn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ncnn.framework; sourceTree = "<group>"; };
+		5F50870824B3007C0088E326 /* openmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openmp.framework; sourceTree = "<group>"; };
+		5F50870A24B309F30088E326 /* YoloV5.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = YoloV5.mm; sourceTree = "<group>"; };
+		5F50870B24B309F30088E326 /* YoloV5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoloV5.h; sourceTree = "<group>"; };
+		5F87CD2F24FFA41C00B60518 /* WelcomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WelcomeVC.h; sourceTree = "<group>"; };
+		5F87CD3024FFA41C00B60518 /* WelcomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WelcomeVC.m; sourceTree = "<group>"; };
+		5FD3E2CA24B3FDF70049450B /* 000000000650.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 000000000650.jpg; sourceTree = "<group>"; };
+		5FD3E2D524B417AA0049450B /* ELCameraControlCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCameraControlCapture.m; sourceTree = "<group>"; };
+		5FD3E2D624B417AA0049450B /* ELCameraControlCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCameraControlCapture.h; sourceTree = "<group>"; };
+		5FD3E2D724B417AA0049450B /* ELCameraBaseCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCameraBaseCapture.h; sourceTree = "<group>"; };
+		5FD3E2D824B417AA0049450B /* ELCameraBaseCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCameraBaseCapture.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5F40C2A424B1647800C84041 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F50870724B300720088E326 /* ncnn.framework in Frameworks */,
+				5F50870924B3007C0088E326 /* openmp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5F40C29E24B1647800C84041 = {
+			isa = PBXGroup;
+			children = (
+				5F40C2A924B1647800C84041 /* YOLOv5NCNN */,
+				5F40C2A824B1647800C84041 /* Products */,
+				5F40C2C324B164F600C84041 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5F40C2A824B1647800C84041 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F40C2A724B1647800C84041 /* NCNN Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5F40C2A924B1647800C84041 /* YOLOv5NCNN */ = {
+			isa = PBXGroup;
+			children = (
+				5FD3E2D424B4171C0049450B /* CameraCapture */,
+				5F40C2AA24B1647800C84041 /* AppDelegate.h */,
+				5F40C2AB24B1647800C84041 /* AppDelegate.m */,
+				5F40C2B024B1647800C84041 /* ViewController.h */,
+				5F40C2B124B1647800C84041 /* ViewController.mm */,
+				5F40C2B624B1647C00C84041 /* Assets.xcassets */,
+				5F40C2D824B16B0B00C84041 /* Main.storyboard */,
+				5F40C2B824B1647C00C84041 /* LaunchScreen.storyboard */,
+				5F40C2BB24B1647D00C84041 /* Info.plist */,
+				5F40C2BC24B1647D00C84041 /* main.m */,
+				5F40C2DA24B171A100C84041 /* res */,
+				5F50870A24B309F30088E326 /* YoloV5.mm */,
+				5F50870B24B309F30088E326 /* YoloV5.h */,
+				5F37E1A024B97FD900BF9E94 /* YoloV4.mm */,
+				5F37E1A124B97FD900BF9E94 /* YoloV4.h */,
+				5F87CD2F24FFA41C00B60518 /* WelcomeVC.h */,
+				5F87CD3024FFA41C00B60518 /* WelcomeVC.m */,
+			);
+			path = YOLOv5NCNN;
+			sourceTree = "<group>";
+		};
+		5F40C2C324B164F600C84041 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F50870824B3007C0088E326 /* openmp.framework */,
+				5F50870624B300720088E326 /* ncnn.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5F40C2DA24B171A100C84041 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				5F37E19D24B97F9600BF9E94 /* yolov4-tiny-opt.bin */,
+				5F37E19C24B97F9400BF9E94 /* yolov4-tiny-opt.param */,
+				5F40C2E324B18C5700C84041 /* yolov5.bin */,
+				5F40C2E424B18C5700C84041 /* yolov5.param */,
+				5FD3E2CA24B3FDF70049450B /* 000000000650.jpg */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		5FD3E2D424B4171C0049450B /* CameraCapture */ = {
+			isa = PBXGroup;
+			children = (
+				5FD3E2D724B417AA0049450B /* ELCameraBaseCapture.h */,
+				5FD3E2D824B417AA0049450B /* ELCameraBaseCapture.m */,
+				5FD3E2D624B417AA0049450B /* ELCameraControlCapture.h */,
+				5FD3E2D524B417AA0049450B /* ELCameraControlCapture.m */,
+			);
+			path = CameraCapture;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5F40C2A624B1647800C84041 /* YOLOv5NCNN */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F40C2C024B1647D00C84041 /* Build configuration list for PBXNativeTarget "YOLOv5NCNN" */;
+			buildPhases = (
+				5F40C2A324B1647800C84041 /* Sources */,
+				5F40C2A424B1647800C84041 /* Frameworks */,
+				5F40C2A524B1647800C84041 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YOLOv5NCNN;
+			productName = YOLOv5NCNN;
+			productReference = 5F40C2A724B1647800C84041 /* NCNN Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5F40C29F24B1647800C84041 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = TENG;
+				TargetAttributes = {
+					5F40C2A624B1647800C84041 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 5F40C2A224B1647800C84041 /* Build configuration list for PBXProject "YOLOv5NCNN" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5F40C29E24B1647800C84041;
+			productRefGroup = 5F40C2A824B1647800C84041 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5F40C2A624B1647800C84041 /* YOLOv5NCNN */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5F40C2A524B1647800C84041 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F40C2D924B16B0B00C84041 /* Main.storyboard in Resources */,
+				5F37E19F24B97F9600BF9E94 /* yolov4-tiny-opt.bin in Resources */,
+				5F40C2BA24B1647C00C84041 /* LaunchScreen.storyboard in Resources */,
+				5F37E19E24B97F9600BF9E94 /* yolov4-tiny-opt.param in Resources */,
+				5F40C2B724B1647C00C84041 /* Assets.xcassets in Resources */,
+				5F40C2E624B18C5700C84041 /* yolov5.param in Resources */,
+				5F40C2E524B18C5700C84041 /* yolov5.bin in Resources */,
+				5FD3E2CB24B3FDF70049450B /* 000000000650.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5F40C2A324B1647800C84041 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FD3E2DA24B417AA0049450B /* ELCameraBaseCapture.m in Sources */,
+				5FD3E2D924B417AA0049450B /* ELCameraControlCapture.m in Sources */,
+				5F40C2B224B1647800C84041 /* ViewController.mm in Sources */,
+				5F87CD3124FFA41C00B60518 /* WelcomeVC.m in Sources */,
+				5F37E1A224B97FD900BF9E94 /* YoloV4.mm in Sources */,
+				5F40C2AC24B1647800C84041 /* AppDelegate.m in Sources */,
+				5F50870C24B309F30088E326 /* YoloV5.mm in Sources */,
+				5F40C2BD24B1647D00C84041 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5F40C2B824B1647C00C84041 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5F40C2B924B1647C00C84041 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5F40C2BE24B1647D00C84041 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Debug;
+		};
+		5F40C2BF24B1647D00C84041 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Release;
+		};
+		5F40C2C124B1647D00C84041 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y8CV4Z8FW4;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = YOLOv5NCNN/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.teng.YOLONCNN;
+				PRODUCT_NAME = "NCNN Demo";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Debug;
+		};
+		5F40C2C224B1647D00C84041 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y8CV4Z8FW4;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = YOLOv5NCNN/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.teng.YOLONCNN;
+				PRODUCT_NAME = "NCNN Demo";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5F40C2A224B1647800C84041 /* Build configuration list for PBXProject "YOLOv5NCNN" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F40C2BE24B1647D00C84041 /* Debug */,
+				5F40C2BF24B1647D00C84041 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5F40C2C024B1647D00C84041 /* Build configuration list for PBXNativeTarget "YOLOv5NCNN" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F40C2C124B1647D00C84041 /* Debug */,
+				5F40C2C224B1647D00C84041 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5F40C29F24B1647800C84041 /* Project object */;
+}
