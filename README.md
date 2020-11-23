@@ -38,6 +38,8 @@ Select the model to be tested directly on the interface.
 * ***DBFace***: Only the Android version is written for the time being, and iOS has not been added yet.
 * ***MBNv2-FCN***: Only the Android version is written for the time being, and iOS has not been added yet.(Thanks to the nick name Persistence for help)
 * ***MBNv3-Seg-small***: Only the Android version is written for the time being, and iOS has not been added yet.
+* ***YOLOv5s_custom_op***: Only the Android version is written for the time being, and iOS has not been added yet.
+* ***nanodet***: Only the Android version is written for the time being, and iOS has not been added yet.
 
 ### Note：<br/>
 * Due to factors such as mobile phone performance and image size, FPS varies greatly on different mobile phones. This project mainly tests the use of the NCNN framework. For the conversion of specific models, you can go to the NCNN official to view the conversion tutorial.
@@ -65,6 +67,10 @@ Select the model to be tested directly on the interface.
 |  dbface | mbnv2_fcn | mbnv3_seg_small |
 |-------------------|-------------|---------|
 | <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_dbface.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_MBNFCN.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_MBNV3_Seg_small.jpg"/>|
+
+|  yolov5s_custom_op | nanodet | xxx |
+|-------------------|-------------|---------|
+| none | none | xxx |
 
 > iOS
 
