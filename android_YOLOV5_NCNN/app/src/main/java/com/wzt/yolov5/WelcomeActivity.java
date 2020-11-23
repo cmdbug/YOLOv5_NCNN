@@ -27,6 +27,8 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button dbface;
     private Button mobilenetv2Fcn;
     private Button mobilenetv3Seg;
+    private Button yolov5sCustomLayer;
+    private Button nanoDet;
 
     private boolean useGPU = false;
 
@@ -160,6 +162,26 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.USE_MODEL = MainActivity.MOBILENETV3_SEG;
+                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                WelcomeActivity.this.startActivity(intent);
+            }
+        });
+
+        yolov5sCustomLayer = findViewById(R.id.btn_start_detect12);
+        yolov5sCustomLayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.USE_MODEL = MainActivity.YOLOV5_CUSTOM_LAYER;
+                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                WelcomeActivity.this.startActivity(intent);
+            }
+        });
+
+        nanoDet = findViewById(R.id.btn_start_detect13);
+        nanoDet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.USE_MODEL = MainActivity.NANODET;
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 WelcomeActivity.this.startActivity(intent);
             }

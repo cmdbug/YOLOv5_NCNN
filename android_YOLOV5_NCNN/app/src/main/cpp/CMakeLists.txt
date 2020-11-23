@@ -36,6 +36,8 @@ add_library( # Sets the name of the library.
         DBFace.cpp
         MbnFCN.cpp
         MobileNetV3Seg.cpp
+        YoloV5CustomLayer.cpp
+        NanoDet.cpp
         )
 
 include_directories(
@@ -73,6 +75,11 @@ set_target_properties(OGLCompiler PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DI
 set_target_properties(OSDependent PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/ncnnvulkan/${ANDROID_ABI}/libOSDependent.a)
 set_target_properties(SPIRV PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/ncnnvulkan/${ANDROID_ABI}/libSPIRV.a)
 
+# disable rtti and exceptions
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti -fno-exceptions")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
+# enable rtti and exceptions
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/opencv/include/

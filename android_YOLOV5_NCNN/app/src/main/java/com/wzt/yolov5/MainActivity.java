@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     public static int DBFACE = 8;
     public static int MOBILENETV2_FCN = 9;
     public static int MOBILENETV3_SEG = 10;
+    public static int YOLOV5_CUSTOM_LAYER = 11;
+    public static int NANODET = 12;
 
     public static int USE_MODEL = MOBILENETV2_YOLOV3_NANO;
     public static boolean USE_GPU = false;
@@ -139,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.actionbar_dark_back_icon);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        if (USE_MODEL != YOLOV5S && USE_MODEL != DBFACE) {
+        if (USE_MODEL != YOLOV5S && USE_MODEL != DBFACE && USE_MODEL != NANODET && USE_MODEL != YOLOV5_CUSTOM_LAYER) {
             nmsSeekBar.setEnabled(false);
             thresholdSeekBar.setEnabled(false);
             tvNMS.setVisibility(View.GONE);
@@ -150,9 +152,12 @@ public class MainActivity extends AppCompatActivity {
         } else if (USE_MODEL == YOLOV5S) {
             threshold = 0.3f;
             nms_threshold = 0.7f;
-        } else if (USE_MODEL == DBFACE) {
+        } else if (USE_MODEL == DBFACE || USE_MODEL == NANODET) {
             threshold = 0.4f;
             nms_threshold = 0.6f;
+        } else if (USE_MODEL == YOLOV5_CUSTOM_LAYER) {
+            threshold = 0.25f;
+            nms_threshold = 0.45f;
         }
         nmsSeekBar.setProgress((int) (nms_threshold * 100));
         thresholdSeekBar.setProgress((int) (threshold * 100));
@@ -331,6 +336,10 @@ public class MainActivity extends AppCompatActivity {
             MbnFCN.init(getAssets(), USE_GPU);
         } else if (USE_MODEL == MOBILENETV3_SEG) {
             MbnSeg.init(getAssets(), USE_GPU);
+        } else if (USE_MODEL == YOLOV5_CUSTOM_LAYER) {
+            YOLOv5.initCustomLayer(getAssets(), USE_GPU);
+        } else if (USE_MODEL == NANODET) {
+            NanoDet.init(getAssets(), USE_GPU);
         }
     }
 
@@ -696,12 +705,17 @@ public class MainActivity extends AppCompatActivity {
             enetMasks = MbnFCN.detect(image);
         } else if (USE_MODEL == MOBILENETV3_SEG) {
             enetMasks = MbnSeg.detect(image);
+        } else if (USE_MODEL == YOLOV5_CUSTOM_LAYER) {
+            result = YOLOv5.detectCustomLayer(image, threshold, nms_threshold);
+        } else if (USE_MODEL == NANODET) {
+            result = NanoDet.detect(image, threshold, nms_threshold);
         }
         if (result == null && keyPoints == null && yolactMasks == null && enetMasks == null && faceKeyPoints == null) {
             detectCamera.set(false);
             return image;
         }
-        if (USE_MODEL == YOLOV5S || USE_MODEL == YOLOV4_TINY || USE_MODEL == MOBILENETV2_YOLOV3_NANO) {
+        if (USE_MODEL == YOLOV5S || USE_MODEL == YOLOV4_TINY || USE_MODEL == MOBILENETV2_YOLOV3_NANO
+                || USE_MODEL == YOLOV5_CUSTOM_LAYER || USE_MODEL == NANODET) {
             mutableBitmap = drawBoxRects(image, result);
         } else if (USE_MODEL == SIMPLE_POSE) {
             mutableBitmap = drawPersonPose(image, keyPoints);
@@ -743,6 +757,10 @@ public class MainActivity extends AppCompatActivity {
             modelName = "MobileNetV2-FCN";
         } else if (USE_MODEL == MOBILENETV3_SEG) {
             modelName = "MBNV3-Segmentation-small";
+        } else if (USE_MODEL == YOLOV5_CUSTOM_LAYER) {
+            modelName = "YOLOv5s_Custom_Layer";
+        } else if (USE_MODEL == NANODET) {
+            modelName = "NanoDet";
         }
         return USE_GPU ? "[ GPU ] " + modelName : "[ CPU ] " + modelName;
     }

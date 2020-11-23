@@ -13,6 +13,8 @@
 #include "DBFace.h"
 #include "MbnFCN.h"
 #include "MobileNetV3Seg.h"
+#include "YoloV5CustomLayer.h"
+#include "NanoDet.h"
 
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
@@ -77,6 +79,32 @@ Java_com_wzt_yolov5_YOLOv5_detect(JNIEnv *env, jclass, jobject image, jdouble th
     return ret;
 }
 
+// ***************************************[ Yolov5 Custom Layer ]****************************************
+extern "C" JNIEXPORT void JNICALL
+Java_com_wzt_yolov5_YOLOv5_initCustomLayer(JNIEnv *env, jclass, jobject assetManager, jboolean useGPU) {
+    if (YoloV5CustomLayer::detector == nullptr) {
+        AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
+        YoloV5CustomLayer::detector = new YoloV5CustomLayer(mgr, "yolov5s_customlayer.param", "yolov5s_customlayer.bin", useGPU);
+    }
+}
+
+extern "C" JNIEXPORT jobjectArray JNICALL
+Java_com_wzt_yolov5_YOLOv5_detectCustomLayer(JNIEnv *env, jclass, jobject image, jdouble threshold, jdouble nms_threshold) {
+    auto result = YoloV5CustomLayer::detector->detect(env, image, threshold, nms_threshold);
+
+    auto box_cls = env->FindClass("com/wzt/yolov5/Box");
+    auto cid = env->GetMethodID(box_cls, "<init>", "(FFFFIF)V");
+    jobjectArray ret = env->NewObjectArray(result.size(), box_cls, nullptr);
+    int i = 0;
+    for (auto &box:result) {
+        env->PushLocalFrame(1);
+        jobject obj = env->NewObject(box_cls, cid, box.x1, box.y1, box.x2, box.y2, box.label, box.score);
+        obj = env->PopLocalFrame(obj);
+        env->SetObjectArrayElement(ret, i++, obj);
+    }
+    return ret;
+}
+
 /*********************************************************************************************
                                          YOLOv4-tiny
  yolov4官方ncnn模型下载地址
@@ -106,6 +134,34 @@ Java_com_wzt_yolov5_YOLOv4_init(JNIEnv *env, jclass, jobject assetManager, jbool
 extern "C" JNIEXPORT jobjectArray JNICALL
 Java_com_wzt_yolov5_YOLOv4_detect(JNIEnv *env, jclass, jobject image, jdouble threshold, jdouble nms_threshold) {
     auto result = YoloV4::detector->detect(env, image, threshold, nms_threshold);
+
+    auto box_cls = env->FindClass("com/wzt/yolov5/Box");
+    auto cid = env->GetMethodID(box_cls, "<init>", "(FFFFIF)V");
+    jobjectArray ret = env->NewObjectArray(result.size(), box_cls, nullptr);
+    int i = 0;
+    for (auto &box:result) {
+        env->PushLocalFrame(1);
+        jobject obj = env->NewObject(box_cls, cid, box.x1, box.y1, box.x2, box.y2, box.label, box.score);
+        obj = env->PopLocalFrame(obj);
+        env->SetObjectArrayElement(ret, i++, obj);
+    }
+    return ret;
+}
+
+/*********************************************************************************************
+                                         NanoDet
+ ********************************************************************************************/
+extern "C" JNIEXPORT void JNICALL
+Java_com_wzt_yolov5_NanoDet_init(JNIEnv *env, jclass, jobject assetManager, jboolean useGPU) {
+    if (NanoDet::detector == nullptr) {
+        AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
+        NanoDet::detector = new NanoDet(mgr, "nanodet_m.param", "nanodet_m.bin", useGPU);
+    }
+}
+
+extern "C" JNIEXPORT jobjectArray JNICALL
+Java_com_wzt_yolov5_NanoDet_detect(JNIEnv *env, jclass, jobject image, jdouble threshold, jdouble nms_threshold) {
+    auto result = NanoDet::detector->detect(env, image, threshold, nms_threshold);
 
     auto box_cls = env->FindClass("com/wzt/yolov5/Box");
     auto cid = env->GetMethodID(box_cls, "<init>", "(FFFFIF)V");

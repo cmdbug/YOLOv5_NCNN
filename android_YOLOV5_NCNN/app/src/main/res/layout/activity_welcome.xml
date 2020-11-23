@@ -63,6 +63,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="45dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,6 +166,22 @@
                 android:text="MobileNetV3_Segmentation_small"
                 android:textAllCaps="false"
                 app:layout_constraintTop_toBottomOf="@id/btn_start_detect10" />
+
+            <Button
+                android:id="@+id/btn_start_detect12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="YOLOv5s_Custom_Layer \n[ 与opencv冲突，需要重新编译ncnn或去掉opencv ]"
+                android:textAllCaps="false"
+                app:layout_constraintTop_toBottomOf="@id/btn_start_detect11" />
+
+            <Button
+                android:id="@+id/btn_start_detect13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NanoDet"
+                android:textAllCaps="false"
+                app:layout_constraintTop_toBottomOf="@id/btn_start_detect12" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
