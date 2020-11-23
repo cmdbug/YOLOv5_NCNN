@@ -38,6 +38,8 @@ YOLOv3-nano: 从界面中选择需要测试的模型。
 * ***DBFace*** 暂时只写了安卓版本，iOS目前还没有增加。
 * ***MBNv3-FCN*** 暂时只写了安卓版本，iOS目前还没有增加。(感谢网名Persistence提供帮助)
 * ***MBNv3-Seg-small*** 暂时只写了安卓版本，iOS目前还没有增加。
+* ***YOLOv5s_custom_op*** 暂时只写了安卓版本，iOS目前还没有增加。
+* ***nanodet*** 暂时只写了安卓版本，iOS目前还没有增加。
 
 ### Note：
 * 由于手机性能、图像尺寸等因素导致FPS在不同手机上相差比较大。该项目主要测试NCNN框架的使用，具体模型的转换可以去NCNN官方查看转换教程。<br/>
@@ -66,6 +68,10 @@ YOLOv3-nano: 从界面中选择需要测试的模型。
 |  dbface | mbnv2_fcn | mbnv3_seg_small |
 |-------------------|-------------|---------|
 | <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_dbface.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_MBNFCN.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_MBNV3_Seg_small.jpg"/>|
+
+|  yolov5s_custom_op | nanodet | xxx |
+|-------------------|-------------|---------|
+| none | none | xxx |
 
 > iOS
 
