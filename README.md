@@ -18,9 +18,7 @@ Android has added permission requests, but if it still crashes, please manually 
 
 > iOS
 ```code
-YOLOv5s:     Select the model to be tested directly on the interface.
-YOLOv4-tiny: Select the model to be tested directly on the interface.
-YOLOv3-nano: Select the model to be tested directly on the interface.
+Select the model to be tested directly on the interface.
 ```
 > Android
 ```
