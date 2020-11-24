@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     public static int MOBILENETV3_SEG = 10;
     public static int YOLOV5_CUSTOM_LAYER = 11;
     public static int NANODET = 12;
+    public static int YOLO_FASTEST_XL = 13;
 
     public static int USE_MODEL = MOBILENETV2_YOLOV3_NANO;
     public static boolean USE_GPU = false;
@@ -319,9 +320,11 @@ public class MainActivity extends AppCompatActivity {
         if (USE_MODEL == YOLOV5S) {
             YOLOv5.init(getAssets(), USE_GPU);
         } else if (USE_MODEL == YOLOV4_TINY) {
-            YOLOv4.init(getAssets(), true, USE_GPU);
+            YOLOv4.init(getAssets(), 0, USE_GPU);
         } else if (USE_MODEL == MOBILENETV2_YOLOV3_NANO) {
-            YOLOv4.init(getAssets(), false, USE_GPU);
+            YOLOv4.init(getAssets(), 1, USE_GPU);
+        } else if (USE_MODEL == YOLO_FASTEST_XL) {
+            YOLOv4.init(getAssets(), 2, USE_GPU);
         } else if (USE_MODEL == SIMPLE_POSE) {
             SimplePose.init(getAssets(), USE_GPU);
         } else if (USE_MODEL == YOLACT) {
@@ -689,7 +692,7 @@ public class MainActivity extends AppCompatActivity {
         float[] enetMasks = null;
         if (USE_MODEL == YOLOV5S) {
             result = YOLOv5.detect(image, threshold, nms_threshold);
-        } else if (USE_MODEL == YOLOV4_TINY || USE_MODEL == MOBILENETV2_YOLOV3_NANO) {
+        } else if (USE_MODEL == YOLOV4_TINY || USE_MODEL == MOBILENETV2_YOLOV3_NANO || USE_MODEL == YOLO_FASTEST_XL) {
             result = YOLOv4.detect(image, threshold, nms_threshold);
         } else if (USE_MODEL == SIMPLE_POSE) {
             keyPoints = SimplePose.detect(image);
@@ -715,7 +718,7 @@ public class MainActivity extends AppCompatActivity {
             return image;
         }
         if (USE_MODEL == YOLOV5S || USE_MODEL == YOLOV4_TINY || USE_MODEL == MOBILENETV2_YOLOV3_NANO
-                || USE_MODEL == YOLOV5_CUSTOM_LAYER || USE_MODEL == NANODET) {
+                || USE_MODEL == YOLOV5_CUSTOM_LAYER || USE_MODEL == NANODET || USE_MODEL == YOLO_FASTEST_XL) {
             mutableBitmap = drawBoxRects(image, result);
         } else if (USE_MODEL == SIMPLE_POSE) {
             mutableBitmap = drawPersonPose(image, keyPoints);
@@ -761,6 +764,8 @@ public class MainActivity extends AppCompatActivity {
             modelName = "YOLOv5s_Custom_Layer";
         } else if (USE_MODEL == NANODET) {
             modelName = "NanoDet";
+        } else if (USE_MODEL == YOLO_FASTEST_XL) {
+            modelName = "YOLO-Fastest-xl";
         }
         return USE_GPU ? "[ GPU ] " + modelName : "[ CPU ] " + modelName;
     }

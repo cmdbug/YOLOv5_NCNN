@@ -112,21 +112,23 @@ Java_com_wzt_yolov5_YOLOv5_detectCustomLayer(JNIEnv *env, jclass, jobject image,
  ********************************************************************************************/
 
 // 20200813 增加 MobileNetV2-YOLOv3-Nano-coco
+// 20201124 增加 yolo-fastest-xl
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_wzt_yolov5_YOLOv4_init(JNIEnv *env, jclass, jobject assetManager, jboolean v4tiny, jboolean useGPU) {
+Java_com_wzt_yolov5_YOLOv4_init(JNIEnv *env, jclass, jobject assetManager, jint yoloType, jboolean useGPU) {
     if (YoloV4::detector != nullptr) {
         delete YoloV4::detector;
         YoloV4::detector = nullptr;
     }
     if (YoloV4::detector == nullptr) {
         AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
-        if (v4tiny == 1) {
+        if (yoloType == 0) {
             YoloV4::detector = new YoloV4(mgr, "yolov4-tiny-opt.param", "yolov4-tiny-opt.bin", useGPU);
-        } else if (v4tiny == 0) {
+        } else if (yoloType == 1) {
             YoloV4::detector = new YoloV4(mgr, "MobileNetV2-YOLOv3-Nano-coco.param",
                                           "MobileNetV2-YOLOv3-Nano-coco.bin", useGPU);
-//            YoloV4::detector = new YoloV4(mgr,"export_demo.param","export_demo.bin");
+        } else if (yoloType == 2) {
+            YoloV4::detector = new YoloV4(mgr, "yolo-fastest-xl.param", "yolo-fastest-xl.bin", useGPU);
         }
     }
 }

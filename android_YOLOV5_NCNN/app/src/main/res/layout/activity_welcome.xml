@@ -183,6 +183,14 @@
                 android:textAllCaps="false"
                 app:layout_constraintTop_toBottomOf="@id/btn_start_detect12" />
 
+            <Button
+                android:id="@+id/btn_start_detect14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="YOLO_Fastest_xl"
+                android:textAllCaps="false"
+                app:layout_constraintTop_toBottomOf="@id/btn_start_detect13" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
 

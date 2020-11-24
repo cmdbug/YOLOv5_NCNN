@@ -29,6 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button mobilenetv3Seg;
     private Button yolov5sCustomLayer;
     private Button nanoDet;
+    private Button yoloFastestXL;
 
     private boolean useGPU = false;
 
@@ -182,6 +183,16 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.USE_MODEL = MainActivity.NANODET;
+                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                WelcomeActivity.this.startActivity(intent);
+            }
+        });
+
+        yoloFastestXL = findViewById(R.id.btn_start_detect14);
+        yoloFastestXL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.USE_MODEL = MainActivity.YOLO_FASTEST_XL;
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 WelcomeActivity.this.startActivity(intent);
             }
