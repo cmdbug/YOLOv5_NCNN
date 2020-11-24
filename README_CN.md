@@ -27,19 +27,22 @@ YOLOv3-nano: 从界面中选择需要测试的模型。
 从界面中选择需要测试的模型。
 ```
 ### 模型
-* ***YOLOv5s*** 输入尺寸减小，解码过程使用了大量的 for 循环与 NMS 表现出来会比较慢。
-* ***YOLOv4-tiny*** 使用默认尺寸，解码过程没有大量的 for 与 NMS 所以速度会快些。
-* ***YOLOv3-nano*** 与 v4-tiny 一样。
-* ***Simple-Pose*** 暂时只写了安卓版本，iOS目前还没有增加。内部原理是先检测人再用人的区域再次进行姿态检测，即2步过程。
-* ***Yolact*** 暂时只写了安卓版本，iOS目前还没有增加。
-* ***ChineseOCR_lite*** 暂时只写了安卓版本，iOS目前还没有增加。(需要注意的是偶尔会发生崩溃现象，有空修复一下)
-* ***ENet*** 暂时只写了安卓版本，iOS目前还没有增加。(由于模型太小所以分割效果比较差，可以自行更换更强的网络。但是效果太差了可能哪里有问题)
-* ***Landmark106*** 暂时只写了安卓版本，iOS目前还没有增加。内部原理是先检测脸再用脸的区域再次进行关键点检测，即2步过程。
-* ***DBFace*** 暂时只写了安卓版本，iOS目前还没有增加。
-* ***MBNv3-FCN*** 暂时只写了安卓版本，iOS目前还没有增加。(感谢网名Persistence提供帮助)
-* ***MBNv3-Seg-small*** 暂时只写了安卓版本，iOS目前还没有增加。
-* ***YOLOv5s_custom_op*** 暂时只写了安卓版本，iOS目前还没有增加。
-* ***nanodet*** 暂时只写了安卓版本，iOS目前还没有增加。
+| model | android | iOS | from |
+|-------------------|:--------:|:--------:|:--------:|
+| YOLOv5s           | yes | yes |  [Github](https://github.com/ultralytics/yolov5)   |
+| YOLOv4-tiny       | yes | yes |  [Github](https://github.com/ultralytics/yolov3)   |
+| YOLOv3-nano       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
+| Simple-Pose       | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
+| Yolact            | yes | coming soon |  [Github](https://github.com/dbolya/yolact) [zhihu](https://zhuanlan.zhihu.com/p/128974102)  |
+| ChineseOCR_lite   | yes | probably |  [Github](https://github.com/ouyanghuiyu/chineseocr_lite) [zhihu](https://zhuanlan.zhihu.com/p/113338890)   |
+| ENet              | yes | cancel |  [Github](https://github.com/davidtvs/PyTorch-ENet)   |
+| Landmark106       | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
+| DBFace            | yes | coming soon |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
+| MBNv2-FCN         | yes | coming soon |     |
+| MBNv3-Seg-small   | yes | coming soon |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
+| YOLOv5s_custom_op | yes | coming soon |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
+| NanoDet           | yes | coming soon |  [Github](https://github.com/RangiLyu/nanodet)   |
+| YOLO-Fastest-xl   | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
 
 ### Note：
 * 由于手机性能、图像尺寸等因素导致FPS在不同手机上相差比较大。该项目主要测试NCNN框架的使用，具体模型的转换可以去NCNN官方查看转换教程。<br/>
@@ -69,9 +72,9 @@ YOLOv3-nano: 从界面中选择需要测试的模型。
 |-------------------|-------------|---------|
 | <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_dbface.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_MBNFCN.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_MBNV3_Seg_small.jpg"/>|
 
-|  yolov5s_custom_op | nanodet | xxx |
+|  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
-| none | none | xxx |
+| none | none | none |
 
 > iOS
 
