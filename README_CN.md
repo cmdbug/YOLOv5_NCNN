@@ -36,7 +36,7 @@
 | ENet              | yes | cancel |  [Github](https://github.com/davidtvs/PyTorch-ENet)   |
 | Landmark106       | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | DBFace            | yes | coming soon |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
-| MBNv2-FCN         | yes | coming soon |     |
+| MBNv2-FCN         | yes | coming soon |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
 | MBNv3-Seg-small   | yes | coming soon |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
 | YOLOv5s_custom_op | yes | coming soon |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
 | NanoDet           | yes | coming soon |  [Github](https://github.com/RangiLyu/nanodet)   |
