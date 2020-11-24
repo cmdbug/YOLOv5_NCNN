@@ -13,7 +13,7 @@
 #include <algorithm>
 #include <functional>
 #include <vector>
-#include <ncnn/ncnn/net.h>  // 新版本
+#include <ncnn/ncnn/net.h>  // 新版本(如果报错请尝试从官网下载后重新导入。download ncnn.framework/openmp.framework from ncnn and replace)
 //#include <ncnn/net.h>  // 旧版本
 #include "YoloV5.h"
 #include "YoloV4.h"
@@ -21,6 +21,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVMediaFormat.h>
 #import "ELCameraControlCapture.h"
+//#import <opencv2/opencv.hpp>
 
 
 @interface ViewController ()
@@ -65,14 +66,9 @@
     [self setCameraUI];
 }
 
+#pragma mark 显示标题
 - (void)initTitleName {
-    if (self.USE_MODEL == W_YOLOV5S) {
-        self.title = @"YOLOv5s";
-    } else if (self.USE_MODEL == W_YOLOV4TINY) {
-        self.title = @"YOLOV4-tiny";
-    } else {
-        self.title = @"ohhhhhh";
-    }
+    self.title = [self getModelName];
 }
 
 - (CGFloat)degreesToRadians:(CGFloat)degrees {
@@ -105,6 +101,7 @@
     return newImage;
 }
 
+#pragma mark 设置相机并回调
 - (void)setCameraUI {
     [self setVideoPreview];
     __weak typeof(self) weakSelf = self;
@@ -140,6 +137,7 @@
     return _cameraCapture;
 }
 
+#pragma mark 相机预览画面位置
 - (void)setVideoPreview {
     self.preLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.cameraCapture.captureSession];
     self.preLayer.backgroundColor = [[UIColor redColor] CGColor];
@@ -173,6 +171,7 @@
     }
 }
 
+#pragma mark 顶部控件
 - (void)nmsChange:(UISlider *)slider forEvent:(UIEvent *)event {
     UITouch *torchEvent = [[event allTouches] anyObject];
     switch (torchEvent.phase) {
@@ -204,75 +203,68 @@
     }
 }
 
-// 推理
+#pragma mark 照片
 - (IBAction)predict:(id)sender {
     // load image
-    UIImage* image = [UIImage imageNamed:@"000000000650.jpg"];
-    self.imageView.image = image;
-    if (self.USE_MODEL == W_YOLOV5S) {
-        YoloV5 *yolo = new YoloV5("", "");
-        std::vector<BoxInfo> result = yolo->dectect(image, self.threshold, self.nms_threshold);
-        printf("result size:%lu", result.size());
-        NSString *detect_result = @"";
-        for (int i = 0; i < result.size(); i++) {
-            BoxInfo boxInfo = result[i];
-            detect_result = [NSString stringWithFormat:@"%@\n%s %.3f", detect_result, yolo->labels[boxInfo.label].c_str(), boxInfo.score];
-        }
-        delete yolo;
-        self.resultLabel.text = detect_result;
-        self.imageView.image = [self drawBox:self.imageView image:image boxs:result];
-    } else if (self.USE_MODEL == W_YOLOV4TINY) {
-        YoloV4 *yolo = new YoloV4("", "");
-        std::vector<BoxInfo> result = yolo->detectv4(image, self.threshold, self.nms_threshold);
-        printf("result size:%lu", result.size());
-        NSString *detect_result = @"";
-        for (int i = 0; i < result.size(); i++) {
-            BoxInfo boxInfo = result[i];
-            detect_result = [NSString stringWithFormat:@"%@\n%s %.3f", detect_result, yolo->labels[boxInfo.label].c_str(), boxInfo.score];
-        }
-        delete yolo;
-        self.resultLabel.text = detect_result;
-        self.imageView.image = [self drawBox:self.imageView image:image boxs:result];
-    }
+//    UIImage* image = [UIImage imageNamed:@"000000000650.jpg"];
+//    self.imageView.image = image;
+//    if (self.USE_MODEL == W_YOLOV5S) {
+//        YoloV5 *yolo = new YoloV5("", "");
+//        std::vector<BoxInfo> result = yolo->dectect(image, self.threshold, self.nms_threshold);
+//        printf("result size:%lu", result.size());
+//        NSString *detect_result = @"";
+//        for (int i = 0; i < result.size(); i++) {
+//            BoxInfo boxInfo = result[i];
+//            detect_result = [NSString stringWithFormat:@"%@\n%s %.3f", detect_result, yolo->labels[boxInfo.label].c_str(), boxInfo.score];
+//        }
+//        delete yolo;
+//        self.resultLabel.text = detect_result;
+//        self.imageView.image = [self drawBox:self.imageView image:image boxs:result];
+//    } else if (self.USE_MODEL == W_YOLOV4TINY) {
+//        YoloV4 *yolo = new YoloV4("", "", YES);
+//        std::vector<BoxInfo> result = yolo->detectv4(image, self.threshold, self.nms_threshold);
+//        printf("result size:%lu", result.size());
+//        NSString *detect_result = @"";
+//        for (int i = 0; i < result.size(); i++) {
+//            BoxInfo boxInfo = result[i];
+//            detect_result = [NSString stringWithFormat:@"%@\n%s %.3f", detect_result, yolo->labels[boxInfo.label].c_str(), boxInfo.score];
+//        }
+//        delete yolo;
+//        self.resultLabel.text = detect_result;
+//        self.imageView.image = [self drawBox:self.imageView image:image boxs:result];
+//    }
 }
 
+#pragma mark 相机回调图片
 - (void)detectImage:(UIImage *)image {
-    if (!self.yolo && self.USE_MODEL == 1) {
+    if (!self.yolo && self.USE_MODEL == W_YOLOV5S) {
         NSLog(@"new YoloV5");
         self.yolo = new YoloV5("", "");
-    } else if (!self.yolov4 && self.USE_MODEL == 2) {
+    } else if (!self.yolov4 && self.USE_MODEL == W_YOLOV4TINY) {
         NSLog(@"new YoloV4");
-        self.yolov4 = new YoloV4("", "");
+        self.yolov4 = new YoloV4("", "", YES);
+    } else if (!self.yolov4 && self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO) {
+        NSLog(@"new YoloV3-nano");
+        self.yolov4 = new YoloV4("", "", NO);
     }
+    NSDate *start = [NSDate date];
     if (self.USE_MODEL == W_YOLOV5S) {
-        NSDate *start = [NSDate date];
         std::vector<BoxInfo> result = self.yolo->dectect(image, self.threshold, self.nms_threshold);
-        NSString *detect_result = @"";
-        for (int i = 0; i < result.size(); i++) {
-            BoxInfo boxInfo = result[i];
-            detect_result = [NSString stringWithFormat:@"%@\n%s %.3f", detect_result, self.yolo->labels[boxInfo.label].c_str(), boxInfo.score];
-        }
 //        delete self.yolo;
         __weak typeof(self) weakSelf = self;
         dispatch_sync(dispatch_get_main_queue(), ^{
             long dur = [[NSDate date] timeIntervalSince1970]*1000 - start.timeIntervalSince1970*1000;
-            NSString *info = [NSString stringWithFormat:@"YOLOv5s\nSize:%dx%d\nTime:%.3fs\nFPS:%.2f", int(image.size.width), int(image.size.height), dur / 1000.0, 1.0 / (dur / 1000.0)];
+            NSString *info = [NSString stringWithFormat:@"%@\nSize:%dx%d\nTime:%.3fs\nFPS:%.2f", [self getModelName], int(image.size.width), int(image.size.height), dur / 1000.0, 1.0 / (dur / 1000.0)];
             weakSelf.resultLabel.text = info;
             weakSelf.imageView.image = [weakSelf drawBox:weakSelf.imageView image:image boxs:result];
         });
-    } else if (self.USE_MODEL == W_YOLOV4TINY) {
-        NSDate *start = [NSDate date];
+    } else if (self.USE_MODEL == W_YOLOV4TINY || self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO) {
         std::vector<BoxInfo> result = self.yolov4->detectv4(image, self.threshold, self.nms_threshold);
-        NSString *detect_result = @"";
-        for (int i = 0; i < result.size(); i++) {
-            BoxInfo boxInfo = result[i];
-            detect_result = [NSString stringWithFormat:@"%@\n%s %.3f", detect_result, self.yolov4->labels[boxInfo.label].c_str(), boxInfo.score];
-        }
 //        delete self.yolov4;
         __weak typeof(self) weakSelf = self;
         dispatch_sync(dispatch_get_main_queue(), ^{
             long dur = [[NSDate date] timeIntervalSince1970]*1000 - start.timeIntervalSince1970*1000;
-            NSString *info = [NSString stringWithFormat:@"YOLOv4-tiny\nSize:%dx%d\nTime:%.3fs\nFPS:%.2f", int(image.size.width), int(image.size.height), dur / 1000.0, 1.0 / (dur / 1000.0)];
+            NSString *info = [NSString stringWithFormat:@"%@\nSize:%dx%d\nTime:%.3fs\nFPS:%.2f", [self getModelName], int(image.size.width), int(image.size.height), dur / 1000.0, 1.0 / (dur / 1000.0)];
             weakSelf.resultLabel.text = info;
             weakSelf.imageView.image = [weakSelf drawBox:weakSelf.imageView image:image boxs:result];
         });
@@ -280,6 +272,20 @@
     
 }
 
+#pragma mark 获取模型名称
+- (NSString *)getModelName {
+    NSString *name = @"ohhhhh";
+    if (self.USE_MODEL == W_YOLOV5S) {
+        name = @"YOLOv5s";
+    } else if (self.USE_MODEL == W_YOLOV4TINY) {
+        name = @"YOLOv4-tiny";
+    } else if (self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO) {
+        name = @"MobileNetV2-YOLOv3_Nano";
+    }
+    return name;
+}
+
+#pragma mark 绘制结果
 - (UIImage *)drawBox:(UIImageView *)imageView image:(UIImage *)image boxs:(std::vector<BoxInfo>)boxs {
     UIGraphicsBeginImageContext(image.size);
 
@@ -296,7 +302,7 @@
         if (self.USE_MODEL == W_YOLOV5S) {
             NSString *name = [NSString stringWithFormat:@"%s %.3f", self.yolo->labels[box.label].c_str(), box.score];
             [name drawAtPoint:CGPointMake(box.x1, box.y1) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:35], NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName:color}];
-        } else if (self.USE_MODEL == W_YOLOV4TINY) {
+        } else if (self.USE_MODEL == W_YOLOV4TINY || self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO) {
             NSString *name = [NSString stringWithFormat:@"%s %.3f", self.yolov4->labels[box.label].c_str(), box.score];
             [name drawAtPoint:CGPointMake(box.x1, box.y1) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:35], NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName:color}];
         }

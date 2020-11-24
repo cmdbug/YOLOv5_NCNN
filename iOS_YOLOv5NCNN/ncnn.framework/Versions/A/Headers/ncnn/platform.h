@@ -19,14 +19,18 @@
 #define NCNN_STRING 1
 #define NCNN_OPENCV 0
 #define NCNN_SIMPLESTL 0
+#define NCNN_THREADS 1
 #define NCNN_BENCHMARK 0
 #define NCNN_PIXEL 1
 #define NCNN_PIXEL_ROTATE 1
 #define NCNN_VULKAN 0
 #define NCNN_VULKAN_ONLINE_SPIRV 1
 #define NCNN_REQUANT 0
+#define NCNN_RUNTIME_CPU 1
 #define NCNN_AVX2 0
+#define NCNN_ARM82 1
 
+#if NCNN_THREADS
 #if (defined _WIN32 && !(defined __MINGW32__))
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -34,6 +38,7 @@
 #else
 #include <pthread.h>
 #endif
+#endif // NCNN_THREADS
 
 #if __ANDROID_API__ >= 26
 #define VK_USE_PLATFORM_ANDROID_KHR
@@ -41,6 +46,7 @@
 
 namespace ncnn {
 
+#if NCNN_THREADS
 #if (defined _WIN32 && !(defined __MINGW32__))
 class Mutex
 {
@@ -134,12 +140,42 @@ private:
     pthread_t t;
 };
 #endif // _WIN32
+#else // NCNN_THREADS
+class Mutex
+{
+public:
+    Mutex() {}
+    ~Mutex() {}
+    void lock() {}
+    void unlock() {}
+};
+
+class ConditionVariable
+{
+public:
+    ConditionVariable() {}
+    ~ConditionVariable() {}
+    void wait(Mutex& /*mutex*/) {}
+    void broadcast() {}
+    void signal() {}
+};
+
+class Thread
+{
+public:
+    Thread(void* (*/*start*/)(void*), void* /*args*/ = 0) {}
+    ~Thread() {}
+    void join() {}
+};
+#endif // NCNN_THREADS
 
 } // namespace ncnn
 
 #if NCNN_SIMPLESTL
 #include "simplestl.h"
 #else
+#include <algorithm>
+#include <list>
 #include <vector>
 #include <string>
 #endif

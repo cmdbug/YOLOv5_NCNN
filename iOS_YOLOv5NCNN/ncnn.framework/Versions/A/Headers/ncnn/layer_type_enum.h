@@ -76,4 +76,7 @@ DeepCopy = 70,
 Mish = 71,
 StatisticsPooling = 72,
 Swish = 73,
+Gemm = 74,
+GroupNorm = 75,
+LayerNorm = 76,
 

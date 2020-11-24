@@ -16,17 +16,17 @@
 #import <UIKit/UIImage.h>
 #import <functional>
 
-namespace cv {
+namespace yolocv {
     typedef struct {
         int width;
         int height;
-    }Size;
+    }YoloSize;
 }
 
 typedef struct {
     std::string name;
     int stride;
-    std::vector<cv::Size> anchors;
+    std::vector<yolocv::YoloSize> anchors;
 }YoloLayerData;
 
 typedef struct BoxInfo {
@@ -54,7 +54,7 @@ public:
         "hair drier", "toothbrush"};
 
 private:
-    static std::vector<BoxInfo> decode_infer(ncnn::Mat &data, int stride, const cv::Size& frame_size, int net_size, int num_classes, const std::vector<cv::Size>& anchors, float threshold);
+    static std::vector<BoxInfo> decode_infer(ncnn::Mat &data, int stride, const yolocv::YoloSize& frame_size, int net_size, int num_classes, const std::vector<yolocv::YoloSize>& anchors, float threshold);
     static void nms(std::vector<BoxInfo>& result, float nms_threshold);
     
     ncnn::Net* Net;

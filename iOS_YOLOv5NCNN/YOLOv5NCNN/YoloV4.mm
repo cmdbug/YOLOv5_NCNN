@@ -9,10 +9,17 @@ darknet2ncnn:https://drive.google.com/drive/folders/1YzILvh0SKQPS_lrb33dmGNq7aVT
 bool YoloV4::hasGPU = false;
 YoloV4 *YoloV4::detector = nullptr;
 
-YoloV4::YoloV4(const char* param, const char* bin) {
+YoloV4::YoloV4(const char* param, const char* bin, const BOOL v4tiny) {
     Net = new ncnn::Net();
-    NSString *parmaPath = [[NSBundle mainBundle] pathForResource:@"yolov4-tiny-opt" ofType:@"param"];
-    NSString *binPath = [[NSBundle mainBundle] pathForResource:@"yolov4-tiny-opt" ofType:@"bin"];
+    NSString *parmaPath = nil;
+    NSString *binPath = nil;
+    if (v4tiny) {
+        parmaPath = [[NSBundle mainBundle] pathForResource:@"yolov4-tiny-opt" ofType:@"param"];
+        binPath = [[NSBundle mainBundle] pathForResource:@"yolov4-tiny-opt" ofType:@"bin"];
+    } else {
+        parmaPath = [[NSBundle mainBundle] pathForResource:@"MobileNetV2-YOLOv3-Nano-coco" ofType:@"param"];
+        binPath = [[NSBundle mainBundle] pathForResource:@"MobileNetV2-YOLOv3-Nano-coco" ofType:@"bin"];
+    }
     int rp = Net->load_param([parmaPath UTF8String]);
     int rm = Net->load_model([binPath UTF8String]);
     if (rp == 0 && rm == 0) {
@@ -23,6 +30,7 @@ YoloV4::YoloV4(const char* param, const char* bin) {
 }
 
 YoloV4::~YoloV4() {
+    Net->clear();
     delete Net;
 }
 
@@ -67,7 +75,7 @@ inline float sigmoid(float x) {
 }
 
 std::vector<BoxInfo>
-YoloV4::decode_inferv4(ncnn::Mat &data, const cv::Size &frame_size, int net_size, int num_classes, float threshold) {
+YoloV4::decode_inferv4(ncnn::Mat &data, const yolocv::YoloSize &frame_size, int net_size, int num_classes, float threshold) {
     std::vector<BoxInfo> result;
     for (int i = 0; i < data.h; i++) {
         BoxInfo box;

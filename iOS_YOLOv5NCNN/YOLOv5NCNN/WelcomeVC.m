@@ -29,6 +29,7 @@
 - (void)initView {
     [_btnYolov5s addTarget:self action:@selector(pressYolov5s:) forControlEvents:UIControlEventTouchUpInside];
     [_btnYolov4tiny addTarget:self action:@selector(pressYolov4tiny:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnMBV2Yolov3nano addTarget:self action:@selector(pressMBNv2Yolov3Nano:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)pressYolov5s:(UIButton *)btn {
@@ -40,6 +41,12 @@
 - (void)pressYolov4tiny:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_YOLOV4TINY;
+    [self.navigationController pushViewController:vc animated:NO];
+}
+
+- (void)pressMBNv2Yolov3Nano:(UIButton *)btn {
+    ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+    vc.USE_MODEL = W_MOBILENETV2_YOLOV3_NANO;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
