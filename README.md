@@ -27,19 +27,22 @@ YOLOv3-nano: Select the model to be tested directly on the interface.
 Select the model to be tested directly on the interface.
 ```
 ### Models
-* ***YOLOv5s***: The input size is reduced, the decoding process uses a large number of for loops and NMS appears to be slower.
-* ***YOLOv4-tiny***: Using the default size, the decoding process does not have a lot of for and NMS, so the speed will be faster.
-* ***YOLOv3-nano***: Same as v4-tiny.
-* ***Simple-Pose***: Only the Android version is written for the time being, and iOS has not been added yet. The internal principle is to first detect the person and then use the area of the person to perform posture detection again, that is, a 2-step process.
-* ***Yolact***: Only the Android version is written for the time being, and iOS has not been added yet.
-* ***ChineseOCR_lite***: Only the Android version is written for the time being, and iOS has not been added yet. (It should be noted that crashes occasionally occur, please fix it if you have time)
-* ***ENet***: Only the Android version is written for the time being, and iOS has not been added yet. (Because the model is too small, the segmentation effect is relatively poor, you can replace the stronger network by yourself. But the effect is too poor, there may be problems)
-* ***Landmark106***: Only the Android version is written for the time being, and iOS has not been added yet. The internal principle is to first detect the face and then use the area of the face to perform key point detection again, that is, a 2-step process.
-* ***DBFace***: Only the Android version is written for the time being, and iOS has not been added yet.
-* ***MBNv2-FCN***: Only the Android version is written for the time being, and iOS has not been added yet.(Thanks to the nick name Persistence for help)
-* ***MBNv3-Seg-small***: Only the Android version is written for the time being, and iOS has not been added yet.
-* ***YOLOv5s_custom_op***: Only the Android version is written for the time being, and iOS has not been added yet.
-* ***nanodet***: Only the Android version is written for the time being, and iOS has not been added yet.
+| model | android | iOS | from |
+|-------------------|:--------:|:--------:|:--------:|
+| YOLOv5s           | yes | yes |  [Github](https://github.com/ultralytics/yolov5)   |
+| YOLOv4-tiny       | yes | yes |  [Github](https://github.com/ultralytics/yolov3)   |
+| YOLOv3-nano       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
+| Simple-Pose       | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
+| Yolact            | yes | coming soon |  [Github](https://github.com/dbolya/yolact) [zhihu](https://zhuanlan.zhihu.com/p/128974102)  |
+| ChineseOCR_lite   | yes | probably |  [Github](https://github.com/ouyanghuiyu/chineseocr_lite) [zhihu](https://zhuanlan.zhihu.com/p/113338890)   |
+| ENet              | yes | cancel |  [Github](https://github.com/davidtvs/PyTorch-ENet)   |
+| Landmark106       | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
+| DBFace            | yes | coming soon |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
+| MBNv2-FCN         | yes | coming soon |     |
+| MBNv3-Seg-small   | yes | coming soon |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
+| YOLOv5s_custom_op | yes | coming soon |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
+| NanoDet           | yes | coming soon |  [Github](https://github.com/RangiLyu/nanodet)   |
+| YOLO-Fastest-xl   | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
 
 ### Note：<br/>
 * Due to factors such as mobile phone performance and image size, FPS varies greatly on different mobile phones. This project mainly tests the use of the NCNN framework. For the conversion of specific models, you can go to the NCNN official to view the conversion tutorial.
@@ -68,9 +71,9 @@ Select the model to be tested directly on the interface.
 |-------------------|-------------|---------|
 | <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_dbface.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_MBNFCN.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_MBNV3_Seg_small.jpg"/>|
 
-|  yolov5s_custom_op | nanodet | xxx |
+|  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
-| none | none | xxx |
+| none | none | none |
 
 > iOS
 
