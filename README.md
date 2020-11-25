@@ -39,8 +39,8 @@ Select the model to be tested directly on the interface.
 | MBNv2-FCN         | yes | coming soon |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
 | MBNv3-Seg-small   | yes | coming soon |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
 | YOLOv5s_custom_op | yes | coming soon |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
-| NanoDet           | yes | coming soon |  [Github](https://github.com/RangiLyu/nanodet)   |
-| YOLO-Fastest-xl   | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
+| NanoDet           | yes | yes |  [Github](https://github.com/RangiLyu/nanodet)   |
+| YOLO-Fastest-xl   | yes | bug |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
 
 ### Note：<br/>
 * Due to factors such as mobile phone performance and image size, FPS varies greatly on different mobile phones. This project mainly tests the use of the NCNN framework. For the conversion of specific models, you can go to the NCNN official to view the conversion tutorial.
@@ -78,6 +78,10 @@ Select the model to be tested directly on the interface.
 |  mbnv2-yolov3-nano | yolov4-tiny | yolov5s |
 |-------------------|-------------|---------|
 | <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_yolov3_nano.jpg"/> |<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov4_tiny.jpg"/>| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s.jpg"/> |
+
+|  xxx | nanodet | yolo-fastest-xl |
+|-------------------|-------------|---------|
+| xxx | none | none |
 
 
 Thanks:<br/>
