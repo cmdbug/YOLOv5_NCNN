@@ -39,8 +39,8 @@
 | MBNv2-FCN         | yes | coming soon |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
 | MBNv3-Seg-small   | yes | coming soon |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
 | YOLOv5s_custom_op | yes | coming soon |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
-| NanoDet           | yes | coming soon |  [Github](https://github.com/RangiLyu/nanodet)   |
-| YOLO-Fastest-xl   | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
+| NanoDet           | yes | yes |  [Github](https://github.com/RangiLyu/nanodet)   |
+| YOLO-Fastest-xl   | yes | bug |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
 
 ### Note：
 * 由于手机性能、图像尺寸等因素导致FPS在不同手机上相差比较大。该项目主要测试NCNN框架的使用，具体模型的转换可以去NCNN官方查看转换教程。<br/>
@@ -79,6 +79,10 @@
 |  mbnv2-yolov3-nano | yolov4-tiny | yolov5s |
 |-------------------|-------------|---------|
 | <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_yolov3_nano.jpg"/> |<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov4_tiny.jpg"/>| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s.jpg"/> |
+
+|  xxx | nanodet | yolo-fastest-xl |
+|-------------------|-------------|---------|
+| xxx | none | none |
 
 
 感谢:<br/>
