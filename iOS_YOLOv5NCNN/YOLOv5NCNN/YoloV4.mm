@@ -9,16 +9,19 @@ darknet2ncnn:https://drive.google.com/drive/folders/1YzILvh0SKQPS_lrb33dmGNq7aVT
 bool YoloV4::hasGPU = false;
 YoloV4 *YoloV4::detector = nullptr;
 
-YoloV4::YoloV4(const char* param, const char* bin, const BOOL v4tiny) {
+YoloV4::YoloV4(const char* param, const char* bin, const int yoloType) {
     Net = new ncnn::Net();
     NSString *parmaPath = nil;
     NSString *binPath = nil;
-    if (v4tiny) {
+    if (yoloType == 0) {
         parmaPath = [[NSBundle mainBundle] pathForResource:@"yolov4-tiny-opt" ofType:@"param"];
         binPath = [[NSBundle mainBundle] pathForResource:@"yolov4-tiny-opt" ofType:@"bin"];
-    } else {
+    } else if (yoloType == 1) {
         parmaPath = [[NSBundle mainBundle] pathForResource:@"MobileNetV2-YOLOv3-Nano-coco" ofType:@"param"];
         binPath = [[NSBundle mainBundle] pathForResource:@"MobileNetV2-YOLOv3-Nano-coco" ofType:@"bin"];
+    } else if (yoloType == 2) {
+        parmaPath = [[NSBundle mainBundle] pathForResource:@"yolo-fastest-xl-opt" ofType:@"param"];
+        binPath = [[NSBundle mainBundle] pathForResource:@"yolo-fastest-xl-opt" ofType:@"bin"];
     }
     int rp = Net->load_param([parmaPath UTF8String]);
     int rm = Net->load_model([binPath UTF8String]);
@@ -58,6 +61,7 @@ std::vector<BoxInfo> YoloV4::detectv4(UIImage *image, float threshold, float nms
     auto boxes = decode_inferv4(blob, {w, h}, input_size, num_class, threshold);
     result.insert(result.begin(), boxes.begin(), boxes.end());
 //    nms(result,nms_threshold);
+    delete[] rgba;
     return result;
 }
 

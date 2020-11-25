@@ -17,11 +17,12 @@
 //#include <ncnn/net.h>  // 旧版本
 #include "YoloV5.h"
 #include "YoloV4.h"
+#include "NanoDet.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVMediaFormat.h>
 #import "ELCameraControlCapture.h"
-//#import <opencv2/opencv.hpp>
+#import <opencv2/opencv.hpp>
 
 
 @interface ViewController ()
@@ -35,13 +36,19 @@
 @property (assign, nonatomic) float threshold;
 @property (assign, nonatomic) float nms_threshold;
 
+@property (assign, atomic) double total_fps;
+@property (assign, atomic) double fps_count;
+
 // 相机部分
 @property (strong, nonatomic) ELCameraControlCapture *cameraCapture;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *preLayer;
 
 @property YoloV5 *yolo;
 @property YoloV4 *yolov4;
+@property NanoDet *nanoDet;
+
 @property (assign, atomic) Boolean isDetecting;
+@property (nonatomic) dispatch_queue_t queue;
 
 //@property (assign, nonatomic) Boolean USE_YOLOV5;  // YES:YOLOv5  NO:YOLOv4-tiny
 
@@ -60,6 +67,7 @@
     } else {
         // 有权限
     }
+    self.queue = dispatch_queue_create("ncnn", DISPATCH_QUEUE_CONCURRENT);
     [self initTitleName];
     self.isDetecting = NO;
     [self initView];
@@ -68,7 +76,7 @@
 
 #pragma mark 显示标题
 - (void)initTitleName {
-    self.title = [self getModelName];
+    self.title = [[[self getModelName] stringByReplacingOccurrencesOfString:@"[CPU] " withString:@""] stringByReplacingOccurrencesOfString:@"[GPU] " withString:@""];
 }
 
 - (CGFloat)degreesToRadians:(CGFloat)degrees {
@@ -89,7 +97,7 @@
     // Move the origin to the middle of the image so we will rotate and scale around the center.
     CGContextTranslateCTM(bitmap, rotatedSize.width/2, rotatedSize.height/2);
     
-    //   // Rotate the image context
+    // Rotate the image context
     CGContextRotateCTM(bitmap, [self degreesToRadians:degrees]);
     
     // Now, draw the rotated/scaled image into the context
@@ -122,7 +130,7 @@
             }
             temp = [weakSelf rotatedByDegrees:degrees image:image];
         });
-        dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+        dispatch_sync(weakSelf.queue, ^{
             [weakSelf detectImage:temp];
             weakSelf.isDetecting = NO;
         });
@@ -143,7 +151,7 @@
     self.preLayer.backgroundColor = [[UIColor redColor] CGColor];
     UIEdgeInsets insets = self.view.safeAreaInsets;
     CGRect screen = [[UIScreen mainScreen] bounds];
-    self.preLayer.frame = CGRectMake(15, screen.size.height - 145 - insets.bottom - 15, 110, 145);
+    self.preLayer.frame = CGRectMake(5, screen.size.height - 145 - insets.bottom - 5, 110, 145);
     self.preLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.view.layer addSublayer:self.preLayer];
 }
@@ -158,14 +166,32 @@
     [self.cameraCapture stopSession];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    dispatch_barrier_async(self.queue, ^{
+        [self releaseModel];
+    });
+}
+
 
 - (void)initView {
     self.threshold = 0.3f;
     self.nms_threshold = 0.7f;
+    if (self.USE_MODEL == W_YOLOV5S) {
+        self.threshold = 0.3f;
+        self.nms_threshold = 0.7f;
+    } else if (self.USE_MODEL == W_DBFACE || self.USE_MODEL == W_NANODET) {
+        self.threshold = 0.3f;
+        self.nms_threshold = 0.6f;
+    } else if (self.USE_MODEL == W_YOLOV5S_CUSTOM_OP) {
+        self.threshold = 0.25f;
+        self.nms_threshold = 0.45f;
+    }
+    
 //    self.imageView.image = [UIImage imageNamed:@"000000000650.jpg"];
     [self.nmsSlider addTarget:self action:@selector(nmsChange:forEvent:) forControlEvents:UIControlEventValueChanged];
     [self.thresholdSlider addTarget:self action:@selector(nmsChange:forEvent:) forControlEvents:UIControlEventValueChanged];
-    if (!(self.USE_MODEL == W_YOLOV5S)) {
+    if (self.USE_MODEL != W_YOLOV5S && self.USE_MODEL != W_DBFACE && self.USE_MODEL != W_NANODET && self.USE_MODEL != W_YOLOV5S_CUSTOM_OP) {
         self.nmsSlider.enabled = NO;
         self.thresholdSlider.enabled = NO;
     }
@@ -237,39 +263,89 @@
 
 #pragma mark 相机回调图片
 - (void)detectImage:(UIImage *)image {
+    // create model
+    [self createModel];
+    
+    NSDate *start = [NSDate date];
+    std::vector<BoxInfo> result;
+    if (self.USE_MODEL == W_YOLOV5S) {
+        result = self.yolo->dectect(image, self.threshold, self.nms_threshold);
+    } else if (self.USE_MODEL == W_YOLOV4TINY
+               || self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO
+               || self.USE_MODEL == W_YOLO_FASTEST_XL) {
+        result = self.yolov4->detectv4(image, self.threshold, self.nms_threshold);
+    } else if (self.USE_MODEL == W_NANODET) {
+        result = self.nanoDet->detect(image, self.threshold, self.nms_threshold);
+    }
+    __weak typeof(self) weakSelf = self;
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        long dur = [[NSDate date] timeIntervalSince1970]*1000 - start.timeIntervalSince1970*1000;
+        float fps = 1.0 / (dur / 1000.0);
+        weakSelf.total_fps = (weakSelf.total_fps == 0) ? fps : (weakSelf.total_fps + fps);
+        weakSelf.fps_count++;
+        NSString *info = [NSString stringWithFormat:@"%@\nSize:%dx%d\nTime:%.3fs\nFPS:%.2f\nAVG_FPS:%.2f", [self getModelName], int(image.size.width), int(image.size.height), dur / 1000.0, fps, (float)weakSelf.total_fps / weakSelf.fps_count];
+        weakSelf.resultLabel.text = info;
+        if (weakSelf.USE_MODEL == W_YOLOV5S
+            || weakSelf.USE_MODEL == W_YOLOV4TINY
+            || weakSelf.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO
+            || weakSelf.USE_MODEL == W_YOLOV5S_CUSTOM_OP
+            || weakSelf.USE_MODEL == W_NANODET
+            || weakSelf.USE_MODEL == W_YOLO_FASTEST_XL) {
+            weakSelf.imageView.image = [weakSelf drawBox:weakSelf.imageView image:image boxs:result];
+        } else if (weakSelf.USE_MODEL == W_SIMPLE_POSE) {
+            
+        } else if (weakSelf.USE_MODEL == W_YOLACT) {
+                   
+        } else if (weakSelf.USE_MODEL == W_FACE_LANDMARK) {
+                          
+        } else if (weakSelf.USE_MODEL == W_DBFACE) {
+                                 
+        } else if (weakSelf.USE_MODEL == W_MOBILENETV2_FCN || weakSelf.USE_MODEL == W_MOBILENETV3_SEG) {
+                                        
+        }
+    });
+    
+}
+
+#pragma mark 创建模型
+- (void)createModel {
     if (!self.yolo && self.USE_MODEL == W_YOLOV5S) {
         NSLog(@"new YoloV5");
         self.yolo = new YoloV5("", "");
     } else if (!self.yolov4 && self.USE_MODEL == W_YOLOV4TINY) {
         NSLog(@"new YoloV4");
-        self.yolov4 = new YoloV4("", "", YES);
+        self.yolov4 = new YoloV4("", "", 0);
     } else if (!self.yolov4 && self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO) {
         NSLog(@"new YoloV3-nano");
-        self.yolov4 = new YoloV4("", "", NO);
+        self.yolov4 = new YoloV4("", "", 1);
+    } else if (!self.yolov4 && self.USE_MODEL == W_SIMPLE_POSE) {
+        NSLog(@"new Simple-Pose");
+    } else if (!self.yolov4 && self.USE_MODEL == W_YOLACT) {
+        NSLog(@"new Yolact");
+    } else if (!self.yolov4 && self.USE_MODEL == W_FACE_LANDMARK) {
+        NSLog(@"new face-landmark");
+    } else if (!self.yolov4 && self.USE_MODEL == W_DBFACE) {
+        NSLog(@"new dbface");
+    } else if (!self.yolov4 && self.USE_MODEL == W_MOBILENETV2_FCN) {
+        NSLog(@"new mbnv2 fcn");
+    } else if (!self.yolov4 && self.USE_MODEL == W_MOBILENETV3_SEG) {
+        NSLog(@"new mbnv3 seg");
+    } else if (!self.yolov4 && self.USE_MODEL == W_YOLOV5S_CUSTOM_OP) {
+        NSLog(@"new yolov5s custom op");
+    } else if (!self.nanoDet && self.USE_MODEL == W_NANODET) {
+        NSLog(@"new nanodet");
+        self.nanoDet = new NanoDet("", "", NO);
+    } else if (!self.yolov4 && self.USE_MODEL == W_YOLO_FASTEST_XL) {
+        NSLog(@"new yolo fastest xl");
+        self.yolov4 = new YoloV4("", "", 2);
     }
-    NSDate *start = [NSDate date];
-    if (self.USE_MODEL == W_YOLOV5S) {
-        std::vector<BoxInfo> result = self.yolo->dectect(image, self.threshold, self.nms_threshold);
-//        delete self.yolo;
-        __weak typeof(self) weakSelf = self;
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            long dur = [[NSDate date] timeIntervalSince1970]*1000 - start.timeIntervalSince1970*1000;
-            NSString *info = [NSString stringWithFormat:@"%@\nSize:%dx%d\nTime:%.3fs\nFPS:%.2f", [self getModelName], int(image.size.width), int(image.size.height), dur / 1000.0, 1.0 / (dur / 1000.0)];
-            weakSelf.resultLabel.text = info;
-            weakSelf.imageView.image = [weakSelf drawBox:weakSelf.imageView image:image boxs:result];
-        });
-    } else if (self.USE_MODEL == W_YOLOV4TINY || self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO) {
-        std::vector<BoxInfo> result = self.yolov4->detectv4(image, self.threshold, self.nms_threshold);
-//        delete self.yolov4;
-        __weak typeof(self) weakSelf = self;
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            long dur = [[NSDate date] timeIntervalSince1970]*1000 - start.timeIntervalSince1970*1000;
-            NSString *info = [NSString stringWithFormat:@"%@\nSize:%dx%d\nTime:%.3fs\nFPS:%.2f", [self getModelName], int(image.size.width), int(image.size.height), dur / 1000.0, 1.0 / (dur / 1000.0)];
-            weakSelf.resultLabel.text = info;
-            weakSelf.imageView.image = [weakSelf drawBox:weakSelf.imageView image:image boxs:result];
-        });
-    }
-    
+}
+
+- (void)releaseModel {
+    NSLog(@"release model");
+    delete self.yolo;
+    delete self.yolov4;
+    delete self.nanoDet;
 }
 
 #pragma mark 获取模型名称
@@ -281,8 +357,27 @@
         name = @"YOLOv4-tiny";
     } else if (self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO) {
         name = @"MobileNetV2-YOLOv3_Nano";
+    } else if (self.USE_MODEL == W_SIMPLE_POSE) {
+        name = @"Simple-Pose";
+    } else if (self.USE_MODEL == W_YOLACT) {
+        name = @"Yolact";
+    } else if (self.USE_MODEL == W_FACE_LANDMARK) {
+        name = @"YoloFace500k-landmark106";
+    } else if (self.USE_MODEL == W_DBFACE) {
+        name = @"DBFace";
+    } else if (self.USE_MODEL == W_MOBILENETV2_FCN) {
+        name = @"MobileNetV2-FCN";
+    } else if (self.USE_MODEL == W_MOBILENETV3_SEG) {
+        name = @"MBNv3-Segmentation-small";
+    } else if (self.USE_MODEL == W_YOLOV5S_CUSTOM_OP) {
+        name = @"YOLOv5s_Custom_Layer";
+    } else if (self.USE_MODEL == W_NANODET) {
+        name = @"NanoDet";
+    } else if (self.USE_MODEL == W_YOLO_FASTEST_XL) {
+        name = @"YOLO-Fastest-xl";
     }
-    return name;
+    NSString *modelName = self.USE_GPU ? [NSString stringWithFormat:@"[GPU] %@", name] : [NSString stringWithFormat:@"[CPU] %@", name];
+    return modelName;
 }
 
 #pragma mark 绘制结果
@@ -299,13 +394,17 @@
         srand(box.label + 2020);
         UIColor *color = [UIColor colorWithRed:rand()%256/255.0f green:rand()%256/255.0f blue:rand()%255/255.0f alpha:1.0f];
         CGContextAddRect(context, CGRectMake(box.x1, box.y1, box.x2 - box.x1, box.y2 - box.y1));
+        NSString *label = nil;
         if (self.USE_MODEL == W_YOLOV5S) {
-            NSString *name = [NSString stringWithFormat:@"%s %.3f", self.yolo->labels[box.label].c_str(), box.score];
-            [name drawAtPoint:CGPointMake(box.x1, box.y1) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:35], NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName:color}];
-        } else if (self.USE_MODEL == W_YOLOV4TINY || self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO) {
-            NSString *name = [NSString stringWithFormat:@"%s %.3f", self.yolov4->labels[box.label].c_str(), box.score];
-            [name drawAtPoint:CGPointMake(box.x1, box.y1) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:35], NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName:color}];
+            label = [NSString stringWithFormat:@"%s %.3f", self.yolo->labels[box.label].c_str(), box.score];
+        } else if (self.USE_MODEL == W_YOLOV4TINY
+                   || self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO
+                   || self.USE_MODEL == W_YOLO_FASTEST_XL) {
+            label = [NSString stringWithFormat:@"%s %.3f", self.yolov4->labels[box.label].c_str(), box.score];
+        } else if (self.USE_MODEL == W_NANODET) {
+            label = [NSString stringWithFormat:@"%s %.3f", self.nanoDet->labels[box.label].c_str(), box.score];
         }
+        [label drawAtPoint:CGPointMake(box.x1 + 2, box.y1 - 3) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20], NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName:color}];
         
         CGContextSetStrokeColorWithColor(context, [color CGColor]);
         CGContextStrokePath(context);

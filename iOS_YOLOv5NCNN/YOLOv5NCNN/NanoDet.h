@@ -1,5 +1,5 @@
-#ifndef YOLOV4_H
-#define YOLOV4_H
+#ifndef NANODET_H
+#define NANODET_H
 
 #include <stdio.h>
 #include "ncnn/ncnn/net.h"
@@ -9,33 +9,21 @@
 #import <functional>
 #include "YoloV5.h"
 
-//namespace yolocv{
-//    typedef struct{
-//        int width;
-//        int height;
-//    }YoloSize;
-//}
+typedef struct {
+    std::string cls_layer;
+    std::string dis_layer;
+    int stride;
+} HeadInfo;
 
-//typedef struct {
-//    std::string name;
-//    int stride;
-//    std::vector<yolocv::YoloSize> anchors;
-//}YoloLayerData;
 
-//typedef struct BoxInfo {
-//    float x1;
-//    float y1;
-//    float x2;
-//    float y2;
-//    float score;
-//    int label;
-//} BoxInfo;
-
-class YoloV4 {
+class NanoDet {
 public:
-    YoloV4(const char* param, const char* bin, const int yoloType);
-    ~YoloV4();
-    std::vector<BoxInfo> detectv4(UIImage *image, float threshold, float nms_threshold);
+    NanoDet(const char *param, const char *bin, bool useGPU);
+
+    ~NanoDet();
+
+    std::vector<BoxInfo> detect(UIImage *image, float score_threshold, float nms_threshold);
+
     std::vector<std::string> labels{"person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
                                     "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow",
                                     "elephant", "bear", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
@@ -46,15 +34,31 @@ public:
                                     "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
                                     "hair drier", "toothbrush"};
 private:
-    static std::vector<BoxInfo> decode_inferv4(ncnn::Mat &data, const yolocv::YoloSize& frame_size, int net_size,int num_classes,float threshold);
-//    static void nms(std::vector<BoxInfo>& result,float nms_threshold);
-    ncnn::Net* Net;
-    int input_size = 640 / 2; // 416
+
+    void decode_infer(ncnn::Mat &cls_pred, ncnn::Mat &dis_pred, int stride, float threshold,
+                      std::vector<std::vector<BoxInfo>> &results, float width_ratio, float height_ratio);
+
+    BoxInfo disPred2Bbox(const float *&dfl_det, int label, float score, int x, int y, int stride, float width_ratio,
+                         float height_ratio);
+
+    static void nms(std::vector<BoxInfo> &result, float nms_threshold);
+
+    ncnn::Net *Net;
+    int input_size = 320;
     int num_class = 80;
+    int reg_max = 7;
+    std::vector<HeadInfo> heads_info{
+            // cls_pred|dis_pred|stride
+            {"792", "795", 8},
+            {"814", "817", 16},
+            {"836", "839", 32},
+    };
+
 public:
-    static YoloV4 *detector;
+    static NanoDet *detector;
     static bool hasGPU;
+    static bool toUseGPU;
 };
 
 
-#endif //YOLOV4_H
+#endif //NANODET_H
