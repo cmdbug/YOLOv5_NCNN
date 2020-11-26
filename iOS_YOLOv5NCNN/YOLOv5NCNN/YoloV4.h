@@ -33,7 +33,7 @@
 
 class YoloV4 {
 public:
-    YoloV4(const char* param, const char* bin, const int yoloType);
+    YoloV4(bool useGPU, const int yoloType);
     ~YoloV4();
     std::vector<BoxInfo> detectv4(UIImage *image, float threshold, float nms_threshold);
     std::vector<std::string> labels{"person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
@@ -54,6 +54,7 @@ private:
 public:
     static YoloV4 *detector;
     static bool hasGPU;
+    static bool toUseGPU;
 };
 
 

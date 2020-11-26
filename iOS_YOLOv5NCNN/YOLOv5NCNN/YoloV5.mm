@@ -9,10 +9,19 @@
 #include "YoloV5.h"
 
 bool YoloV5::hasGPU = false;
+bool YoloV5::toUseGPU = false;
 YoloV5* YoloV5::detector = nullptr;
 
-YoloV5::YoloV5(const char* param, const char* bin) {
+YoloV5::YoloV5(bool useGPU) {
+#if NCNN_VULKAN
+    ncnn::create_gpu_instance();
+    hasGPU = ncnn::get_gpu_count();
+#endif
+    toUseGPU = hasGPU && useGPU;
+    
     Net = new ncnn::Net();
+    Net->opt.use_vulkan_compute = toUseGPU;
+    Net->opt.use_fp16_arithmetic = true;
     NSString *parmaPath = [[NSBundle mainBundle] pathForResource:@"yolov5" ofType:@"param"];
     NSString *binPath = [[NSBundle mainBundle] pathForResource:@"yolov5" ofType:@"bin"];
     int rp = Net->load_param([parmaPath UTF8String]);
@@ -29,6 +38,9 @@ YoloV5::YoloV5(const char* param, const char* bin) {
 YoloV5::~YoloV5() {
     Net->clear();
     delete Net;
+#if NCNN_VULKAN
+    ncnn::destroy_gpu_instance();
+#endif
     printf("delete YoloV5");
 }
 
@@ -48,6 +60,11 @@ std::vector<BoxInfo> YoloV5::dectect(UIImage *image, float threshold, float nms_
     auto ex = Net->create_extractor();
     ex.set_light_mode(true);
     ex.set_num_threads(4);
+#if NCNN_VULKAN
+    if (toUseGPU) {
+        ex.set_vulkan_compute(toUseGPU);
+    }
+#endif
     ex.input(0, in_net);
     std::vector<BoxInfo> result;
     for (const auto& layer: layers) {

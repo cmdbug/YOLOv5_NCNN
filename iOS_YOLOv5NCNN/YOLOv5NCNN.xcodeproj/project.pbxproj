@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F13A99E256F767800E45BA3 /* glslang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F13A99D256F767800E45BA3 /* glslang.framework */; };
+		5F13A9A0256F851000E45BA3 /* ncnn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F13A99F256F851000E45BA3 /* ncnn.framework */; };
 		5F37E19E24B97F9600BF9E94 /* yolov4-tiny-opt.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E19C24B97F9400BF9E94 /* yolov4-tiny-opt.param */; };
 		5F37E19F24B97F9600BF9E94 /* yolov4-tiny-opt.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E19D24B97F9600BF9E94 /* yolov4-tiny-opt.bin */; };
 		5F37E1A224B97FD900BF9E94 /* YoloV4.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E1A024B97FD900BF9E94 /* YoloV4.mm */; };
@@ -26,7 +28,6 @@
 		5FF8B4AE256DD8F90002375F /* openmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF8B4AD256DD8F90002375F /* openmp.framework */; };
 		5FF8B4B2256DD9CB0002375F /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF8B4B1256DD9CA0002375F /* opencv2.framework */; };
 		5FF8B4B6256DDAD20002375F /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF8B4B5256DDAD20002375F /* opencv2.framework */; };
-		5FF8B4BE256DF23E0002375F /* ncnn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF8B4BD256DF23E0002375F /* ncnn.framework */; };
 		5FF8B4C1256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4BF256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin */; };
 		5FF8B4C2256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4C0256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param */; };
 		5FF8B4C5256DF31D0002375F /* nanodet_m.param in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4C3256DF31D0002375F /* nanodet_m.param */; };
@@ -37,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F13A99D256F767800E45BA3 /* glslang.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = glslang.framework; sourceTree = "<group>"; };
+		5F13A99F256F851000E45BA3 /* ncnn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ncnn.framework; sourceTree = "<group>"; };
 		5F37E19C24B97F9400BF9E94 /* yolov4-tiny-opt.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "yolov4-tiny-opt.param"; sourceTree = "<group>"; };
 		5F37E19D24B97F9600BF9E94 /* yolov4-tiny-opt.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "yolov4-tiny-opt.bin"; sourceTree = "<group>"; };
 		5F37E1A024B97FD900BF9E94 /* YoloV4.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YoloV4.mm; sourceTree = "<group>"; };
@@ -65,7 +68,6 @@
 		5FF8B4AD256DD8F90002375F /* openmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openmp.framework; sourceTree = "<group>"; };
 		5FF8B4B1256DD9CA0002375F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "../局域网共享/opencv2.framework"; sourceTree = "<group>"; };
 		5FF8B4B5256DDAD20002375F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
-		5FF8B4BD256DF23E0002375F /* ncnn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ncnn.framework; sourceTree = "<group>"; };
 		5FF8B4BF256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "MobileNetV2-YOLOv3-Nano-coco.bin"; sourceTree = "<group>"; };
 		5FF8B4C0256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MobileNetV2-YOLOv3-Nano-coco.param"; sourceTree = "<group>"; };
 		5FF8B4C3256DF31D0002375F /* nanodet_m.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nanodet_m.param; sourceTree = "<group>"; };
@@ -82,9 +84,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FF8B4AE256DD8F90002375F /* openmp.framework in Frameworks */,
+				5F13A9A0256F851000E45BA3 /* ncnn.framework in Frameworks */,
 				5FF8B4B6256DDAD20002375F /* opencv2.framework in Frameworks */,
 				5FF8B4B2256DD9CB0002375F /* opencv2.framework in Frameworks */,
-				5FF8B4BE256DF23E0002375F /* ncnn.framework in Frameworks */,
+				5F13A99E256F767800E45BA3 /* glslang.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +114,8 @@
 		5F40C2A924B1647800C84041 /* YOLOv5NCNN */ = {
 			isa = PBXGroup;
 			children = (
-				5FF8B4BD256DF23E0002375F /* ncnn.framework */,
+				5F13A99F256F851000E45BA3 /* ncnn.framework */,
+				5F13A99D256F767800E45BA3 /* glslang.framework */,
 				5FF8B4B5256DDAD20002375F /* opencv2.framework */,
 				5FF8B4AD256DD8F90002375F /* openmp.framework */,
 				5FD3E2D424B4171C0049450B /* CameraCapture */,

@@ -18,7 +18,7 @@ typedef struct {
 
 class NanoDet {
 public:
-    NanoDet(const char *param, const char *bin, bool useGPU);
+    NanoDet(bool useGPU);
 
     ~NanoDet();
 

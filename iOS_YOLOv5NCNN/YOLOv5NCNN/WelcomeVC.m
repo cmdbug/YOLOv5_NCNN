@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnYOLOFastestXL;
 
 @property (strong, nonatomic) IBOutlet UIImageView *btnUseGPU;
+@property (assign, nonatomic) Boolean useGPU;
 
 @end
 
@@ -38,7 +39,32 @@
     self.title = @"TENG";
 }
 
+- (void)changeMode {
+    self.useGPU = NO;
+    self.btnUseGPU.userInteractionEnabled = YES;
+    UITapGestureRecognizer *modeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeNcnnMode)];
+    [self.btnUseGPU addGestureRecognizer:modeTap];
+}
+
+- (void)changeNcnnMode {
+    self.useGPU = self.useGPU ? NO : YES;
+    NSString *title = @"Warning";
+    NSString *message = @"ohhhhh";
+    if (self.useGPU) {
+        title = @"Warning";
+        message = @"If the GPU is too old, it may not work well in GPU mode.";
+    } else {
+        title = @"Warning";
+        message = @"Run on CPU.";
+    }
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:sure];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)initView {
+    [self changeMode];
     [_btnYolov5s addTarget:self action:@selector(pressYolov5s:) forControlEvents:UIControlEventTouchUpInside];
     [_btnYolov4tiny addTarget:self action:@selector(pressYolov4tiny:) forControlEvents:UIControlEventTouchUpInside];
     [_btnMBV2Yolov3nano addTarget:self action:@selector(pressMBNv2Yolov3Nano:) forControlEvents:UIControlEventTouchUpInside];
@@ -56,72 +82,84 @@
 - (void)pressYolov5s:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_YOLOV5S;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressYolov4tiny:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_YOLOV4TINY;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressMBNv2Yolov3Nano:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_MOBILENETV2_YOLOV3_NANO;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressSimplePose:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_SIMPLE_POSE;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressYolact:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_YOLACT;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressFaceLandmark:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_FACE_LANDMARK;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressDBFace:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_DBFACE;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressMBNv2FCN:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_MOBILENETV2_FCN;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressMBNv3SEG:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_MOBILENETV3_SEG;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressYOLOv5CustomOP:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_YOLOV5S_CUSTOM_OP;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressNanoDet:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_NANODET;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pressYOLOFastestXL:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_YOLO_FASTEST_XL;
+    vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
 

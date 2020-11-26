@@ -22,7 +22,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVMediaFormat.h>
 #import "ELCameraControlCapture.h"
-#import <opencv2/opencv.hpp>
+#import <opencv2/opencv.hpp>  // download opencv2.framework to project
 
 
 @interface ViewController ()
@@ -311,13 +311,13 @@
 - (void)createModel {
     if (!self.yolo && self.USE_MODEL == W_YOLOV5S) {
         NSLog(@"new YoloV5");
-        self.yolo = new YoloV5("", "");
+        self.yolo = new YoloV5(self.USE_GPU);
     } else if (!self.yolov4 && self.USE_MODEL == W_YOLOV4TINY) {
         NSLog(@"new YoloV4");
-        self.yolov4 = new YoloV4("", "", 0);
+        self.yolov4 = new YoloV4(self.USE_GPU, 0);
     } else if (!self.yolov4 && self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO) {
         NSLog(@"new YoloV3-nano");
-        self.yolov4 = new YoloV4("", "", 1);
+        self.yolov4 = new YoloV4(self.USE_GPU, 1);
     } else if (!self.yolov4 && self.USE_MODEL == W_SIMPLE_POSE) {
         NSLog(@"new Simple-Pose");
     } else if (!self.yolov4 && self.USE_MODEL == W_YOLACT) {
@@ -334,10 +334,10 @@
         NSLog(@"new yolov5s custom op");
     } else if (!self.nanoDet && self.USE_MODEL == W_NANODET) {
         NSLog(@"new nanodet");
-        self.nanoDet = new NanoDet("", "", NO);
+        self.nanoDet = new NanoDet(self.USE_GPU);
     } else if (!self.yolov4 && self.USE_MODEL == W_YOLO_FASTEST_XL) {
         NSLog(@"new yolo fastest xl");
-        self.yolov4 = new YoloV4("", "", 2);
+        self.yolov4 = new YoloV4(self.USE_GPU, 2);
     }
 }
 

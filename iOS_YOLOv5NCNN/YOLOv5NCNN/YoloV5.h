@@ -40,7 +40,7 @@ typedef struct BoxInfo {
 
 class YoloV5 {
 public:
-    YoloV5(const char* param, const char* bin);
+    YoloV5(bool useGPU);
     ~YoloV5();
     std::vector<BoxInfo> dectect(UIImage *image, float threshold, float nms_threshold);
     std::vector<std::string> labels{"person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
@@ -69,6 +69,7 @@ private:
 public:
     static YoloV5 *detector;
     static bool hasGPU;
+    static bool toUseGPU;
     
 };
 

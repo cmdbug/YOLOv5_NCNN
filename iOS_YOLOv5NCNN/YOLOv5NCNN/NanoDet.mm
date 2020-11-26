@@ -1,7 +1,7 @@
 #include "NanoDet.h"
 
-bool NanoDet::hasGPU = true;
-bool NanoDet::toUseGPU = true;
+bool NanoDet::hasGPU = false;
+bool NanoDet::toUseGPU = false;
 NanoDet *NanoDet::detector = nullptr;
 
 inline float fast_exp(float x) {
@@ -34,8 +34,16 @@ int activation_function_softmax(const _Tp *src, _Tp *dst, int length) {
     return 0;
 }
 
-NanoDet::NanoDet(const char *param, const char *bin, bool useGPU) {
+NanoDet::NanoDet(bool useGPU) {
+#if NCNN_VULKAN
+    ncnn::create_gpu_instance();
+    hasGPU = ncnn::get_gpu_count();
+#endif
+    toUseGPU = hasGPU && useGPU;
+    
     Net = new ncnn::Net();
+    Net->opt.use_vulkan_compute = toUseGPU;
+    Net->opt.use_fp16_arithmetic = true;
     NSString *parmaPath = [[NSBundle mainBundle] pathForResource:@"nanodet_m" ofType:@"param"];
     NSString *binPath = [[NSBundle mainBundle] pathForResource:@"nanodet_m" ofType:@"bin"];
     int rp = Net->load_param([parmaPath UTF8String]);
@@ -51,6 +59,9 @@ NanoDet::NanoDet(const char *param, const char *bin, bool useGPU) {
 NanoDet::~NanoDet() {
     Net->clear();
     delete Net;
+#if NCNN_VULKAN
+    ncnn::destroy_gpu_instance();
+#endif
 }
 
 std::vector<BoxInfo> NanoDet::detect(UIImage *image, float score_threshold, float nms_threshold) {
@@ -73,9 +84,11 @@ std::vector<BoxInfo> NanoDet::detect(UIImage *image, float score_threshold, floa
     auto ex = Net->create_extractor();
     ex.set_light_mode(true);
     ex.set_num_threads(4);
-//    if (toUseGPU) {  // 消除提示
-//        ex.set_vulkan_compute(toUseGPU);
-//    }
+#if NCNN_VULKAN
+    if (toUseGPU) {
+        ex.set_vulkan_compute(toUseGPU);
+    }
+#endif
     ex.input("input.1", input);
     std::vector<std::vector<BoxInfo>> results;
     results.resize(this->num_class);
