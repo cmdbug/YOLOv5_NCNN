@@ -18,6 +18,7 @@
 #include "YoloV5.h"
 #include "YoloV4.h"
 #include "NanoDet.h"
+#include "YoloV5CustomLayer.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVMediaFormat.h>
@@ -46,6 +47,7 @@
 @property YoloV5 *yolo;
 @property YoloV4 *yolov4;
 @property NanoDet *nanoDet;
+@property YoloV5CustomLayer *yolov5CustomOp;
 
 @property (assign, atomic) Boolean isDetecting;
 @property (nonatomic) dispatch_queue_t queue;
@@ -276,6 +278,20 @@
         result = self.yolov4->detectv4(image, self.threshold, self.nms_threshold);
     } else if (self.USE_MODEL == W_NANODET) {
         result = self.nanoDet->detect(image, self.threshold, self.nms_threshold);
+    } else if (self.USE_MODEL == W_YOLOV5S_CUSTOM_OP) {
+        result = self.yolov5CustomOp->detect(image, self.threshold, self.nms_threshold);
+    } else if (self.USE_MODEL == W_SIMPLE_POSE) {
+        
+    } else if (self.USE_MODEL == W_DBFACE) {
+           
+    } else if (self.USE_MODEL == W_FACE_LANDMARK) {
+           
+    } else if (self.USE_MODEL == W_YOLACT) {
+              
+    } else if (self.USE_MODEL == W_MOBILENETV2_FCN) {
+                 
+    } else if (self.USE_MODEL == W_MOBILENETV3_SEG) {
+                    
     }
     __weak typeof(self) weakSelf = self;
     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -330,8 +346,9 @@
         NSLog(@"new mbnv2 fcn");
     } else if (!self.yolov4 && self.USE_MODEL == W_MOBILENETV3_SEG) {
         NSLog(@"new mbnv3 seg");
-    } else if (!self.yolov4 && self.USE_MODEL == W_YOLOV5S_CUSTOM_OP) {
+    } else if (!self.yolov5CustomOp && self.USE_MODEL == W_YOLOV5S_CUSTOM_OP) {
         NSLog(@"new yolov5s custom op");
+        self.yolov5CustomOp = new YoloV5CustomLayer(self.USE_GPU);
     } else if (!self.nanoDet && self.USE_MODEL == W_NANODET) {
         NSLog(@"new nanodet");
         self.nanoDet = new NanoDet(self.USE_GPU);
@@ -346,6 +363,7 @@
     delete self.yolo;
     delete self.yolov4;
     delete self.nanoDet;
+    delete self.yolov5CustomOp;
 }
 
 #pragma mark 获取模型名称
@@ -403,6 +421,8 @@
             label = [NSString stringWithFormat:@"%s %.3f", self.yolov4->labels[box.label].c_str(), box.score];
         } else if (self.USE_MODEL == W_NANODET) {
             label = [NSString stringWithFormat:@"%s %.3f", self.nanoDet->labels[box.label].c_str(), box.score];
+        } else if (self.USE_MODEL == W_YOLOV5S_CUSTOM_OP) {
+            label = [NSString stringWithFormat:@"%s %.3f", self.yolov5CustomOp->labels[box.label].c_str(), box.score];
         }
         [label drawAtPoint:CGPointMake(box.x1 + 2, box.y1 - 3) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20], NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName:color}];
         

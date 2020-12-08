@@ -38,11 +38,14 @@
 | DBFace            | yes | coming soon |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
 | MBNv2-FCN         | yes | coming soon |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
 | MBNv3-Seg-small   | yes | coming soon |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
-| YOLOv5s_custom_op | yes | coming soon |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
+| YOLOv5s_custom_op | yes | yes |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
 | NanoDet           | yes | yes |  [Github](https://github.com/RangiLyu/nanodet)   |
 | YOLO-Fastest-xl   | yes | bug |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
 
-iOS: 从 "android_YOLOV5_NCNN\app\src\main\assets" 复制 .param 和 .bin 文件到 "iOS_YOLOv5NCNN\YOLOv5NCNN\res" 下。
+iOS:
+- 从 "android_YOLOV5_NCNN\app\src\main\assets" 复制 .param 和 .bin 文件到 "iOS_YOLOv5NCNN\YOLOv5NCNN\res" 下。
+- iOS如果提示 net.h 找不到的需要去ncnn官网下载或自行编译.framework替换到工程中，opencv2.framework如果有用到也需要重新下载并替换到工程。
+- iOS默认使用的库不包含vulkan与bitcode。
 
 ### Note：
 * 由于手机性能、图像尺寸等因素导致FPS在不同手机上相差比较大。该项目主要测试NCNN框架的使用，具体模型的转换可以去NCNN官方查看转换教程。<br/>
@@ -50,7 +53,7 @@ iOS: 从 "android_YOLOV5_NCNN\app\src\main\assets" 复制 .param 和 .bin 文件
 * ncnn暂时使用vulkan版本，在加载前需要打开加速，本项目中没有打开。如果要用ncnn版本需要修改CMakeLists.txt配置。
 * AS版本不一样可能编译会有各种问题，如果编译错误无法解决、建议使用AS4.0以上版本尝试一下。
 
-已知部分ncnn大佬网名：.... nihui qiuqiu
+已知部分ncnn大佬网名：.... nihui qiuqiu 大缺弦 圈圈虫
 
 :art: 截图<br/>
 
@@ -82,9 +85,9 @@ iOS: 从 "android_YOLOV5_NCNN\app\src\main\assets" 复制 .param 和 .bin 文件
 |-------------------|-------------|---------|
 | <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_yolov3_nano.jpg"/> |<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov4_tiny.jpg"/>| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s.jpg"/> |
 
-|  xxx | nanodet | yolo-fastest-xl |
+|  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
-| xxx | none | none |
+| none | none | none |
 
 
 感谢:<br/>

@@ -38,11 +38,14 @@ Select the model to be tested directly on the interface.
 | DBFace            | yes | coming soon |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
 | MBNv2-FCN         | yes | coming soon |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
 | MBNv3-Seg-small   | yes | coming soon |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
-| YOLOv5s_custom_op | yes | coming soon |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
+| YOLOv5s_custom_op | yes | yes |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
 | NanoDet           | yes | yes |  [Github](https://github.com/RangiLyu/nanodet)   |
 | YOLO-Fastest-xl   | yes | bug |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
 
-iOS: Copy .param and .bin from "android_YOLOV5_NCNN\app\src\main\assets" to "iOS_YOLOv5NCNN\YOLOv5NCNN\res"
+iOS:
+- Copy .param and .bin from "android_YOLOV5_NCNN\app\src\main\assets" to "iOS_YOLOv5NCNN\YOLOv5NCNN\res"
+- If it prompts that net.h can't be found, you need to download it from the ncnn official website or compile .framework yourself and replace it in the project. If opencv2.framework is useful, you need to download it again and replace it in the project.
+- The default library used by iOS does not include vulkan and bitcode.
 
 ### Note：<br/>
 * Due to factors such as mobile phone performance and image size, FPS varies greatly on different mobile phones. This project mainly tests the use of the NCNN framework. For the conversion of specific models, you can go to the NCNN official to view the conversion tutorial.
@@ -81,9 +84,9 @@ iOS: Copy .param and .bin from "android_YOLOV5_NCNN\app\src\main\assets" to "iOS
 |-------------------|-------------|---------|
 | <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_yolov3_nano.jpg"/> |<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov4_tiny.jpg"/>| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s.jpg"/> |
 
-|  xxx | nanodet | yolo-fastest-xl |
+|  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
-| xxx | none | none |
+| none | none | none |
 
 
 Thanks:<br/>

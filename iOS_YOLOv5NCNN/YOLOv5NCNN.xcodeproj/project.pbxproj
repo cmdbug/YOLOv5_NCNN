@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		5F13A99E256F767800E45BA3 /* glslang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F13A99D256F767800E45BA3 /* glslang.framework */; };
 		5F13A9A0256F851000E45BA3 /* ncnn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F13A99F256F851000E45BA3 /* ncnn.framework */; };
+		5F364A6E2579B50700F45596 /* YoloV5CustomLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F364A6C2579B50700F45596 /* YoloV5CustomLayer.mm */; };
 		5F37E19E24B97F9600BF9E94 /* yolov4-tiny-opt.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E19C24B97F9400BF9E94 /* yolov4-tiny-opt.param */; };
 		5F37E19F24B97F9600BF9E94 /* yolov4-tiny-opt.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E19D24B97F9600BF9E94 /* yolov4-tiny-opt.bin */; };
 		5F37E1A224B97FD900BF9E94 /* YoloV4.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E1A024B97FD900BF9E94 /* YoloV4.mm */; };
+		5F39AE3B2570CD6200A1DAB3 /* yolo-fastest-xl-opt.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F39AE392570CD6200A1DAB3 /* yolo-fastest-xl-opt.bin */; };
+		5F39AE3C2570CD6200A1DAB3 /* yolo-fastest-xl-opt.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F39AE3A2570CD6200A1DAB3 /* yolo-fastest-xl-opt.param */; };
 		5F40C2AC24B1647800C84041 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F40C2AB24B1647800C84041 /* AppDelegate.m */; };
 		5F40C2B224B1647800C84041 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F40C2B124B1647800C84041 /* ViewController.mm */; };
 		5F40C2B724B1647C00C84041 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2B624B1647C00C84041 /* Assets.xcassets */; };
@@ -21,29 +24,33 @@
 		5F40C2E524B18C5700C84041 /* yolov5.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2E324B18C5700C84041 /* yolov5.bin */; };
 		5F40C2E624B18C5700C84041 /* yolov5.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2E424B18C5700C84041 /* yolov5.param */; };
 		5F50870C24B309F30088E326 /* YoloV5.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F50870A24B309F30088E326 /* YoloV5.mm */; };
+		5F70E49B257F03DF0011CD78 /* yolov5s_customlayer.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F70E499257F03DF0011CD78 /* yolov5s_customlayer.param */; };
+		5F70E49C257F03DF0011CD78 /* yolov5s_customlayer.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F70E49A257F03DF0011CD78 /* yolov5s_customlayer.bin */; };
 		5F87CD3124FFA41C00B60518 /* WelcomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F87CD3024FFA41C00B60518 /* WelcomeVC.m */; };
 		5FD3E2CB24B3FDF70049450B /* 000000000650.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5FD3E2CA24B3FDF70049450B /* 000000000650.jpg */; };
 		5FD3E2D924B417AA0049450B /* ELCameraControlCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD3E2D524B417AA0049450B /* ELCameraControlCapture.m */; };
 		5FD3E2DA24B417AA0049450B /* ELCameraBaseCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD3E2D824B417AA0049450B /* ELCameraBaseCapture.m */; };
 		5FF8B4AE256DD8F90002375F /* openmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF8B4AD256DD8F90002375F /* openmp.framework */; };
-		5FF8B4B2256DD9CB0002375F /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF8B4B1256DD9CA0002375F /* opencv2.framework */; };
 		5FF8B4B6256DDAD20002375F /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF8B4B5256DDAD20002375F /* opencv2.framework */; };
 		5FF8B4C1256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4BF256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin */; };
 		5FF8B4C2256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4C0256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param */; };
 		5FF8B4C5256DF31D0002375F /* nanodet_m.param in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4C3256DF31D0002375F /* nanodet_m.param */; };
 		5FF8B4C6256DF31D0002375F /* nanodet_m.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4C4256DF31D0002375F /* nanodet_m.bin */; };
 		5FF8B4C9256DF33C0002375F /* NanoDet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FF8B4C7256DF33C0002375F /* NanoDet.mm */; };
-		5FF8B4D4256E24EF0002375F /* yolo-fastest-xl-opt.param in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4D2256E24EF0002375F /* yolo-fastest-xl-opt.param */; };
-		5FF8B4D5256E24EF0002375F /* yolo-fastest-xl-opt.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4D3256E24EF0002375F /* yolo-fastest-xl-opt.bin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5F13A99D256F767800E45BA3 /* glslang.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = glslang.framework; sourceTree = "<group>"; };
 		5F13A99F256F851000E45BA3 /* ncnn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ncnn.framework; sourceTree = "<group>"; };
+		5F364A6C2579B50700F45596 /* YoloV5CustomLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YoloV5CustomLayer.mm; sourceTree = "<group>"; };
+		5F364A6D2579B50700F45596 /* YoloV5CustomLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoloV5CustomLayer.h; sourceTree = "<group>"; };
+		5F364A6F2579BA6A00F45596 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		5F37E19C24B97F9400BF9E94 /* yolov4-tiny-opt.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "yolov4-tiny-opt.param"; sourceTree = "<group>"; };
 		5F37E19D24B97F9600BF9E94 /* yolov4-tiny-opt.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "yolov4-tiny-opt.bin"; sourceTree = "<group>"; };
 		5F37E1A024B97FD900BF9E94 /* YoloV4.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YoloV4.mm; sourceTree = "<group>"; };
 		5F37E1A124B97FD900BF9E94 /* YoloV4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoloV4.h; sourceTree = "<group>"; };
+		5F39AE392570CD6200A1DAB3 /* yolo-fastest-xl-opt.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "yolo-fastest-xl-opt.bin"; sourceTree = "<group>"; };
+		5F39AE3A2570CD6200A1DAB3 /* yolo-fastest-xl-opt.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "yolo-fastest-xl-opt.param"; sourceTree = "<group>"; };
 		5F40C2A724B1647800C84041 /* NCNN Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NCNN Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F40C2AA24B1647800C84041 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5F40C2AB24B1647800C84041 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -58,6 +65,8 @@
 		5F40C2E424B18C5700C84041 /* yolov5.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yolov5.param; sourceTree = "<group>"; };
 		5F50870A24B309F30088E326 /* YoloV5.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = YoloV5.mm; sourceTree = "<group>"; };
 		5F50870B24B309F30088E326 /* YoloV5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoloV5.h; sourceTree = "<group>"; };
+		5F70E499257F03DF0011CD78 /* yolov5s_customlayer.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yolov5s_customlayer.param; sourceTree = "<group>"; };
+		5F70E49A257F03DF0011CD78 /* yolov5s_customlayer.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = yolov5s_customlayer.bin; sourceTree = "<group>"; };
 		5F87CD2F24FFA41C00B60518 /* WelcomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WelcomeVC.h; sourceTree = "<group>"; };
 		5F87CD3024FFA41C00B60518 /* WelcomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WelcomeVC.m; sourceTree = "<group>"; };
 		5FD3E2CA24B3FDF70049450B /* 000000000650.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 000000000650.jpg; sourceTree = "<group>"; };
@@ -66,7 +75,6 @@
 		5FD3E2D724B417AA0049450B /* ELCameraBaseCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCameraBaseCapture.h; sourceTree = "<group>"; };
 		5FD3E2D824B417AA0049450B /* ELCameraBaseCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCameraBaseCapture.m; sourceTree = "<group>"; };
 		5FF8B4AD256DD8F90002375F /* openmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openmp.framework; sourceTree = "<group>"; };
-		5FF8B4B1256DD9CA0002375F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "../局域网共享/opencv2.framework"; sourceTree = "<group>"; };
 		5FF8B4B5256DDAD20002375F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		5FF8B4BF256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "MobileNetV2-YOLOv3-Nano-coco.bin"; sourceTree = "<group>"; };
 		5FF8B4C0256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MobileNetV2-YOLOv3-Nano-coco.param"; sourceTree = "<group>"; };
@@ -74,8 +82,6 @@
 		5FF8B4C4256DF31D0002375F /* nanodet_m.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = nanodet_m.bin; sourceTree = "<group>"; };
 		5FF8B4C7256DF33C0002375F /* NanoDet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NanoDet.mm; sourceTree = "<group>"; };
 		5FF8B4C8256DF33C0002375F /* NanoDet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanoDet.h; sourceTree = "<group>"; };
-		5FF8B4D2256E24EF0002375F /* yolo-fastest-xl-opt.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "yolo-fastest-xl-opt.param"; sourceTree = "<group>"; };
-		5FF8B4D3256E24EF0002375F /* yolo-fastest-xl-opt.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "yolo-fastest-xl-opt.bin"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +92,6 @@
 				5FF8B4AE256DD8F90002375F /* openmp.framework in Frameworks */,
 				5F13A9A0256F851000E45BA3 /* ncnn.framework in Frameworks */,
 				5FF8B4B6256DDAD20002375F /* opencv2.framework in Frameworks */,
-				5FF8B4B2256DD9CB0002375F /* opencv2.framework in Frameworks */,
 				5F13A99E256F767800E45BA3 /* glslang.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,6 +142,8 @@
 				5F37E1A124B97FD900BF9E94 /* YoloV4.h */,
 				5FF8B4C7256DF33C0002375F /* NanoDet.mm */,
 				5FF8B4C8256DF33C0002375F /* NanoDet.h */,
+				5F364A6C2579B50700F45596 /* YoloV5CustomLayer.mm */,
+				5F364A6D2579B50700F45596 /* YoloV5CustomLayer.h */,
 			);
 			path = YOLOv5NCNN;
 			sourceTree = "<group>";
@@ -144,7 +151,7 @@
 		5F40C2C324B164F600C84041 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5FF8B4B1256DD9CA0002375F /* opencv2.framework */,
+				5F364A6F2579BA6A00F45596 /* libc++.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -152,8 +159,10 @@
 		5F40C2DA24B171A100C84041 /* res */ = {
 			isa = PBXGroup;
 			children = (
-				5FF8B4D3256E24EF0002375F /* yolo-fastest-xl-opt.bin */,
-				5FF8B4D2256E24EF0002375F /* yolo-fastest-xl-opt.param */,
+				5F70E49A257F03DF0011CD78 /* yolov5s_customlayer.bin */,
+				5F70E499257F03DF0011CD78 /* yolov5s_customlayer.param */,
+				5F39AE392570CD6200A1DAB3 /* yolo-fastest-xl-opt.bin */,
+				5F39AE3A2570CD6200A1DAB3 /* yolo-fastest-xl-opt.param */,
 				5FF8B4C4256DF31D0002375F /* nanodet_m.bin */,
 				5FF8B4C3256DF31D0002375F /* nanodet_m.param */,
 				5FF8B4BF256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin */,
@@ -236,17 +245,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FF8B4C5256DF31D0002375F /* nanodet_m.param in Resources */,
-				5FF8B4D5256E24EF0002375F /* yolo-fastest-xl-opt.bin in Resources */,
 				5F40C2D924B16B0B00C84041 /* Main.storyboard in Resources */,
 				5F37E19F24B97F9600BF9E94 /* yolov4-tiny-opt.bin in Resources */,
-				5FF8B4D4256E24EF0002375F /* yolo-fastest-xl-opt.param in Resources */,
 				5F40C2BA24B1647C00C84041 /* LaunchScreen.storyboard in Resources */,
 				5F37E19E24B97F9600BF9E94 /* yolov4-tiny-opt.param in Resources */,
+				5F39AE3C2570CD6200A1DAB3 /* yolo-fastest-xl-opt.param in Resources */,
+				5F70E49C257F03DF0011CD78 /* yolov5s_customlayer.bin in Resources */,
 				5F40C2B724B1647C00C84041 /* Assets.xcassets in Resources */,
 				5F40C2E624B18C5700C84041 /* yolov5.param in Resources */,
 				5FF8B4C1256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin in Resources */,
+				5F39AE3B2570CD6200A1DAB3 /* yolo-fastest-xl-opt.bin in Resources */,
 				5FF8B4C2256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param in Resources */,
 				5FF8B4C6256DF31D0002375F /* nanodet_m.bin in Resources */,
+				5F70E49B257F03DF0011CD78 /* yolov5s_customlayer.param in Resources */,
 				5F40C2E524B18C5700C84041 /* yolov5.bin in Resources */,
 				5FD3E2CB24B3FDF70049450B /* 000000000650.jpg in Resources */,
 			);
@@ -265,6 +276,7 @@
 				5F87CD3124FFA41C00B60518 /* WelcomeVC.m in Sources */,
 				5FF8B4C9256DF33C0002375F /* NanoDet.mm in Sources */,
 				5F37E1A224B97FD900BF9E94 /* YoloV4.mm in Sources */,
+				5F364A6E2579B50700F45596 /* YoloV5CustomLayer.mm in Sources */,
 				5F40C2AC24B1647800C84041 /* AppDelegate.m in Sources */,
 				5F50870C24B309F30088E326 /* YoloV5.mm in Sources */,
 				5F40C2BD24B1647D00C84041 /* main.m in Sources */,
@@ -411,6 +423,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/YOLOv5NCNN",
 				);
+				GCC_ENABLE_CPP_RTTI = NO;
 				INFOPLIST_FILE = YOLOv5NCNN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -436,6 +449,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/YOLOv5NCNN",
 				);
+				GCC_ENABLE_CPP_RTTI = NO;
 				INFOPLIST_FILE = YOLOv5NCNN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
