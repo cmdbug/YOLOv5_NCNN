@@ -36,8 +36,8 @@
 | ENet              | bug | cancel |  [Github](https://github.com/davidtvs/PyTorch-ENet)   |
 | Landmark106       | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | DBFace            | yes | coming soon |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
-| MBNv2-FCN         | yes | coming soon |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
-| MBNv3-Seg-small   | yes | coming soon |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
+| MBNv2-FCN         | yes | yes |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
+| MBNv3-Seg-small   | yes | yes |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
 | YOLOv5s_custom_op | yes | yes |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
 | NanoDet           | yes | yes |  [Github](https://github.com/RangiLyu/nanodet)   |
 | YOLO-Fastest-xl   | yes | bug |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
@@ -53,7 +53,7 @@ iOS:
 * ncnn暂时使用vulkan版本，在加载前需要打开加速，本项目中没有打开。如果要用ncnn版本需要修改CMakeLists.txt配置。
 * AS版本不一样可能编译会有各种问题，如果编译错误无法解决、建议使用AS4.0以上版本尝试一下。
 
-已知部分ncnn大佬网名：.... nihui qiuqiu 大缺弦 圈圈虫
+已知部分ncnn大佬网名：.... nihui qiuqiu 大缺弦 圈圈虫 小韩笑
 
 :art: 截图<br/>
 
@@ -88,6 +88,10 @@ iOS:
 |  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
 | none | none | none |
+
+|  mbnv2_fcn | mbnv3_seg_small | xxx |
+|-------------------|-------------|---------|
+| none | none | xxx |
 
 
 感谢:<br/>

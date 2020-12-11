@@ -36,8 +36,8 @@ Select the model to be tested directly on the interface.
 | ENet              | bug | cancel |  [Github](https://github.com/davidtvs/PyTorch-ENet)   |
 | Landmark106       | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | DBFace            | yes | coming soon |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
-| MBNv2-FCN         | yes | coming soon |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
-| MBNv3-Seg-small   | yes | coming soon |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
+| MBNv2-FCN         | yes | yes |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
+| MBNv3-Seg-small   | yes | yes |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
 | YOLOv5s_custom_op | yes | yes |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
 | NanoDet           | yes | yes |  [Github](https://github.com/RangiLyu/nanodet)   |
 | YOLO-Fastest-xl   | yes | bug |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
@@ -87,6 +87,10 @@ iOS:
 |  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
 | none | none | none |
+
+|  mbnv2_fcn | mbnv3_seg_small | xxx |
+|-------------------|-------------|---------|
+| none | none | xxx |
 
 
 Thanks:<br/>

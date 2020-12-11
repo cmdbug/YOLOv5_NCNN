@@ -19,6 +19,8 @@
 #include "YoloV4.h"
 #include "NanoDet.h"
 #include "YoloV5CustomLayer.h"
+#include "MobileNetV3Seg.h"
+#include "MbnFCN.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVMediaFormat.h>
@@ -48,6 +50,8 @@
 @property YoloV4 *yolov4;
 @property NanoDet *nanoDet;
 @property YoloV5CustomLayer *yolov5CustomOp;
+@property MBNV3Seg *mbnv3Seg;
+@property MbnFCN *mbnFCN;
 
 @property (assign, atomic) Boolean isDetecting;
 @property (nonatomic) dispatch_queue_t queue;
@@ -233,6 +237,10 @@
 
 #pragma mark 照片
 - (IBAction)predict:(id)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sorry" message:@"coming soon" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:sure];
+    [self presentViewController:alert animated:YES completion:nil];
     // load image
 //    UIImage* image = [UIImage imageNamed:@"000000000650.jpg"];
 //    self.imageView.image = image;
@@ -270,6 +278,7 @@
     
     NSDate *start = [NSDate date];
     std::vector<BoxInfo> result;
+    ncnn::Mat maskMat;
     if (self.USE_MODEL == W_YOLOV5S) {
         result = self.yolo->dectect(image, self.threshold, self.nms_threshold);
     } else if (self.USE_MODEL == W_YOLOV4TINY
@@ -283,24 +292,18 @@
     } else if (self.USE_MODEL == W_SIMPLE_POSE) {
         
     } else if (self.USE_MODEL == W_DBFACE) {
-           
+        
     } else if (self.USE_MODEL == W_FACE_LANDMARK) {
-           
+        
     } else if (self.USE_MODEL == W_YOLACT) {
-              
+        
     } else if (self.USE_MODEL == W_MOBILENETV2_FCN) {
-                 
+        maskMat = self.mbnFCN->detect_mbnfcn(image);
     } else if (self.USE_MODEL == W_MOBILENETV3_SEG) {
-                    
+        maskMat = self.mbnv3Seg->detect_mbnseg(image);
     }
     __weak typeof(self) weakSelf = self;
     dispatch_sync(dispatch_get_main_queue(), ^{
-        long dur = [[NSDate date] timeIntervalSince1970]*1000 - start.timeIntervalSince1970*1000;
-        float fps = 1.0 / (dur / 1000.0);
-        weakSelf.total_fps = (weakSelf.total_fps == 0) ? fps : (weakSelf.total_fps + fps);
-        weakSelf.fps_count++;
-        NSString *info = [NSString stringWithFormat:@"%@\nSize:%dx%d\nTime:%.3fs\nFPS:%.2f\nAVG_FPS:%.2f", [self getModelName], int(image.size.width), int(image.size.height), dur / 1000.0, fps, (float)weakSelf.total_fps / weakSelf.fps_count];
-        weakSelf.resultLabel.text = info;
         if (weakSelf.USE_MODEL == W_YOLOV5S
             || weakSelf.USE_MODEL == W_YOLOV4TINY
             || weakSelf.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO
@@ -317,8 +320,20 @@
         } else if (weakSelf.USE_MODEL == W_DBFACE) {
                                  
         } else if (weakSelf.USE_MODEL == W_MOBILENETV2_FCN || weakSelf.USE_MODEL == W_MOBILENETV3_SEG) {
-                                        
+            // slow !!!
+            // slow !!!
+            // slow !!!
+            weakSelf.imageView.image = [weakSelf drawSegMask:weakSelf.imageView image:image mask:maskMat];
         }
+        
+        // include draw
+        long dur = [[NSDate date] timeIntervalSince1970]*1000 - start.timeIntervalSince1970*1000;
+        float fps = 1.0 / (dur / 1000.0);
+        weakSelf.total_fps = (weakSelf.total_fps == 0) ? fps : (weakSelf.total_fps + fps);
+        weakSelf.fps_count++;
+        NSString *info = [NSString stringWithFormat:@"%@\nSize:%dx%d\nTime:%.3fs\nFPS:%.2f\nAVG_FPS:%.2f", [self getModelName], int(image.size.width), int(image.size.height), dur / 1000.0, fps, (float)weakSelf.total_fps / weakSelf.fps_count];
+        weakSelf.resultLabel.text = info;
+        
     });
     
 }
@@ -342,10 +357,12 @@
         NSLog(@"new face-landmark");
     } else if (!self.yolov4 && self.USE_MODEL == W_DBFACE) {
         NSLog(@"new dbface");
-    } else if (!self.yolov4 && self.USE_MODEL == W_MOBILENETV2_FCN) {
+    } else if (!self.mbnFCN && self.USE_MODEL == W_MOBILENETV2_FCN) {
         NSLog(@"new mbnv2 fcn");
-    } else if (!self.yolov4 && self.USE_MODEL == W_MOBILENETV3_SEG) {
+        self.mbnFCN = new MbnFCN(self.USE_GPU);
+    } else if (!self.mbnv3Seg && self.USE_MODEL == W_MOBILENETV3_SEG) {
         NSLog(@"new mbnv3 seg");
+        self.mbnv3Seg = new MBNV3Seg(self.USE_GPU);
     } else if (!self.yolov5CustomOp && self.USE_MODEL == W_YOLOV5S_CUSTOM_OP) {
         NSLog(@"new yolov5s custom op");
         self.yolov5CustomOp = new YoloV5CustomLayer(self.USE_GPU);
@@ -364,6 +381,8 @@
     delete self.yolov4;
     delete self.nanoDet;
     delete self.yolov5CustomOp;
+    delete self.mbnv3Seg;
+    delete self.mbnFCN;
 }
 
 #pragma mark 获取模型名称
@@ -398,7 +417,7 @@
     return modelName;
 }
 
-#pragma mark 绘制结果
+#pragma mark 绘制目标检测结果
 - (UIImage *)drawBox:(UIImageView *)imageView image:(UIImage *)image boxs:(std::vector<BoxInfo>)boxs {
     UIGraphicsBeginImageContext(image.size);
 
@@ -437,6 +456,86 @@
     UIGraphicsEndImageContext();
     return newImage;
 }
+
+#pragma mark 绘制语义分割结果
+- (UIImage *)drawSegMask:(UIImageView *)imageView image:(UIImage *)image mask:(ncnn::Mat)mask {
+    // 0, "road" 1, "sidewalk" 2, "building" 3, "wall" 4, "fence" 5, "pole" 6, "traffic light" 7, "traffic sign" 8, "vegetation"
+    // 9, "terrain" 10, "sky" 11, "person" 12, "rider" 13, "car" 14, "truck" 15, "bus" 16, "train" 17, "motorcycle" 18, "bicycle"
+    int cityspace_colormap[19][3] = {
+            {128, 64, 128}, {244, 35, 232}, {70, 70, 70}, {102, 102, 156}, {190, 153, 153}, {153, 153, 153},
+            {250, 170, 30}, {220, 220, 0}, {107, 142, 35}, {152, 251, 152}, {70, 130, 180}, {220, 20, 60},
+            {255, 0, 0}, {0, 0, 142}, {0, 0, 70}, {0, 60, 100}, {0, 80, 100}, {0, 0, 230}, {119, 11, 32}
+    };
+    
+    UIGraphicsBeginImageContext(image.size);
+
+    [image drawAtPoint:CGPointMake(0,0)];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 1);
+    
+    int tempC = -1;
+    int lengthW = 1;
+    for (int h = 0; h < image.size.height; h++) {
+        float *rowx = mask.row(h);
+        for (int w = 0; w < image.size.width; w++) {
+            int classes = rowx[w];
+            if (tempC != classes) {
+                float r = cityspace_colormap[tempC][0] / 255.0f;
+                float g = cityspace_colormap[tempC][1] / 255.0f;
+                float b = cityspace_colormap[tempC][2] / 255.0f;
+                
+                UIColor *color = [UIColor colorWithRed:r green:g blue:b alpha:0.5f];
+                CGContextSetStrokeColorWithColor(context, [color CGColor]);
+                // not draw point fun ???
+                CGContextMoveToPoint(context, w - lengthW, h);
+                CGContextAddLineToPoint(context, w, h);
+                CGContextStrokePath(context);
+                tempC = classes;
+                lengthW = 1;
+            } else {
+                lengthW++;
+            }
+        }
+        float r = cityspace_colormap[tempC][0] / 255.0f;
+        float g = cityspace_colormap[tempC][1] / 255.0f;
+        float b = cityspace_colormap[tempC][2] / 255.0f;
+        
+        UIColor *color = [UIColor colorWithRed:r green:g blue:b alpha:0.5f];
+        CGContextSetStrokeColorWithColor(context, [color CGColor]);
+        // not draw point fun ???
+        CGContextMoveToPoint(context, image.size.width - lengthW, h);
+        CGContextAddLineToPoint(context, image.size.width, h);
+        CGContextStrokePath(context);
+        tempC = -1;
+        lengthW = 1;
+    }
+    
+    // slow !!!
+//    for (int h = 0; h < image.size.height; h++) {
+//        float *rowx = mask.row(h);
+//        for (int w = 0; w < image.size.width; w++) {
+//            int classes = rowx[w];
+//            float r = cityspace_colormap[classes][0] / 255.0f;
+//            float g = cityspace_colormap[classes][1] / 255.0f;
+//            float b = cityspace_colormap[classes][2] / 255.0f;
+//
+//            UIColor *color = [UIColor colorWithRed:r green:g blue:b alpha:0.5f];
+//            CGContextSetStrokeColorWithColor(context, [color CGColor]);
+//            // not draw point fun ???
+//            CGContextMoveToPoint(context, w, h);
+//            CGContextAddLineToPoint(context, w + 1, h);
+//            CGContextStrokePath(context);
+//        }
+//    }
+    
+    //创建新图像
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 @end
 
