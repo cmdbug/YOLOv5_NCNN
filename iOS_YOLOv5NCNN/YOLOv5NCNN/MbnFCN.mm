@@ -17,7 +17,7 @@ MbnFCN *MbnFCN::detector = nullptr;
 MbnFCN::MbnFCN(bool useGPU) {
 #if NCNN_VULKAN
     ncnn::create_gpu_instance();
-    hasGPU = ncnn::get_gpu_count();
+    hasGPU = ncnn::get_gpu_count() > 0;
 #endif
     toUseGPU = hasGPU && useGPU;
         

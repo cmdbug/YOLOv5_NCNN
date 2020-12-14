@@ -15,7 +15,7 @@ YoloV5* YoloV5::detector = nullptr;
 YoloV5::YoloV5(bool useGPU) {
 #if NCNN_VULKAN
     ncnn::create_gpu_instance();
-    hasGPU = ncnn::get_gpu_count();
+    hasGPU = ncnn::get_gpu_count() > 0;
 #endif
     toUseGPU = hasGPU && useGPU;
     

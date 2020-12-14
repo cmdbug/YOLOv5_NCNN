@@ -10,6 +10,22 @@
 		5F13A99E256F767800E45BA3 /* glslang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F13A99D256F767800E45BA3 /* glslang.framework */; };
 		5F13A9A0256F851000E45BA3 /* ncnn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F13A99F256F851000E45BA3 /* ncnn.framework */; };
 		5F364A6E2579B50700F45596 /* YoloV5CustomLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F364A6C2579B50700F45596 /* YoloV5CustomLayer.mm */; };
+		5F36C22E2586F4270033BB1B /* SimplePose.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F36C22D2586F4270033BB1B /* SimplePose.mm */; };
+		5F36C2332586FDDF0033BB1B /* Ultralight-Nano-SimplePose.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C22F2586FDDE0033BB1B /* Ultralight-Nano-SimplePose.param */; };
+		5F36C2342586FDDF0033BB1B /* Ultralight-Nano-SimplePose.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C2302586FDDE0033BB1B /* Ultralight-Nano-SimplePose.bin */; };
+		5F36C2352586FDDF0033BB1B /* person_detector.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C2312586FDDE0033BB1B /* person_detector.param */; };
+		5F36C2362586FDDF0033BB1B /* person_detector.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C2322586FDDE0033BB1B /* person_detector.bin */; };
+		5F36C2392587059C0033BB1B /* FaceLandmark.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F36C2382587059C0033BB1B /* FaceLandmark.mm */; };
+		5F36C23E25870B610033BB1B /* yoloface-500k.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C23A25870B610033BB1B /* yoloface-500k.param */; };
+		5F36C23F25870B610033BB1B /* landmark106.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C23B25870B610033BB1B /* landmark106.bin */; };
+		5F36C24025870B610033BB1B /* yoloface-500k.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C23C25870B610033BB1B /* yoloface-500k.bin */; };
+		5F36C24125870B610033BB1B /* landmark106.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C23D25870B610033BB1B /* landmark106.param */; };
+		5F36C24425870CC40033BB1B /* dbface.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C24225870CC40033BB1B /* dbface.bin */; };
+		5F36C24525870CC40033BB1B /* dbface.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C24325870CC40033BB1B /* dbface.param */; };
+		5F36C24825870CD60033BB1B /* DBFace.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F36C24625870CD60033BB1B /* DBFace.mm */; };
+		5F36C24B25871A9D0033BB1B /* Yolact.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F36C24A25871A9D0033BB1B /* Yolact.mm */; };
+		5F36C24E25871ABF0033BB1B /* yolact.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C24C25871ABF0033BB1B /* yolact.bin */; };
+		5F36C24F25871ABF0033BB1B /* yolact.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C24D25871ABF0033BB1B /* yolact.param */; };
 		5F37E19E24B97F9600BF9E94 /* yolov4-tiny-opt.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E19C24B97F9400BF9E94 /* yolov4-tiny-opt.param */; };
 		5F37E19F24B97F9600BF9E94 /* yolov4-tiny-opt.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E19D24B97F9600BF9E94 /* yolov4-tiny-opt.bin */; };
 		5F37E1A224B97FD900BF9E94 /* YoloV4.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E1A024B97FD900BF9E94 /* YoloV4.mm */; };
@@ -51,6 +67,26 @@
 		5F364A6C2579B50700F45596 /* YoloV5CustomLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YoloV5CustomLayer.mm; sourceTree = "<group>"; };
 		5F364A6D2579B50700F45596 /* YoloV5CustomLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoloV5CustomLayer.h; sourceTree = "<group>"; };
 		5F364A6F2579BA6A00F45596 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		5F36C22C2586F4270033BB1B /* SimplePose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePose.h; sourceTree = "<group>"; };
+		5F36C22D2586F4270033BB1B /* SimplePose.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SimplePose.mm; sourceTree = "<group>"; };
+		5F36C22F2586FDDE0033BB1B /* Ultralight-Nano-SimplePose.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Ultralight-Nano-SimplePose.param"; sourceTree = "<group>"; };
+		5F36C2302586FDDE0033BB1B /* Ultralight-Nano-SimplePose.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "Ultralight-Nano-SimplePose.bin"; sourceTree = "<group>"; };
+		5F36C2312586FDDE0033BB1B /* person_detector.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = person_detector.param; sourceTree = "<group>"; };
+		5F36C2322586FDDE0033BB1B /* person_detector.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = person_detector.bin; sourceTree = "<group>"; };
+		5F36C2372587059C0033BB1B /* FaceLandmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceLandmark.h; sourceTree = "<group>"; };
+		5F36C2382587059C0033BB1B /* FaceLandmark.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceLandmark.mm; sourceTree = "<group>"; };
+		5F36C23A25870B610033BB1B /* yoloface-500k.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "yoloface-500k.param"; sourceTree = "<group>"; };
+		5F36C23B25870B610033BB1B /* landmark106.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = landmark106.bin; sourceTree = "<group>"; };
+		5F36C23C25870B610033BB1B /* yoloface-500k.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "yoloface-500k.bin"; sourceTree = "<group>"; };
+		5F36C23D25870B610033BB1B /* landmark106.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = landmark106.param; sourceTree = "<group>"; };
+		5F36C24225870CC40033BB1B /* dbface.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = dbface.bin; sourceTree = "<group>"; };
+		5F36C24325870CC40033BB1B /* dbface.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dbface.param; sourceTree = "<group>"; };
+		5F36C24625870CD60033BB1B /* DBFace.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DBFace.mm; sourceTree = "<group>"; };
+		5F36C24725870CD60033BB1B /* DBFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBFace.h; sourceTree = "<group>"; };
+		5F36C24925871A9D0033BB1B /* Yolact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yolact.h; sourceTree = "<group>"; };
+		5F36C24A25871A9D0033BB1B /* Yolact.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Yolact.mm; sourceTree = "<group>"; };
+		5F36C24C25871ABF0033BB1B /* yolact.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = yolact.bin; sourceTree = "<group>"; };
+		5F36C24D25871ABF0033BB1B /* yolact.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yolact.param; sourceTree = "<group>"; };
 		5F37E19C24B97F9400BF9E94 /* yolov4-tiny-opt.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "yolov4-tiny-opt.param"; sourceTree = "<group>"; };
 		5F37E19D24B97F9600BF9E94 /* yolov4-tiny-opt.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "yolov4-tiny-opt.bin"; sourceTree = "<group>"; };
 		5F37E1A024B97FD900BF9E94 /* YoloV4.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YoloV4.mm; sourceTree = "<group>"; };
@@ -162,6 +198,14 @@
 				5F5DFF252583176A00D6077B /* MobileNetV3Seg.h */,
 				5F5DFF2C25833DCF00D6077B /* MbnFCN.mm */,
 				5F5DFF2B25833DC600D6077B /* MbnFCN.h */,
+				5F36C22D2586F4270033BB1B /* SimplePose.mm */,
+				5F36C22C2586F4270033BB1B /* SimplePose.h */,
+				5F36C2382587059C0033BB1B /* FaceLandmark.mm */,
+				5F36C2372587059C0033BB1B /* FaceLandmark.h */,
+				5F36C24625870CD60033BB1B /* DBFace.mm */,
+				5F36C24725870CD60033BB1B /* DBFace.h */,
+				5F36C24A25871A9D0033BB1B /* Yolact.mm */,
+				5F36C24925871A9D0033BB1B /* Yolact.h */,
 			);
 			path = YOLOv5NCNN;
 			sourceTree = "<group>";
@@ -177,6 +221,18 @@
 		5F40C2DA24B171A100C84041 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				5F36C24C25871ABF0033BB1B /* yolact.bin */,
+				5F36C24D25871ABF0033BB1B /* yolact.param */,
+				5F36C24225870CC40033BB1B /* dbface.bin */,
+				5F36C24325870CC40033BB1B /* dbface.param */,
+				5F36C23B25870B610033BB1B /* landmark106.bin */,
+				5F36C23D25870B610033BB1B /* landmark106.param */,
+				5F36C23C25870B610033BB1B /* yoloface-500k.bin */,
+				5F36C23A25870B610033BB1B /* yoloface-500k.param */,
+				5F36C2322586FDDE0033BB1B /* person_detector.bin */,
+				5F36C2312586FDDE0033BB1B /* person_detector.param */,
+				5F36C2302586FDDE0033BB1B /* Ultralight-Nano-SimplePose.bin */,
+				5F36C22F2586FDDE0033BB1B /* Ultralight-Nano-SimplePose.param */,
 				5F5DFF2F258340BF00D6077B /* fcn_mbv2-sim-opt.bin */,
 				5F5DFF2E258340BF00D6077B /* fcn_mbv2-sim-opt.param */,
 				5F5DFF2825831D1100D6077B /* mbnv3_small.bin */,
@@ -268,24 +324,36 @@
 			files = (
 				5FF8B4C5256DF31D0002375F /* nanodet_m.param in Resources */,
 				5F40C2D924B16B0B00C84041 /* Main.storyboard in Resources */,
+				5F36C24425870CC40033BB1B /* dbface.bin in Resources */,
+				5F36C2342586FDDF0033BB1B /* Ultralight-Nano-SimplePose.bin in Resources */,
 				5F37E19F24B97F9600BF9E94 /* yolov4-tiny-opt.bin in Resources */,
 				5F40C2BA24B1647C00C84041 /* LaunchScreen.storyboard in Resources */,
+				5F36C24125870B610033BB1B /* landmark106.param in Resources */,
 				5F37E19E24B97F9600BF9E94 /* yolov4-tiny-opt.param in Resources */,
+				5F36C24E25871ABF0033BB1B /* yolact.bin in Resources */,
 				5F39AE3C2570CD6200A1DAB3 /* yolo-fastest-xl.param in Resources */,
 				5F70E49C257F03DF0011CD78 /* yolov5s_customlayer.bin in Resources */,
 				5F40C2B724B1647C00C84041 /* Assets.xcassets in Resources */,
+				5F36C2332586FDDF0033BB1B /* Ultralight-Nano-SimplePose.param in Resources */,
+				5F36C24025870B610033BB1B /* yoloface-500k.bin in Resources */,
 				5F5DFF2A25831D1100D6077B /* mbnv3_small.bin in Resources */,
 				5F40C2E624B18C5700C84041 /* yolov5.param in Resources */,
 				5F5DFF30258340BF00D6077B /* fcn_mbv2-sim-opt.param in Resources */,
+				5F36C23E25870B610033BB1B /* yoloface-500k.param in Resources */,
 				5FF8B4C1256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin in Resources */,
 				5F39AE3B2570CD6200A1DAB3 /* yolo-fastest-xl.bin in Resources */,
 				5FF8B4C2256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param in Resources */,
 				5F5DFF31258340BF00D6077B /* fcn_mbv2-sim-opt.bin in Resources */,
 				5FF8B4C6256DF31D0002375F /* nanodet_m.bin in Resources */,
+				5F36C24F25871ABF0033BB1B /* yolact.param in Resources */,
+				5F36C24525870CC40033BB1B /* dbface.param in Resources */,
+				5F36C2362586FDDF0033BB1B /* person_detector.bin in Resources */,
 				5F5DFF2925831D1100D6077B /* mbnv3_small.param in Resources */,
+				5F36C23F25870B610033BB1B /* landmark106.bin in Resources */,
 				5F70E49B257F03DF0011CD78 /* yolov5s_customlayer.param in Resources */,
 				5F40C2E524B18C5700C84041 /* yolov5.bin in Resources */,
 				5FD3E2CB24B3FDF70049450B /* 000000000650.jpg in Resources */,
+				5F36C2352586FDDF0033BB1B /* person_detector.param in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,12 +367,16 @@
 				5FD3E2DA24B417AA0049450B /* ELCameraBaseCapture.m in Sources */,
 				5FD3E2D924B417AA0049450B /* ELCameraControlCapture.m in Sources */,
 				5F40C2B224B1647800C84041 /* ViewController.mm in Sources */,
+				5F36C22E2586F4270033BB1B /* SimplePose.mm in Sources */,
 				5F5DFF2D25833DCF00D6077B /* MbnFCN.mm in Sources */,
 				5F87CD3124FFA41C00B60518 /* WelcomeVC.m in Sources */,
 				5FF8B4C9256DF33C0002375F /* NanoDet.mm in Sources */,
+				5F36C24B25871A9D0033BB1B /* Yolact.mm in Sources */,
+				5F36C24825870CD60033BB1B /* DBFace.mm in Sources */,
 				5F37E1A224B97FD900BF9E94 /* YoloV4.mm in Sources */,
 				5F364A6E2579B50700F45596 /* YoloV5CustomLayer.mm in Sources */,
 				5F5DFF262583176A00D6077B /* MobileNetV3Seg.mm in Sources */,
+				5F36C2392587059C0033BB1B /* FaceLandmark.mm in Sources */,
 				5F40C2AC24B1647800C84041 /* AppDelegate.m in Sources */,
 				5F50870C24B309F30088E326 /* YoloV5.mm in Sources */,
 				5F40C2BD24B1647D00C84041 /* main.m in Sources */,

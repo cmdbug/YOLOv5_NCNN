@@ -37,7 +37,7 @@ int activation_function_softmax(const _Tp *src, _Tp *dst, int length) {
 NanoDet::NanoDet(bool useGPU) {
 #if NCNN_VULKAN
     ncnn::create_gpu_instance();
-    hasGPU = ncnn::get_gpu_count();
+    hasGPU = ncnn::get_gpu_count() > 0;
 #endif
     toUseGPU = hasGPU && useGPU;
     

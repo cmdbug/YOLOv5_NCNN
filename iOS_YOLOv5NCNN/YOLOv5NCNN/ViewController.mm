@@ -21,6 +21,10 @@
 #include "YoloV5CustomLayer.h"
 #include "MobileNetV3Seg.h"
 #include "MbnFCN.h"
+#include "SimplePose.h"
+#include "FaceLandmark.h"
+#include "DBFace.h"
+#include "Yolact.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVMediaFormat.h>
@@ -28,7 +32,7 @@
 #import <opencv2/opencv.hpp>  // download opencv2.framework to project
 
 
-@interface ViewController ()
+@interface ViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *resultLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UISlider *nmsSlider;
@@ -52,11 +56,15 @@
 @property YoloV5CustomLayer *yolov5CustomOp;
 @property MBNV3Seg *mbnv3Seg;
 @property MbnFCN *mbnFCN;
+@property SimplePose *simplePose;
+@property FaceLandmark *faceLandmark;
+@property DBFace *dbFace;
+@property Yolact *yolact;
 
 @property (assign, atomic) Boolean isDetecting;
-@property (nonatomic) dispatch_queue_t queue;
+@property (assign, atomic) Boolean isPhoto;
 
-//@property (assign, nonatomic) Boolean USE_YOLOV5;  // YES:YOLOv5  NO:YOLOv4-tiny
+@property (nonatomic) dispatch_queue_t queue;
 
 
 @end
@@ -76,6 +84,7 @@
     self.queue = dispatch_queue_create("ncnn", DISPATCH_QUEUE_CONCURRENT);
     [self initTitleName];
     self.isDetecting = NO;
+    self.isPhoto = NO;
     [self initView];
     [self setCameraUI];
 }
@@ -121,7 +130,7 @@
     __weak typeof(self) weakSelf = self;
     self.cameraCapture.imageBlock = ^(UIImage *image) {
 //        NSLog(@"%f", image.size.height);
-        if (weakSelf.isDetecting) {
+        if (weakSelf.isDetecting || weakSelf.isPhoto) {
             return;
         }
         weakSelf.isDetecting = YES;
@@ -162,9 +171,24 @@
     [self.view.layer addSublayer:self.preLayer];
 }
 
+- (void)tapImageViewRecognizer {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick)];
+    tap.numberOfTapsRequired = 1;
+    self.imageView.userInteractionEnabled = YES;
+    [self.imageView addGestureRecognizer:tap];
+}
+
+- (void)tapClick {
+    self.isPhoto = NO;
+    self.isDetecting = NO;
+    [self.cameraCapture startSession];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.cameraCapture startSession];
+    if (!self.isPhoto) {
+        [self.cameraCapture startSession];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -174,9 +198,11 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    dispatch_barrier_async(self.queue, ^{
-        [self releaseModel];
-    });
+    if (!self.isPhoto) {
+        dispatch_barrier_async(self.queue, ^{
+            [self releaseModel];
+        });
+    }
 }
 
 
@@ -194,13 +220,14 @@
         self.nms_threshold = 0.45f;
     }
     
-//    self.imageView.image = [UIImage imageNamed:@"000000000650.jpg"];
     [self.nmsSlider addTarget:self action:@selector(nmsChange:forEvent:) forControlEvents:UIControlEventValueChanged];
     [self.thresholdSlider addTarget:self action:@selector(nmsChange:forEvent:) forControlEvents:UIControlEventValueChanged];
     if (self.USE_MODEL != W_YOLOV5S && self.USE_MODEL != W_DBFACE && self.USE_MODEL != W_NANODET && self.USE_MODEL != W_YOLOV5S_CUSTOM_OP) {
         self.nmsSlider.enabled = NO;
         self.thresholdSlider.enabled = NO;
     }
+    
+    [self tapImageViewRecognizer];
 }
 
 #pragma mark 顶部控件
@@ -237,38 +264,35 @@
 
 #pragma mark 照片
 - (IBAction)predict:(id)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sorry" message:@"coming soon" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:sure];
-    [self presentViewController:alert animated:YES completion:nil];
-    // load image
-//    UIImage* image = [UIImage imageNamed:@"000000000650.jpg"];
-//    self.imageView.image = image;
-//    if (self.USE_MODEL == W_YOLOV5S) {
-//        YoloV5 *yolo = new YoloV5("", "");
-//        std::vector<BoxInfo> result = yolo->dectect(image, self.threshold, self.nms_threshold);
-//        printf("result size:%lu", result.size());
-//        NSString *detect_result = @"";
-//        for (int i = 0; i < result.size(); i++) {
-//            BoxInfo boxInfo = result[i];
-//            detect_result = [NSString stringWithFormat:@"%@\n%s %.3f", detect_result, yolo->labels[boxInfo.label].c_str(), boxInfo.score];
-//        }
-//        delete yolo;
-//        self.resultLabel.text = detect_result;
-//        self.imageView.image = [self drawBox:self.imageView image:image boxs:result];
-//    } else if (self.USE_MODEL == W_YOLOV4TINY) {
-//        YoloV4 *yolo = new YoloV4("", "", YES);
-//        std::vector<BoxInfo> result = yolo->detectv4(image, self.threshold, self.nms_threshold);
-//        printf("result size:%lu", result.size());
-//        NSString *detect_result = @"";
-//        for (int i = 0; i < result.size(); i++) {
-//            BoxInfo boxInfo = result[i];
-//            detect_result = [NSString stringWithFormat:@"%@\n%s %.3f", detect_result, yolo->labels[boxInfo.label].c_str(), boxInfo.score];
-//        }
-//        delete yolo;
-//        self.resultLabel.text = detect_result;
-//        self.imageView.image = [self drawBox:self.imageView image:image boxs:result];
-//    }
+    self.isPhoto = YES;
+    UIImagePickerController *picVC = [[UIImagePickerController alloc] init];
+    picVC.delegate = self;
+    picVC.allowsEditing = NO;
+    [self presentViewController:picVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    NSLog(@"did pick image");
+    self.isDetecting = YES;
+    UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
+    self.imageView.image = image;
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(self.queue, ^{
+        [weakSelf detectImage:image];
+    });
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.isPhoto = NO;
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    NSLog(@"did cancel image");
+    self.isPhoto = NO;
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.isPhoto = NO;
+        self.isDetecting = NO;
+    }];
 }
 
 #pragma mark 相机回调图片
@@ -279,6 +303,10 @@
     NSDate *start = [NSDate date];
     std::vector<BoxInfo> result;
     ncnn::Mat maskMat;
+    std::vector<PoseResult> poseResult;
+    std::vector<FaceKeyPoint> faceLandmarkResult;
+    std::vector<Obj> dbFaceResult;
+    std::vector<Object> yolactResult;
     if (self.USE_MODEL == W_YOLOV5S) {
         result = self.yolo->dectect(image, self.threshold, self.nms_threshold);
     } else if (self.USE_MODEL == W_YOLOV4TINY
@@ -290,13 +318,13 @@
     } else if (self.USE_MODEL == W_YOLOV5S_CUSTOM_OP) {
         result = self.yolov5CustomOp->detect(image, self.threshold, self.nms_threshold);
     } else if (self.USE_MODEL == W_SIMPLE_POSE) {
-        
+        poseResult = self.simplePose->detect(image);
     } else if (self.USE_MODEL == W_DBFACE) {
-        
+        dbFaceResult = self.dbFace->detect(image, self.threshold, self.nms_threshold);
     } else if (self.USE_MODEL == W_FACE_LANDMARK) {
-        
+        faceLandmarkResult = self.faceLandmark->detect(image);
     } else if (self.USE_MODEL == W_YOLACT) {
-        
+        yolactResult = self.yolact->detect_yolact(image);
     } else if (self.USE_MODEL == W_MOBILENETV2_FCN) {
         maskMat = self.mbnFCN->detect_mbnfcn(image);
     } else if (self.USE_MODEL == W_MOBILENETV3_SEG) {
@@ -312,16 +340,14 @@
             || weakSelf.USE_MODEL == W_YOLO_FASTEST_XL) {
             weakSelf.imageView.image = [weakSelf drawBox:weakSelf.imageView image:image boxs:result];
         } else if (weakSelf.USE_MODEL == W_SIMPLE_POSE) {
-            
+            weakSelf.imageView.image = [weakSelf drawPose:weakSelf.imageView image:image pose:poseResult];
         } else if (weakSelf.USE_MODEL == W_YOLACT) {
-                   
+            weakSelf.imageView.image = [weakSelf drawYolactMask:weakSelf.imageView image:image dbface:yolactResult];
         } else if (weakSelf.USE_MODEL == W_FACE_LANDMARK) {
-                          
+            weakSelf.imageView.image = [weakSelf drawFaceLandmark:weakSelf.imageView image:image faceLandmark:faceLandmarkResult];
         } else if (weakSelf.USE_MODEL == W_DBFACE) {
-                                 
+            weakSelf.imageView.image = [weakSelf drawDBFace:weakSelf.imageView image:image dbface:dbFaceResult];
         } else if (weakSelf.USE_MODEL == W_MOBILENETV2_FCN || weakSelf.USE_MODEL == W_MOBILENETV3_SEG) {
-            // slow !!!
-            // slow !!!
             // slow !!!
             weakSelf.imageView.image = [weakSelf drawSegMask:weakSelf.imageView image:image mask:maskMat];
         }
@@ -349,14 +375,18 @@
     } else if (!self.yolov4 && self.USE_MODEL == W_MOBILENETV2_YOLOV3_NANO) {
         NSLog(@"new YoloV3-nano");
         self.yolov4 = new YoloV4(self.USE_GPU, 1);
-    } else if (!self.yolov4 && self.USE_MODEL == W_SIMPLE_POSE) {
+    } else if (!self.simplePose && self.USE_MODEL == W_SIMPLE_POSE) {
         NSLog(@"new Simple-Pose");
-    } else if (!self.yolov4 && self.USE_MODEL == W_YOLACT) {
+        self.simplePose = new SimplePose(self.USE_GPU);
+    } else if (!self.yolact && self.USE_MODEL == W_YOLACT) {
         NSLog(@"new Yolact");
-    } else if (!self.yolov4 && self.USE_MODEL == W_FACE_LANDMARK) {
+        self.yolact = new Yolact(self.USE_GPU);
+    } else if (!self.faceLandmark && self.USE_MODEL == W_FACE_LANDMARK) {
         NSLog(@"new face-landmark");
-    } else if (!self.yolov4 && self.USE_MODEL == W_DBFACE) {
+        self.faceLandmark = new FaceLandmark(self.USE_GPU);
+    } else if (!self.dbFace && self.USE_MODEL == W_DBFACE) {
         NSLog(@"new dbface");
+        self.dbFace = new DBFace(self.USE_GPU);
     } else if (!self.mbnFCN && self.USE_MODEL == W_MOBILENETV2_FCN) {
         NSLog(@"new mbnv2 fcn");
         self.mbnFCN = new MbnFCN(self.USE_GPU);
@@ -383,6 +413,10 @@
     delete self.yolov5CustomOp;
     delete self.mbnv3Seg;
     delete self.mbnFCN;
+    delete self.simplePose;
+    delete self.faceLandmark;
+    delete self.dbFace;
+    delete self.yolact;
 }
 
 #pragma mark 获取模型名称
@@ -536,6 +570,171 @@
     return newImage;
 }
 
+- (UIImage *)drawPose:(UIImageView *)imageView image:(UIImage *)image pose:(std::vector<PoseResult>)pose {
+    UIGraphicsBeginImageContext(image.size);
+
+    [image drawAtPoint:CGPointMake(0,0)];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, fmax(image.size.width/200, 1));
+        
+    // draw bone
+    // 0 nose, 1 left_eye, 2 right_eye, 3 left_Ear, 4 right_Ear, 5 left_Shoulder, 6 rigth_Shoulder, 7 left_Elbow, 8 right_Elbow,
+    // 9 left_Wrist, 10 right_Wrist, 11 left_Hip, 12 right_Hip, 13 left_Knee, 14 right_Knee, 15 left_Ankle, 16 right_Ankle
+    int joint_pairs[17][2] = {{0, 1}, {1, 3}, {0, 2}, {2, 4}, {5, 6}, {5, 7}, {7, 9}, {6, 8}, {8, 10}, {5, 11}, {6, 12}, {11, 12}, {11, 13}, {12, 14}, {13, 15}, {14, 16}};
+    
+    for (int i = 0; i < pose.size(); i++) {
+        PoseResult posex = pose[i];
+        srand(i + 2020);
+        UIColor *color = [UIColor colorWithRed:rand()%256/255.0f green:rand()%256/255.0f blue:rand()%255/255.0f alpha:1.0f];
+        CGContextSetStrokeColorWithColor(context, [color CGColor]);
+        CGContextStrokePath(context);
+        CGContextAddRect(context, CGRectMake(posex.boxInfos.x1, posex.boxInfos.y1, posex.boxInfos.x2 - posex.boxInfos.x1, posex.boxInfos.y2 - posex.boxInfos.y1));
+        
+        for (int j = 0; j < 16; j++) {
+            int pl0 = joint_pairs[j][0];
+            int pl1 = joint_pairs[j][1];
+            // 人体左侧改为红线
+            if ((pl0 % 2 == 1) && (pl1 % 2 == 1) && pl0 >= 5 && pl1 >= 5) {
+                CGContextSetStrokeColorWithColor(context, UIColor.redColor.CGColor);
+            } else {
+                CGContextSetStrokeColorWithColor(context, [color CGColor]);
+            }
+            CGContextMoveToPoint(context, posex.keyPoints[joint_pairs[j][0]].p.x, posex.keyPoints[joint_pairs[j][0]].p.y);
+            CGContextAddLineToPoint(context, posex.keyPoints[joint_pairs[j][1]].p.x, posex.keyPoints[joint_pairs[j][1]].p.y);
+            CGContextStrokePath(context);
+        }
+        for (int j = 0; j < 17; j++) {
+            CGContextFillRect(context, CGRectMake(posex.keyPoints[j].p.x - 2, posex.keyPoints[j].p.y - 2, 5, 5));
+        }
+    }
+    
+    //创建新图像
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+
+- (UIImage *)drawFaceLandmark:(UIImageView *)imageView image:(UIImage *)image faceLandmark:(std::vector<FaceKeyPoint>)faceLandmark {
+    UIGraphicsBeginImageContext(image.size);
+
+    [image drawAtPoint:CGPointMake(0,0)];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, fmax(image.size.width/200, 1));
+    
+    for (int i = 0; i < faceLandmark.size(); i++) {
+        FaceKeyPoint faceLandmarkx = faceLandmark[i];
+        srand(i / 106 + 2020);
+        UIColor *color = [UIColor colorWithRed:rand()%256/255.0f green:rand()%256/255.0f blue:rand()%255/255.0f alpha:1.0f];
+        CGContextSetFillColorWithColor(context, [color CGColor]);
+        CGContextFillRect(context, CGRectMake(faceLandmarkx.p.x - 2, faceLandmarkx.p.y - 2, 5, 5));
+    }
+    
+    //创建新图像
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+- (UIImage *)drawDBFace:(UIImageView *)imageView image:(UIImage *)image dbface:(std::vector<Obj>)dbFace {
+    UIGraphicsBeginImageContext(image.size);
+
+    [image drawAtPoint:CGPointMake(0,0)];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, fmax(image.size.width / 200, 1));
+    
+    for (int i = 0; i < dbFace.size(); i++) {
+        Obj dbfacex = dbFace[i];
+        srand(i + 2020);
+        UIColor *color = [UIColor colorWithRed:rand()%256/255.0f green:rand()%256/255.0f blue:rand()%255/255.0f alpha:1.0f];
+        CGContextSetStrokeColorWithColor(context, [color CGColor]);
+        CGContextStrokePath(context);
+        CGContextAddRect(context, CGRectMake(dbfacex.box.x, dbfacex.box.y, dbfacex.box.r - dbfacex.box.x, dbfacex.box.b - dbfacex.box.y));
+        CGContextDrawPath(context, kCGPathStroke);
+        
+        CGContextSetFillColorWithColor(context, [color CGColor]);
+        for (int j = 0; j < 5; j++) {
+            CGContextFillRect(context, CGRectMake(dbfacex.landmark.x[j] - 2, dbfacex.landmark.y[j] - 2, 5, 5));
+        }
+    }
+    
+    //创建新图像
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+- (UIImage *)drawYolactMask:(UIImageView *)imageView image:(UIImage *)image dbface:(std::vector<Object>)yolactMask {
+    UIGraphicsBeginImageContext(image.size);
+
+    [image drawAtPoint:CGPointMake(0,0)];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, fmax(image.size.width / 200, 1));
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    
+    NSString *label = nil;
+    for (int i = 0; i < yolactMask.size(); i++) {
+        Object yolactx = yolactMask[i];
+        if (yolactx.prob < 0.4f) {
+            continue;
+        }
+        
+        srand(i + 2020);
+        UIColor *color = [UIColor colorWithRed:rand()%256/255.0f green:rand()%256/255.0f blue:rand()%255/255.0f alpha:1.0f];
+        UIColor *acolor = [UIColor colorWithRed:rand()%256/255.0f green:rand()%256/255.0f blue:rand()%255/255.0f alpha:0.4f];
+        CGContextSetLineWidth(context, fmax(image.size.width / 200, 1));
+        CGContextSetStrokeColorWithColor(context, [color CGColor]);
+        CGContextAddRect(context, CGRectMake(yolactx.rect.x, yolactx.rect.y, yolactx.rect.width, yolactx.rect.height));
+        CGContextStrokePath(context);
+        
+        label = [NSString stringWithFormat:@"%s %.3f", self.yolact->labels[yolactx.label].c_str(), yolactx.prob];
+        [label drawAtPoint:CGPointMake(yolactx.rect.x + 2, yolactx.rect.y - 25) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20], NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName:color}];
+        
+        CGContextSetStrokeColorWithColor(context, [acolor CGColor]);
+        CGContextSetLineWidth(context, 1);
+        int lengthW = 0;
+        for (int h = 0; h < yolactx.mask.rows; h++) {
+            const auto *pCowMask = yolactx.mask.ptr(h);
+            for (int w = 0; w < yolactx.mask.cols; w++) {
+                // slow
+//                if (pCowMask[w] != 0) {
+//                    CGContextMoveToPoint(context, w, h);
+//                    CGContextAddLineToPoint(context, w + 1, h);
+//                    CGContextStrokePath(context);
+//                }
+                // fast
+                if (pCowMask[w] != 0) {
+                    lengthW++;
+                } else if (lengthW > 0) {
+                    CGContextMoveToPoint(context, w - lengthW, h);
+                    CGContextAddLineToPoint(context, w, h);
+                    CGContextStrokePath(context);
+                    lengthW = 0;
+                }
+            }
+            // fast
+            if (lengthW > 0) {
+                CGContextMoveToPoint(context, yolactx.mask.cols - lengthW, h);
+                CGContextAddLineToPoint(context, yolactx.mask.cols, h);
+                CGContextStrokePath(context);
+                lengthW = 0;
+            }
+        }
+    }
+    
+    //创建新图像
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 
 @end
 

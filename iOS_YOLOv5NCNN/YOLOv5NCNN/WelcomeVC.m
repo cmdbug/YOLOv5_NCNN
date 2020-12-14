@@ -84,7 +84,7 @@
     [self changeMode];
     
     int btnWidth = self.view.bounds.size.width;
-    int offsetY = 200;
+    int offsetY = self.view.bounds.size.width * 0.6f;
     int btnHeight = 35;
     int btnY = 35;
     int btnCount = 12;

@@ -30,12 +30,12 @@
 | YOLOv5s           | yes | yes |  [Github](https://github.com/ultralytics/yolov5)   |
 | YOLOv4-tiny       | yes | yes |  [Github](https://github.com/ultralytics/yolov3)   |
 | YOLOv3-nano       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
-| Simple-Pose       | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
-| Yolact            | yes | coming soon |  [Github](https://github.com/dbolya/yolact) [zhihu](https://zhuanlan.zhihu.com/p/128974102)  |
-| ChineseOCR_lite   | yes | probably |  [Github](https://github.com/ouyanghuiyu/chineseocr_lite) [zhihu](https://zhuanlan.zhihu.com/p/113338890)   |
+| Simple-Pose       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
+| Yolact            | yes | yes |  [Github](https://github.com/dbolya/yolact) [zhihu](https://zhuanlan.zhihu.com/p/128974102)  |
+| ChineseOCR_lite   | yes | cancel |  [Github](https://github.com/ouyanghuiyu/chineseocr_lite) [zhihu](https://zhuanlan.zhihu.com/p/113338890)   |
 | ENet              | bug | cancel |  [Github](https://github.com/davidtvs/PyTorch-ENet)   |
-| Landmark106       | yes | coming soon |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
-| DBFace            | yes | coming soon |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
+| Landmark106       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
+| DBFace            | yes | yes |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
 | MBNv2-FCN         | yes | yes |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
 | MBNv3-Seg-small   | yes | yes |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
 | YOLOv5s_custom_op | yes | yes |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
@@ -89,9 +89,13 @@ iOS:
 |-------------------|-------------|---------|
 | none | none | none |
 
-|  mbnv2_fcn | mbnv3_seg_small | xxx |
+|  mbnv2_fcn | mbnv3_seg_small | simple_pose |
 |-------------------|-------------|---------|
-| none | none | xxx |
+| none | none | none |
+
+|  yolact | yoloface500k-landmark106 | dbface |
+|-------------------|-------------|---------|
+| none | none | none |
 
 
 感谢:<br/>

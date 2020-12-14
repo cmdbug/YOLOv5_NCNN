@@ -532,20 +532,46 @@ public class MainActivity extends AppCompatActivity {
         maskPaint.setTextSize(30 * mutableBitmap.getWidth() / 800.0f);
         float mask = 0;
         int color = 0;
+        float tempC = 0;
+        int lengthW = 1;
         for (int y = 0; y < mutableBitmap.getHeight(); y++) {
             for (int x = 0; x < mutableBitmap.getWidth(); x++) {
                 mask = results[y * mutableBitmap.getWidth() + x];
                 if (mask >= cityspace_colormap.length) {
                     continue;
                 }
-                color = Color.argb(255,
-                        cityspace_colormap[(int) mask][0],
-                        cityspace_colormap[(int) mask][1],
-                        cityspace_colormap[(int) mask][2]);
-                maskPaint.setColor(color);
-                maskPaint.setAlpha(100);
-                canvas.drawPoint(x, y, maskPaint);
+//                color = Color.argb(255,
+//                        cityspace_colormap[(int) mask][0],
+//                        cityspace_colormap[(int) mask][1],
+//                        cityspace_colormap[(int) mask][2]);
+//                maskPaint.setColor(color);
+//                maskPaint.setAlpha(100);
+//                canvas.drawPoint(x, y, maskPaint);
+                // fast
+                if (mask != tempC) {
+                    color = Color.argb(255,
+                            cityspace_colormap[(int) tempC][0],
+                            cityspace_colormap[(int) tempC][1],
+                            cityspace_colormap[(int) tempC][2]);
+                    maskPaint.setColor(color);
+                    maskPaint.setAlpha(100);
+                    canvas.drawLine(x - lengthW, y, x, y, maskPaint);
+                    tempC = mask;
+                    lengthW = 1;
+                } else {
+                    lengthW++;
+                }
             }
+            // fast
+            color = Color.argb(255,
+                    cityspace_colormap[(int) tempC][0],
+                    cityspace_colormap[(int) tempC][1],
+                    cityspace_colormap[(int) tempC][2]);
+            maskPaint.setColor(color);
+            maskPaint.setAlpha(100);
+            canvas.drawLine(mutableBitmap.getWidth() - lengthW, y, mutableBitmap.getWidth(), y, maskPaint);
+            tempC = mask;
+            lengthW = 1;
         }
         return mutableBitmap;
     }
@@ -566,14 +592,43 @@ public class MainActivity extends AppCompatActivity {
                 continue;
             }
             int index = 0;
+            char tempC = 0;
+            int lengthW = 1;
             for (int y = 0; y < mutableBitmap.getHeight(); y++) {
                 for (int x = 0; x < mutableBitmap.getWidth(); x++) {
+//                    if (mask.mask[index] != 0) {
+//                        maskPaint.setColor(mask.getColor());
+//                        maskPaint.setAlpha(100);
+//                        canvas.drawPoint(x, y, maskPaint);
+//                    }
+//                    index++;
+                    // fast
                     if (mask.mask[index] != 0) {
+                        if (mask.mask[index] != tempC) {
+                            maskPaint.setColor(mask.getColor());
+                            maskPaint.setAlpha(100);
+                            canvas.drawLine(x - lengthW, y, x, y, maskPaint);
+                            tempC = mask.mask[index];
+                            lengthW = 1;
+                        } else {
+                            lengthW++;
+                        }
+                    } else if (lengthW > 1) {
                         maskPaint.setColor(mask.getColor());
                         maskPaint.setAlpha(100);
-                        canvas.drawPoint(x, y, maskPaint);
+                        canvas.drawLine(x - lengthW, y, x, y, maskPaint);
+                        tempC = mask.mask[index];
+                        lengthW = 1;
                     }
                     index++;
+                }
+                // fast
+                if (lengthW > 1) {
+                    maskPaint.setColor(mask.getColor());
+                    maskPaint.setAlpha(100);
+                    canvas.drawLine(mutableBitmap.getWidth() - lengthW, y, mutableBitmap.getWidth(), y, maskPaint);
+                    tempC = mask.mask[index - 1];
+                    lengthW = 1;
                 }
             }
             // 标签跟框放后面画，防止被 mask 挡住

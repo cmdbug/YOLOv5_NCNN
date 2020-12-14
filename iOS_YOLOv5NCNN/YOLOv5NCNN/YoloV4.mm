@@ -13,7 +13,7 @@ YoloV4 *YoloV4::detector = nullptr;
 YoloV4::YoloV4(bool useGPU, const int yoloType) {
 #if NCNN_VULKAN
     ncnn::create_gpu_instance();
-    hasGPU = ncnn::get_gpu_count();
+    hasGPU = ncnn::get_gpu_count() > 0;
 #endif
     toUseGPU = hasGPU && useGPU;
     
