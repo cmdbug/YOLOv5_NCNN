@@ -14,31 +14,41 @@ endif()
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
-add_library( # Sets the name of the library.
+# 搜索当前目录下的所有.cpp文件
+aux_source_directory(. SRC_LIST)
+aux_source_directory(./ocr OCR_SRC_LIST)
+add_library(
         yolov5
-
-        # Sets the library as a shared library.
         SHARED
-
-        # Provides a relative path to your source file(s).
-        jni_interface.cpp
-        YoloV5.cpp
-        YoloV4.cpp
-        SimplePose.cpp
-        Yolact.cpp
-        ocr/clipper.cpp
-        ocr/NCNNDBNet.cpp
-        ocr/ocr.cpp
-        ocr/RRLib.cpp
-        ocr/ZUtil.cpp
-        ENet.cpp
-        FaceLandmark.cpp
-        DBFace.cpp
-        MbnFCN.cpp
-        MobileNetV3Seg.cpp
-        YoloV5CustomLayer.cpp
-        NanoDet.cpp
+        ${SRC_LIST}
+        ${OCR_SRC_LIST}
         )
+
+#add_library( # Sets the name of the library.
+#        yolov5
+#
+#        # Sets the library as a shared library.
+#        SHARED
+#
+#        # Provides a relative path to your source file(s).
+#        jni_interface.cpp
+#        YoloV5.cpp
+#        YoloV4.cpp
+#        SimplePose.cpp
+#        Yolact.cpp
+#        ocr/clipper.cpp
+#        ocr/NCNNDBNet.cpp
+#        ocr/ocr.cpp
+#        ocr/RRLib.cpp
+#        ocr/ZUtil.cpp
+#        ENet.cpp
+#        FaceLandmark.cpp
+#        DBFace.cpp
+#        MbnFCN.cpp
+#        MobileNetV3Seg.cpp
+#        YoloV5CustomLayer.cpp
+#        NanoDet.cpp
+#        )
 
 include_directories(
         ncnnvulkan/include

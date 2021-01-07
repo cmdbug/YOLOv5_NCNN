@@ -6,6 +6,7 @@
 //  Copyright © 2020 TENG. All rights reserved.
 //
 
+#include "ncnn/ncnn/platform.h"
 #import "WelcomeVC.h"
 #import "ViewController.h"
 
@@ -62,7 +63,7 @@
     NSString *message = @"ohhhhh";
     if (self.useGPU) {
         [self.btnRight setImage:[UIImage imageNamed:@"mode_gpu"] forState:UIControlStateNormal];
-#ifdef NCNN_VULKAN
+#if NCNN_VULKAN
         title = @"Warning";
         message = @"If the GPU is too old, it may not work well in GPU mode.";
 #else
