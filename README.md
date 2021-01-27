@@ -48,13 +48,15 @@ Select the model to be tested directly on the interface.
 - If it prompts that net.h can't be found, you need to download it from the ncnn official website or compile .framework yourself and replace it in the project. If opencv2.framework is useful, you need to download it again and replace it in the project.
 - The default library used by iOS does not include vulkan and bitcode.
 
-### Android：<br/>
+### Android：
 * Due to factors such as mobile phone performance and image size, FPS varies greatly on different mobile phones. This project mainly tests the use of the NCNN framework. For the conversion of specific models, you can go to the NCNN official to view the conversion tutorial.
 * Because the opencv library is too large, only arm64-v8a/armeabi-v7a is reserved. If you need other versions, go to the official download.
 * ncnn temporarily uses the vulkan version, and acceleration needs to be turned on before loading, which is not turned on in this project. If you want to use the ncnn version, you need to modify the CMakeLists.txt configuration.
 * Different AS versions may have various problems with compilation. If the compilation error cannot be solved, it is recommended to use AS4.0 or higher to try.
 
 Convert locally(Will not upload model): [xxxx -> ncnn] https://convertmodel.com/
+
+Minimal OpenCV:https://github.com/nihui/opencv-mobile
 
 :art: Screenshot<br/>
 
@@ -84,19 +86,19 @@ Convert locally(Will not upload model): [xxxx -> ncnn] https://convertmodel.com/
 
 |  mbnv2-yolov3-nano | yolov4-tiny | yolov5s |
 |-------------------|-------------|---------|
-| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_yolov3_nano.jpg"/> |<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov4_tiny.jpg"/>| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s.jpg"/> |
+| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_yolov3_nano.jpg"/> |<img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov4_tiny.jpg"/>| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s.jpg"/> |
 
 |  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
-| none | none | none |
+| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_yolov5s_custom_op.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_nanodet.jpg"/> | none |
 
 |  mbnv2_fcn | mbnv3_seg_small | simple_pose |
 |-------------------|-------------|---------|
-| none | none | none |
+| none | none | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_simple_pose.jpg"/> |
 
 |  yolact | yoloface500k-landmark106 | dbface |
 |-------------------|-------------|---------|
-| none | none | none |
+| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolact.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yoloface500k_landmark106.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_dbface.jpg"/> |
 
 
 Thanks:<br/>
