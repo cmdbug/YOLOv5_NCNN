@@ -90,7 +90,7 @@ Minimal OpenCV:https://github.com/nihui/opencv-mobile
 
 |  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
-| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_yolov5s_custom_op.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_nanodet.jpg"/> | none |
+| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s_custom_op.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_nanodet.jpg"/> | none |
 
 |  mbnv2_fcn | mbnv3_seg_small | simple_pose |
 |-------------------|-------------|---------|
