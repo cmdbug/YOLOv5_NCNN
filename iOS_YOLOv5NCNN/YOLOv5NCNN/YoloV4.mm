@@ -29,8 +29,8 @@ YoloV4::YoloV4(bool useGPU, const int yoloType) {
         parmaPath = [[NSBundle mainBundle] pathForResource:@"MobileNetV2-YOLOv3-Nano-coco" ofType:@"param"];
         binPath = [[NSBundle mainBundle] pathForResource:@"MobileNetV2-YOLOv3-Nano-coco" ofType:@"bin"];
     } else if (yoloType == 2) {
-        parmaPath = [[NSBundle mainBundle] pathForResource:@"yolo-fastest-xl" ofType:@"param"];
-        binPath = [[NSBundle mainBundle] pathForResource:@"yolo-fastest-xl" ofType:@"bin"];
+        parmaPath = [[NSBundle mainBundle] pathForResource:@"yolo-fastest-opt" ofType:@"param"];
+        binPath = [[NSBundle mainBundle] pathForResource:@"yolo-fastest-opt" ofType:@"bin"];
     }
     int rp = Net->load_param([parmaPath UTF8String]);
     int rm = Net->load_model([binPath UTF8String]);

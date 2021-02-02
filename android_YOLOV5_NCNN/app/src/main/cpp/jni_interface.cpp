@@ -136,7 +136,7 @@ Java_com_wzt_yolov5_YOLOv4_init(JNIEnv *env, jclass, jobject assetManager, jint 
             YoloV4::detector = new YoloV4(mgr, "MobileNetV2-YOLOv3-Nano-coco.param",
                                           "MobileNetV2-YOLOv3-Nano-coco.bin", useGPU);
         } else if (yoloType == 2) {
-            YoloV4::detector = new YoloV4(mgr, "yolo-fastest-xl.param", "yolo-fastest-xl.bin", useGPU);
+            YoloV4::detector = new YoloV4(mgr, "yolo-fastest-opt.param", "yolo-fastest-opt.bin", useGPU);
         }
     }
 }

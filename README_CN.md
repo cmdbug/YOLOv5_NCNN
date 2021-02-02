@@ -32,7 +32,7 @@
 | YOLOv3-nano       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | YOLOv5s_custom_op | yes | yes |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
 | NanoDet           | yes | yes |  [Github](https://github.com/RangiLyu/nanodet)   |
-| YOLO-Fastest-xl   | yes | bug |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
+| YOLO-Fastest-xl   | yes | yes |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
 | Simple-Pose       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | Yolact            | yes | yes |  [Github](https://github.com/dbolya/yolact) [zhihu](https://zhuanlan.zhihu.com/p/128974102)  |
 | ChineseOCR_lite   | yes | cancel |  [Github](https://github.com/ouyanghuiyu/chineseocr_lite) [zhihu](https://zhuanlan.zhihu.com/p/113338890)   |
@@ -80,7 +80,7 @@
 
 |  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
-| none | none | none |
+| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_yolov5s_custom_layer.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_nanodet.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_yolo_fastest_xl.jpg"/>|
 
 > iOS
 
@@ -90,11 +90,11 @@
 
 |  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
-| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s_custom_op.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_nanodet.jpg"/> | none |
+| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s_custom_op.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_nanodet.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolo_fastest_xl.jpg"/> |
 
 |  mbnv2_fcn | mbnv3_seg_small | simple_pose |
 |-------------------|-------------|---------|
-| none | none | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_simple_pose.jpg"/> |
+| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_fcn.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mbnv3_segmentation_small.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_simple_pose.jpg"/> |
 
 |  yolact | yoloface500k-landmark106 | dbface |
 |-------------------|-------------|---------|

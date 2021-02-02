@@ -6,7 +6,7 @@
 //  Copyright © 2020 TENG. All rights reserved.
 //
 
-#include "ncnn/ncnn/platform.h"
+//#include "ncnn/ncnn/platform.h"
 #import "WelcomeVC.h"
 #import "ViewController.h"
 
