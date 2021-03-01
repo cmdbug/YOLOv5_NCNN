@@ -15,6 +15,7 @@
 #include "MobileNetV3Seg.h"
 #include "YoloV5CustomLayer.h"
 #include "NanoDet.h"
+#include "LightOpenPose.h"
 
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
@@ -603,6 +604,52 @@ Java_com_wzt_yolov5_DBFace_detect(JNIEnv *env, jclass clazz, jobject image, jdou
         jobject obj = env->NewObject(box_cls, cid, xs, ys,
                                      keypoint.box.x, keypoint.box.y, keypoint.box.r, keypoint.box.b,
                                      (float) keypoint.score);
+        obj = env->PopLocalFrame(obj);
+        env->SetObjectArrayElement(ret, i++, obj);
+    }
+    return ret;
+
+}
+
+/*********************************************************************************************
+                                         Light OpenPose
+ ********************************************************************************************/
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_wzt_yolov5_LightOpenPose_init(JNIEnv *env, jclass clazz, jobject assetManager, jboolean useGPU) {
+    if (LightOpenPose::detector != nullptr) {
+        delete LightOpenPose::detector;
+        LightOpenPose::detector = nullptr;
+    }
+    if (LightOpenPose::detector == nullptr) {
+        AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
+        LightOpenPose::detector = new LightOpenPose(mgr, useGPU);
+    }
+}
+
+extern "C" JNIEXPORT jobjectArray JNICALL
+Java_com_wzt_yolov5_LightOpenPose_detect(JNIEnv *env, jclass clazz, jobject image) {
+    auto poses = LightOpenPose::detector->detect(env, image);
+
+    auto box_cls = env->FindClass("com/wzt/yolov5/OpenPoseKeyPoint");
+    auto cid = env->GetMethodID(box_cls, "<init>", "([F[FF)V");
+    jobjectArray ret = env->NewObjectArray(poses.size(), box_cls, nullptr);
+    int i = 0;
+    int KEY_NUM = 18;
+    for (auto &pose : poses) {
+        env->PushLocalFrame(1);
+        float x[KEY_NUM];
+        float y[KEY_NUM];
+        for (int j = 0; j < KEY_NUM; j++) {
+            x[j] = pose.keypoints[j].x;
+            y[j] = pose.keypoints[j].y;
+        }
+        jfloatArray xs = env->NewFloatArray(KEY_NUM);
+        env->SetFloatArrayRegion(xs, 0, KEY_NUM, x);
+        jfloatArray ys = env->NewFloatArray(KEY_NUM);
+        env->SetFloatArrayRegion(ys, 0, KEY_NUM, y);
+
+        jobject obj = env->NewObject(box_cls, cid, xs, ys, pose.score);
         obj = env->PopLocalFrame(obj);
         env->SetObjectArrayElement(ret, i++, obj);
     }

@@ -74,6 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -190,6 +191,14 @@
                 android:text="YOLO_Fastest_xl"
                 android:textAllCaps="false"
                 app:layout_constraintTop_toBottomOf="@id/btn_start_detect13" />
+
+            <Button
+                android:id="@+id/btn_start_detect15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Light OpenPose"
+                android:textAllCaps="false"
+                app:layout_constraintTop_toBottomOf="@id/btn_start_detect14" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>

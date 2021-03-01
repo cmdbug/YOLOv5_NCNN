@@ -33,6 +33,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Size;
 import android.view.TextureView;
 import android.view.View;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     public static int YOLOV5_CUSTOM_LAYER = 11;
     public static int NANODET = 12;
     public static int YOLO_FASTEST_XL = 13;
+    public static int LIGHT_OPEN_POSE = 14;
 
     public static int USE_MODEL = MOBILENETV2_YOLOV3_NANO;
     public static boolean USE_GPU = false;
@@ -343,6 +345,8 @@ public class MainActivity extends AppCompatActivity {
             YOLOv5.initCustomLayer(getAssets(), USE_GPU);
         } else if (USE_MODEL == NANODET) {
             NanoDet.init(getAssets(), USE_GPU);
+        } else if (USE_MODEL == LIGHT_OPEN_POSE) {
+            LightOpenPose.init(getAssets(), USE_GPU);
         }
     }
 
@@ -739,12 +743,61 @@ public class MainActivity extends AppCompatActivity {
         return mutableBitmap;
     }
 
+    protected Bitmap drawOpenPose(Bitmap mutableBitmap, OpenPoseKeyPoint[] humanPoses) {
+        if (humanPoses == null || humanPoses.length <= 0) {
+            return mutableBitmap;
+        }
+        int[][] joint_pairs = {
+                {1, 2}, {1, 5}, {2, 3}, {3, 4}, {5, 6},
+                {6, 7}, {1, 8}, {8, 9}, {9, 10}, {1, 11},
+                {11, 12}, {12, 13}, {1, 0}, {0, 14}, {14, 16},
+                {0, 15}, {15, 17}, {2, 16}, {5, 17}
+        };
+        Canvas canvas = new Canvas(mutableBitmap);
+        final Paint keyPointPaint = new Paint();
+        keyPointPaint.setAlpha(200);
+        keyPointPaint.setStyle(Paint.Style.STROKE);
+        keyPointPaint.setColor(Color.BLUE);
+        int color = Color.BLUE;
+        int keyPointNumber = 18;
+        int lineNumber = 17;
+        // 画线、画点
+        for (int i = 0; i < humanPoses.length; i++) {
+            Random random = new Random(i + 2021);
+            color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+            // line
+            keyPointPaint.setColor(color);
+            keyPointPaint.setStrokeWidth(5 * mutableBitmap.getWidth() / 800.0f);
+            OpenPoseKeyPoint human = humanPoses[i];
+            for (int j = 0; j < lineNumber; j++) {
+                if (human.x[joint_pairs[j][0]] == -1 ||human.y[joint_pairs[j][1]] == -1) {
+                    continue;
+                }
+                canvas.drawLine(human.x[joint_pairs[j][0]], human.y[joint_pairs[j][0]],
+                        human.x[joint_pairs[j][1]], human.y[joint_pairs[j][1]],
+                        keyPointPaint);
+            }
+
+            // point
+            keyPointPaint.setColor(Color.GREEN);
+            keyPointPaint.setStrokeWidth(8 * mutableBitmap.getWidth() / 800.0f);
+            for (int j = 0; j < keyPointNumber; j++) {
+                if (humanPoses[i].x[j] == -1 || humanPoses[i].y[j] == -1) {
+                    continue;
+                }
+                canvas.drawPoint(humanPoses[i].x[j], humanPoses[i].y[j], keyPointPaint);
+            }
+        }
+        return mutableBitmap;
+    }
+
     protected Bitmap detectAndDraw(Bitmap image) {
         Box[] result = null;
         KeyPoint[] keyPoints = null;
         YolactMask[] yolactMasks = null;
         FaceKeyPoint[] faceKeyPoints = null;
         float[] enetMasks = null;
+        OpenPoseKeyPoint[] openPoseKeyPoints = null;
         if (USE_MODEL == YOLOV5S) {
             result = YOLOv5.detect(image, threshold, nms_threshold);
         } else if (USE_MODEL == YOLOV4_TINY || USE_MODEL == MOBILENETV2_YOLOV3_NANO || USE_MODEL == YOLO_FASTEST_XL) {
@@ -767,8 +820,11 @@ public class MainActivity extends AppCompatActivity {
             result = YOLOv5.detectCustomLayer(image, threshold, nms_threshold);
         } else if (USE_MODEL == NANODET) {
             result = NanoDet.detect(image, threshold, nms_threshold);
+        } else if (USE_MODEL == LIGHT_OPEN_POSE) {
+            openPoseKeyPoints = LightOpenPose.detect(image);
         }
-        if (result == null && keyPoints == null && yolactMasks == null && enetMasks == null && faceKeyPoints == null) {
+        if (result == null && keyPoints == null && yolactMasks == null && enetMasks == null && faceKeyPoints == null
+                && openPoseKeyPoints == null) {
             detectCamera.set(false);
             return image;
         }
@@ -789,6 +845,8 @@ public class MainActivity extends AppCompatActivity {
             mutableBitmap = drawENetMask(image, enetMasks);  // 与 enet 相同
         } else if (USE_MODEL == MOBILENETV3_SEG) {
             mutableBitmap = drawENetMask(image, enetMasks);  // 与 enet 相同
+        } else if (USE_MODEL == LIGHT_OPEN_POSE) {
+            mutableBitmap = drawOpenPose(image, openPoseKeyPoints);
         }
         return mutableBitmap;
     }
@@ -821,6 +879,8 @@ public class MainActivity extends AppCompatActivity {
             modelName = "NanoDet";
         } else if (USE_MODEL == YOLO_FASTEST_XL) {
             modelName = "YOLO-Fastest-xl";
+        } else if (USE_MODEL == LIGHT_OPEN_POSE) {
+            modelName = "Light OpenPose";
         }
         return USE_GPU ? "[ GPU ] " + modelName : "[ CPU ] " + modelName;
     }

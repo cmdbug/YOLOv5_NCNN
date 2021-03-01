@@ -35,12 +35,13 @@ Select the model to be tested directly on the interface.
 | YOLO-Fastest-xl   | yes | yes |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
 | Simple-Pose       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | Yolact            | yes | yes |  [Github](https://github.com/dbolya/yolact) [zhihu](https://zhuanlan.zhihu.com/p/128974102)  |
-| ChineseOCR_lite   | yes | cancel |  [Github](https://github.com/ouyanghuiyu/chineseocr_lite) [zhihu](https://zhuanlan.zhihu.com/p/113338890)   |
+| ChineseOCR_lite   | yes | TODO |  [Github](https://github.com/ouyanghuiyu/chineseocr_lite) [zhihu](https://zhuanlan.zhihu.com/p/113338890)   |
 | ENet              | bug | cancel |  [Github](https://github.com/davidtvs/PyTorch-ENet)   |
 | Landmark106       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | DBFace            | yes | yes |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
 | MBNv2-FCN         | yes | yes |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
 | MBNv3-Seg-small   | yes | yes |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
+| Light_OpenPose    | yes | TODO |  [Github](https://github.com/Daniil-Osokin/lightweight-human-pose-estimation.pytorch)   |
 
 
 ### iOS:
@@ -82,6 +83,11 @@ Minimal OpenCV:https://github.com/nihui/opencv-mobile
 |-------------------|-------------|---------|
 | <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_meizu16x_yolov5s_custom_layer.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_meizu16x_nanodet.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_meizu16x_yolo_fastest_xl.jpg"/>|
 
+|  light_openpose  |
+|-------------------|
+| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_lightopenpose.jpg"/>|
+
+
 > iOS
 
 |  mbnv2-yolov3-nano | yolov4-tiny | yolov5s |
@@ -99,6 +105,10 @@ Minimal OpenCV:https://github.com/nihui/opencv-mobile
 |  yolact | yoloface500k-landmark106 | dbface |
 |-------------------|-------------|---------|
 | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolact.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yoloface500k_landmark106.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_dbface.jpg"/> |
+
+|  light_openpose  |
+|-------------------|
+| TODO |
 
 
 Thanks:<br/>
