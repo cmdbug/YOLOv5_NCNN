@@ -484,6 +484,8 @@ std::vector<human_pose_estimation::HumanPose> LightOpenPose::detect(JNIEnv *env,
     }
     net_w = w;
     net_h = h;
+    input_size_w = w;
+    input_size_h = h;
 
     ncnn::Mat in;
     preprocess(env, image, in);
