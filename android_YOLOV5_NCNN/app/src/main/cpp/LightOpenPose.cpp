@@ -468,7 +468,22 @@ std::vector<human_pose_estimation::HumanPose> LightOpenPose::detect(JNIEnv *env,
     int img_w = img_size.width;
     int img_h = img_size.height;
     int net_w = 456;
-    int net_h = 256;
+    int net_h = 456;
+
+    int w = img_w;
+    int h = img_h;
+    float scale = 1.0f;
+    if (w > h) {
+        scale = (float) net_w / w;
+        w = net_w;
+        h = h * scale;
+    } else {
+        scale = (float) net_h / h;
+        h = net_h;
+        w = w * scale;
+    }
+    net_w = w;
+    net_h = h;
 
     ncnn::Mat in;
     preprocess(env, image, in);
