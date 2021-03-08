@@ -46,7 +46,7 @@ Select the model to be tested directly on the interface.
 
 ### iOS:
 - Copy .param and .bin from "android_YOLOV5_NCNN\app\src\main\assets" to "iOS_YOLOv5NCNN\YOLOv5NCNN\res"
-- If it prompts that net.h can't be found, you need to download it from the ncnn official website or compile .framework yourself and replace it in the project. If opencv2.framework is useful, you need to download it again and replace it in the project.
+- If it prompts that net.h can't be found, you need to download it from the ncnn official website or compile .framework(20201208) yourself and replace it in the project. If opencv2.framework(2.4.13) is useful, you need to download it again and replace it in the project.
 - The default library used by iOS does not include vulkan and bitcode.
 
 ### Android：
@@ -60,6 +60,10 @@ Convert locally(Will not upload model): [xxxx -> ncnn] https://convertmodel.com/
 Minimal OpenCV:https://github.com/nihui/opencv-mobile
 
 :art: Screenshot<br/>
+
+| Android | iOS |
+|:-----:|:-----:|
+|<img width="324" height="145" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_CPU_or_GPU.jpg"/>| None |
 
 > Android
 

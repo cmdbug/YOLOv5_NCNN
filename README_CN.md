@@ -46,7 +46,7 @@
 
 ### iOS:
 - 从 "android_YOLOV5_NCNN\app\src\main\assets" 复制 .param 和 .bin 文件到 "iOS_YOLOv5NCNN\YOLOv5NCNN\res" 下。
-- iOS如果提示 net.h 找不到的需要去ncnn官网下载或自行编译.framework替换到工程中，opencv2.framework如果有用到也需要重新下载并替换到工程。
+- iOS如果提示 net.h 找不到的需要去ncnn官网下载或自行编译.framework(20201208)替换到工程中，opencv2.framework(2.4.13)如果有用到也需要重新下载并替换到工程。
 - iOS默认使用的库不包含vulkan与bitcode。
 
 ### Android：
@@ -60,6 +60,10 @@
 轻量级OpenCV:https://github.com/nihui/opencv-mobile
 
 :art: 截图<br/>
+
+| Android | iOS |
+|:-----:|:-----:|
+|<img width="324" height="145" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_CPU_or_GPU.jpg"/>| None |
 
 > Android
 
