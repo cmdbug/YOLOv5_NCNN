@@ -213,12 +213,16 @@
         self.threshold = 0.3f;
         self.nms_threshold = 0.7f;
     } else if (self.USE_MODEL == W_DBFACE || self.USE_MODEL == W_NANODET) {
-        self.threshold = 0.3f;
+        self.threshold = 0.4f;
         self.nms_threshold = 0.6f;
     } else if (self.USE_MODEL == W_YOLOV5S_CUSTOM_OP) {
         self.threshold = 0.25f;
         self.nms_threshold = 0.45f;
     }
+    [self.thresholdSlider setValue:self.threshold];
+    [self.nmsSlider setValue:self.nms_threshold];
+    NSString *value = [NSString stringWithFormat:@"Threshold:%.2f NMS:%.2f", self.threshold, self.nms_threshold];
+    self.valueShowLabel.text = value;
     
     [self.nmsSlider addTarget:self action:@selector(nmsChange:forEvent:) forControlEvents:UIControlEventValueChanged];
     [self.thresholdSlider addTarget:self action:@selector(nmsChange:forEvent:) forControlEvents:UIControlEventValueChanged];

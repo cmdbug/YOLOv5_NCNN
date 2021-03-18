@@ -5,13 +5,13 @@
 ### 移动端NCNN部署，项目支持YOLOv5s、YOLOv4-tiny、MobileNetV2-YOLOv3-nano、Simple-Pose、Yolact、ChineseOCR-lite、ENet、Landmark106、DBFace、MBNv2-FCN与MBNv3-Seg-small模型，摄像头实时捕获视频流进行检测。
 
 ## iOS:
-- Xcode 11.5
-- macOS 10.15.4
+- Xcode 12.4
+- macOS 11.2.3
 - iPhone 6sp 13.5.1
 
 ## Android:
-- Android Studio 4.0
-- Win10 1909
+- Android Studio 4.1
+- Win10 20H2
 - Meizu 16x 8.1.0 (CPU:Qualcomm 710 GPU:Adreno 616)
 
 安卓已经增加权限申请，但如果还是闪退请手动确认下相关权限是否允许。
@@ -35,7 +35,7 @@
 | YOLO-Fastest-xl   | yes | yes |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
 | Simple-Pose       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | Yolact            | yes | yes |  [Github](https://github.com/dbolya/yolact) [zhihu](https://zhuanlan.zhihu.com/p/128974102)  |
-| ChineseOCR_lite   | yes | TODO |  [Github](https://github.com/ouyanghuiyu/chineseocr_lite) [zhihu](https://zhuanlan.zhihu.com/p/113338890)   |
+| ChineseOCR_lite   | yes | yes |  [Github](https://github.com/ouyanghuiyu/chineseocr_lite) [zhihu](https://zhuanlan.zhihu.com/p/113338890)   |
 | ENet              | bug | cancel |  [Github](https://github.com/davidtvs/PyTorch-ENet)   |
 | Landmark106       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | DBFace            | yes | yes |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
@@ -46,8 +46,10 @@
 
 ### iOS:
 - 从 "android_YOLOV5_NCNN\app\src\main\assets" 复制 .param 和 .bin 文件到 "iOS_YOLOv5NCNN\YOLOv5NCNN\res" 下。
-- iOS如果提示 net.h 找不到的需要去ncnn官网下载或自行编译.framework(20201208)替换到工程中，opencv2.framework(2.4.13)如果有用到也需要重新下载并替换到工程。
+- iOS如果提示 net.h 找不到的需要去ncnn官网下载或自行编译.framework(20201208)替换到工程中，opencv2.framework(4.3.0)如果有用到也需要重新下载并替换到工程。
 - iOS默认使用的库不包含vulkan与bitcode。
+- 正常下需要重新下载 ncnn.framework/glslang.framework/openmp.framework/opencv2.framework 并替换到工程中。
+- Vulkan的配置可以看 Issues 里面有提到大概的配置。
 
 ### Android：
 * 由于手机性能、图像尺寸等因素导致FPS在不同手机上相差比较大。该项目主要测试NCNN框架的使用，具体模型的转换可以去NCNN官方查看转换教程。<br/>
@@ -55,15 +57,17 @@
 * ncnn暂时使用vulkan版本，在加载前需要打开加速，本项目中没有打开。如果要用ncnn版本需要修改CMakeLists.txt配置。
 * AS版本不一样可能编译会有各种问题，如果编译错误无法解决、建议使用AS4.0以上版本尝试一下。
 
-懒人本地转换(不会上传模型): [xxxx -> ncnn] https://convertmodel.com/
+该项目更多的是练习各种模型的使用与部署，在速度上没有过多处理。如果对速度有要求可以直接获取 YUV 等数据直接输入或使用 texture 与 opengl 等方式实现数据输入，减少中间的数据传输与转换。
 
-轻量级OpenCV:https://github.com/nihui/opencv-mobile
+懒人本地转换(不会上传模型): [xxxx -> ncnn](https://convertmodel.com/)
+
+轻量级OpenCV:[opencv-mobile](https://github.com/nihui/opencv-mobile)
 
 :art: 截图<br/>
 
 | Android | iOS |
 |:-----:|:-----:|
-|<img width="324" height="145" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_CPU_or_GPU.jpg"/>| None |
+|<img width="324" height="145" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_CPU_or_GPU.jpg"/>| <img width="320" height="166" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_CPU_or_GPU.jpg"/> |
 
 > Android
 
@@ -110,9 +114,9 @@
 |-------------------|-------------|---------|
 | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolact.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yoloface500k_landmark106.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_dbface.jpg"/> |
 
-|  light_openpose  |
-|-------------------|
-| TODO |
+| chineseocr_lite_01 | chineseocr_lite_02 | light_openpose |
+|-------------------|-------------|---------|
+| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_chineseocr_lite_01.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_chineseocr_lite_02.jpg"/> | TODO |
 
 
 感谢:<br/>

@@ -2,6 +2,19 @@
 #include "ncnn/ncnn/layer.h"
 
 
+/**
+
+如果选择重新编译 ncnn 库，需要开启 rtti 选项，即：-DNCNN_DISABLE_RTTI=OFF -DNCNN_DISABLE_EXCEPTION=OFF
+或:
+Build Settings -> Apple Clang - Language - C++ -> Enable C++ Runtime Types 设置为 NO。
+但是由于OCR部分需要使用 OpenCV 4+ 的版本，导致 RTTI 与 EXCEPTION 冲突，所以需要自行编译 ncnn 或去掉 OpenCV、OCR 或去掉 OCR 使用低
+版本的 OpenCV 2.4.13 等。
+ 
+使用自定义层记得在 .h 文件中的：ENABLE_CUSTOM_LAYER 改为 1 开启
+
+**/
+
+
 #if ENABLE_CUSTOM_LAYER
 
 class YoloV5Focus : public ncnn::Layer {

@@ -79,4 +79,5 @@ Swish = 73,
 Gemm = 74,
 GroupNorm = 75,
 LayerNorm = 76,
+Softplus = 77,
 

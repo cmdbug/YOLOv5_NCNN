@@ -6,9 +6,10 @@
 //  Copyright © 2020 TENG. All rights reserved.
 //
 
-//#include "ncnn/ncnn/platform.h"
+#include "ncnn/ncnn/platform.h"
 #import "WelcomeVC.h"
 #import "ViewController.h"
+#import "OCRViewController.h"
 
 @interface WelcomeVC ()
 
@@ -25,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnYOLOv5sCustomLayer;
 @property (strong, nonatomic) IBOutlet UIButton *btnNanoDet;
 @property (strong, nonatomic) IBOutlet UIButton *btnYOLOFastestXL;
+
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIView *boxView;
@@ -63,7 +65,7 @@
     NSString *message = @"ohhhhh";
     if (self.useGPU) {
         [self.btnRight setImage:[UIImage imageNamed:@"mode_gpu"] forState:UIControlStateNormal];
-#if NCNN_VULKAN
+#if NCNN_VULKAN  // #include "ncnn/ncnn/platform.h"
         title = @"Warning";
         message = @"If the GPU is too old, it may not work well in GPU mode.";
 #else
@@ -88,7 +90,7 @@
     int offsetY = self.view.bounds.size.width * 0.6f;
     int btnHeight = 35;
     int btnY = 35;
-    int btnCount = 12;
+    int btnCount = 13;
     int i = 0;
     
     self.boxView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, offsetY + btnHeight * btnCount)];
@@ -128,6 +130,12 @@
     [_btnYolact setTitle:@"Yolact" forState:UIControlStateNormal];
     [_btnYolact addTarget:self action:@selector(pressYolact:) forControlEvents:UIControlEventTouchUpInside];
     [self.boxView addSubview:_btnYolact];
+    
+    _btnChineseOCRLite = [[UIButton alloc] initWithFrame:CGRectMake(0, offsetY + btnY * i++, btnWidth, btnHeight)];
+    [_btnChineseOCRLite setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [_btnChineseOCRLite setTitle:@"Chinese OCR lite [Beta]" forState:UIControlStateNormal];
+    [_btnChineseOCRLite addTarget:self action:@selector(pressChineseOCRLite:) forControlEvents:UIControlEventTouchUpInside];
+    [self.boxView addSubview:_btnChineseOCRLite];
     
     _btnFaceLandmark = [[UIButton alloc] initWithFrame:CGRectMake(0, offsetY + btnY * i++, btnWidth, btnHeight)];
     [_btnFaceLandmark setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -211,6 +219,12 @@
     vc.USE_MODEL = W_YOLACT;
     vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
+}
+
+- (void)pressChineseOCRLite:(UIButton *)btn {
+    OCRViewController *ocr = [[OCRViewController alloc] init];
+    ocr.USE_GPU = self.useGPU;
+    [self.navigationController pushViewController:ocr animated:NO];
 }
 
 - (void)pressFaceLandmark:(UIButton *)btn {

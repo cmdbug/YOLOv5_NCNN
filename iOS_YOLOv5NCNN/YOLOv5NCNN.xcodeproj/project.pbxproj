@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F13A99E256F767800E45BA3 /* glslang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F13A99D256F767800E45BA3 /* glslang.framework */; };
-		5F13A9A0256F851000E45BA3 /* ncnn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F13A99F256F851000E45BA3 /* ncnn.framework */; };
 		5F364A6E2579B50700F45596 /* YoloV5CustomLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F364A6C2579B50700F45596 /* YoloV5CustomLayer.mm */; };
 		5F36C22E2586F4270033BB1B /* SimplePose.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F36C22D2586F4270033BB1B /* SimplePose.mm */; };
 		5F36C2332586FDDF0033BB1B /* Ultralight-Nano-SimplePose.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F36C22F2586FDDE0033BB1B /* Ultralight-Nano-SimplePose.param */; };
@@ -39,6 +37,19 @@
 		5F40C2D924B16B0B00C84041 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2D824B16B0B00C84041 /* Main.storyboard */; };
 		5F40C2E524B18C5700C84041 /* yolov5.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2E324B18C5700C84041 /* yolov5.bin */; };
 		5F40C2E624B18C5700C84041 /* yolov5.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F40C2E424B18C5700C84041 /* yolov5.param */; };
+		5F4EDEBD2601DE7C0080E733 /* ncnn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F4EDEBC2601DE7C0080E733 /* ncnn.framework */; };
+		5F4EDEBF2601DE8A0080E733 /* openmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F4EDEBE2601DE8A0080E733 /* openmp.framework */; };
+		5F4EDEC12601DE970080E733 /* glslang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F4EDEC02601DE970080E733 /* glslang.framework */; };
+		5F4EDED32601E3510080E733 /* keys.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EDECC2601E3510080E733 /* keys.txt */; };
+		5F4EDED42601E3510080E733 /* angle_op.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EDECD2601E3510080E733 /* angle_op.bin */; };
+		5F4EDED52601E3510080E733 /* angle_op.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EDECE2601E3510080E733 /* angle_op.param */; };
+		5F4EDED62601E3510080E733 /* dbnet_op.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EDECF2601E3510080E733 /* dbnet_op.param */; };
+		5F4EDED72601E3510080E733 /* dbnet_op.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EDED02601E3510080E733 /* dbnet_op.bin */; };
+		5F4EDED82601E3510080E733 /* crnn_lite_op.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EDED12601E3510080E733 /* crnn_lite_op.bin */; };
+		5F4EDED92601E3510080E733 /* crnn_lite_op.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EDED22601E3510080E733 /* crnn_lite_op.param */; };
+		5F4EDEEF2601E3F00080E733 /* OCRViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F4EDEEE2601E3F00080E733 /* OCRViewController.mm */; };
+		5F4EDEF52601F1100080E733 /* yolo-fastest-opt.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EDEF32601F10F0080E733 /* yolo-fastest-opt.bin */; };
+		5F4EDEF62601F1100080E733 /* yolo-fastest-opt.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EDEF42601F10F0080E733 /* yolo-fastest-opt.param */; };
 		5F50870C24B309F30088E326 /* YoloV5.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F50870A24B309F30088E326 /* YoloV5.mm */; };
 		5F5DFF262583176A00D6077B /* MobileNetV3Seg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F5DFF242583176A00D6077B /* MobileNetV3Seg.mm */; };
 		5F5DFF2925831D1100D6077B /* mbnv3_small.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F5DFF2725831D1100D6077B /* mbnv3_small.param */; };
@@ -48,12 +59,16 @@
 		5F5DFF31258340BF00D6077B /* fcn_mbv2-sim-opt.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F5DFF2F258340BF00D6077B /* fcn_mbv2-sim-opt.bin */; };
 		5F70E49B257F03DF0011CD78 /* yolov5s_customlayer.param in Resources */ = {isa = PBXBuildFile; fileRef = 5F70E499257F03DF0011CD78 /* yolov5s_customlayer.param */; };
 		5F70E49C257F03DF0011CD78 /* yolov5s_customlayer.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5F70E49A257F03DF0011CD78 /* yolov5s_customlayer.bin */; };
+		5F7FB6332602DB3500245526 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7FB6322602DB3500245526 /* opencv2.framework */; };
+		5F7FB6412602DDC000245526 /* clipper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F7FB6372602DDBF00245526 /* clipper.mm */; };
+		5F7FB6422602DDC000245526 /* ZUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F7FB6392602DDBF00245526 /* ZUtil.mm */; };
+		5F7FB6432602DDC000245526 /* NCNNDBNet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F7FB63A2602DDBF00245526 /* NCNNDBNet.mm */; };
+		5F7FB6442602DDC000245526 /* RRLib.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F7FB63C2602DDBF00245526 /* RRLib.mm */; };
+		5F7FB6452602DDC000245526 /* ocr.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F7FB63E2602DDC000245526 /* ocr.mm */; };
 		5F87CD3124FFA41C00B60518 /* WelcomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F87CD3024FFA41C00B60518 /* WelcomeVC.m */; };
 		5FD3E2CB24B3FDF70049450B /* 000000000650.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5FD3E2CA24B3FDF70049450B /* 000000000650.jpg */; };
 		5FD3E2D924B417AA0049450B /* ELCameraControlCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD3E2D524B417AA0049450B /* ELCameraControlCapture.m */; };
 		5FD3E2DA24B417AA0049450B /* ELCameraBaseCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD3E2D824B417AA0049450B /* ELCameraBaseCapture.m */; };
-		5FF8B4AE256DD8F90002375F /* openmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF8B4AD256DD8F90002375F /* openmp.framework */; };
-		5FF8B4B6256DDAD20002375F /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF8B4B5256DDAD20002375F /* opencv2.framework */; };
 		5FF8B4C1256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4BF256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin */; };
 		5FF8B4C2256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4C0256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param */; };
 		5FF8B4C5256DF31D0002375F /* nanodet_m.param in Resources */ = {isa = PBXBuildFile; fileRef = 5FF8B4C3256DF31D0002375F /* nanodet_m.param */; };
@@ -62,8 +77,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5F13A99D256F767800E45BA3 /* glslang.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = glslang.framework; sourceTree = "<group>"; };
-		5F13A99F256F851000E45BA3 /* ncnn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ncnn.framework; sourceTree = "<group>"; };
 		5F364A6C2579B50700F45596 /* YoloV5CustomLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YoloV5CustomLayer.mm; sourceTree = "<group>"; };
 		5F364A6D2579B50700F45596 /* YoloV5CustomLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoloV5CustomLayer.h; sourceTree = "<group>"; };
 		5F364A6F2579BA6A00F45596 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -105,6 +118,20 @@
 		5F40C2D824B16B0B00C84041 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5F40C2E324B18C5700C84041 /* yolov5.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = yolov5.bin; sourceTree = "<group>"; };
 		5F40C2E424B18C5700C84041 /* yolov5.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yolov5.param; sourceTree = "<group>"; };
+		5F4EDEBC2601DE7C0080E733 /* ncnn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ncnn.framework; sourceTree = "<group>"; };
+		5F4EDEBE2601DE8A0080E733 /* openmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openmp.framework; sourceTree = "<group>"; };
+		5F4EDEC02601DE970080E733 /* glslang.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = glslang.framework; sourceTree = "<group>"; };
+		5F4EDECC2601E3510080E733 /* keys.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keys.txt; sourceTree = "<group>"; };
+		5F4EDECD2601E3510080E733 /* angle_op.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = angle_op.bin; sourceTree = "<group>"; };
+		5F4EDECE2601E3510080E733 /* angle_op.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = angle_op.param; sourceTree = "<group>"; };
+		5F4EDECF2601E3510080E733 /* dbnet_op.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dbnet_op.param; sourceTree = "<group>"; };
+		5F4EDED02601E3510080E733 /* dbnet_op.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = dbnet_op.bin; sourceTree = "<group>"; };
+		5F4EDED12601E3510080E733 /* crnn_lite_op.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = crnn_lite_op.bin; sourceTree = "<group>"; };
+		5F4EDED22601E3510080E733 /* crnn_lite_op.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crnn_lite_op.param; sourceTree = "<group>"; };
+		5F4EDEED2601E3F00080E733 /* OCRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCRViewController.h; sourceTree = "<group>"; };
+		5F4EDEEE2601E3F00080E733 /* OCRViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OCRViewController.mm; sourceTree = "<group>"; };
+		5F4EDEF32601F10F0080E733 /* yolo-fastest-opt.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "yolo-fastest-opt.bin"; sourceTree = "<group>"; };
+		5F4EDEF42601F10F0080E733 /* yolo-fastest-opt.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "yolo-fastest-opt.param"; sourceTree = "<group>"; };
 		5F50870A24B309F30088E326 /* YoloV5.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = YoloV5.mm; sourceTree = "<group>"; };
 		5F50870B24B309F30088E326 /* YoloV5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoloV5.h; sourceTree = "<group>"; };
 		5F5DFF242583176A00D6077B /* MobileNetV3Seg.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MobileNetV3Seg.mm; sourceTree = "<group>"; };
@@ -117,6 +144,19 @@
 		5F5DFF2F258340BF00D6077B /* fcn_mbv2-sim-opt.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "fcn_mbv2-sim-opt.bin"; sourceTree = "<group>"; };
 		5F70E499257F03DF0011CD78 /* yolov5s_customlayer.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yolov5s_customlayer.param; sourceTree = "<group>"; };
 		5F70E49A257F03DF0011CD78 /* yolov5s_customlayer.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = yolov5s_customlayer.bin; sourceTree = "<group>"; };
+		5F7FB6322602DB3500245526 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		5F7FB6352602DDBF00245526 /* NCNNDBNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCNNDBNet.h; sourceTree = "<group>"; };
+		5F7FB6362602DDBF00245526 /* ZUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUtil.h; sourceTree = "<group>"; };
+		5F7FB6372602DDBF00245526 /* clipper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = clipper.mm; sourceTree = "<group>"; };
+		5F7FB6382602DDBF00245526 /* RRLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRLib.h; sourceTree = "<group>"; };
+		5F7FB6392602DDBF00245526 /* ZUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZUtil.mm; sourceTree = "<group>"; };
+		5F7FB63A2602DDBF00245526 /* NCNNDBNet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NCNNDBNet.mm; sourceTree = "<group>"; };
+		5F7FB63B2602DDBF00245526 /* clipper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clipper.h; sourceTree = "<group>"; };
+		5F7FB63C2602DDBF00245526 /* RRLib.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RRLib.mm; sourceTree = "<group>"; };
+		5F7FB63D2602DDBF00245526 /* ocr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ocr.h; sourceTree = "<group>"; };
+		5F7FB63E2602DDC000245526 /* ocr.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ocr.mm; sourceTree = "<group>"; };
+		5F7FB63F2602DDC000245526 /* ZData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZData.h; sourceTree = "<group>"; };
+		5F7FB6402602DDC000245526 /* polygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = polygon.h; sourceTree = "<group>"; };
 		5F87CD2F24FFA41C00B60518 /* WelcomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WelcomeVC.h; sourceTree = "<group>"; };
 		5F87CD3024FFA41C00B60518 /* WelcomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WelcomeVC.m; sourceTree = "<group>"; };
 		5FD3E2CA24B3FDF70049450B /* 000000000650.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 000000000650.jpg; sourceTree = "<group>"; };
@@ -124,8 +164,6 @@
 		5FD3E2D624B417AA0049450B /* ELCameraControlCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCameraControlCapture.h; sourceTree = "<group>"; };
 		5FD3E2D724B417AA0049450B /* ELCameraBaseCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCameraBaseCapture.h; sourceTree = "<group>"; };
 		5FD3E2D824B417AA0049450B /* ELCameraBaseCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCameraBaseCapture.m; sourceTree = "<group>"; };
-		5FF8B4AD256DD8F90002375F /* openmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openmp.framework; sourceTree = "<group>"; };
-		5FF8B4B5256DDAD20002375F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		5FF8B4BF256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "MobileNetV2-YOLOv3-Nano-coco.bin"; sourceTree = "<group>"; };
 		5FF8B4C0256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MobileNetV2-YOLOv3-Nano-coco.param"; sourceTree = "<group>"; };
 		5FF8B4C3256DF31D0002375F /* nanodet_m.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nanodet_m.param; sourceTree = "<group>"; };
@@ -139,10 +177,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FF8B4AE256DD8F90002375F /* openmp.framework in Frameworks */,
-				5F13A9A0256F851000E45BA3 /* ncnn.framework in Frameworks */,
-				5FF8B4B6256DDAD20002375F /* opencv2.framework in Frameworks */,
-				5F13A99E256F767800E45BA3 /* glslang.framework in Frameworks */,
+				5F4EDEBF2601DE8A0080E733 /* openmp.framework in Frameworks */,
+				5F4EDEC12601DE970080E733 /* glslang.framework in Frameworks */,
+				5F7FB6332602DB3500245526 /* opencv2.framework in Frameworks */,
+				5F4EDEBD2601DE7C0080E733 /* ncnn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,10 +207,10 @@
 		5F40C2A924B1647800C84041 /* YOLOv5NCNN */ = {
 			isa = PBXGroup;
 			children = (
-				5F13A99F256F851000E45BA3 /* ncnn.framework */,
-				5F13A99D256F767800E45BA3 /* glslang.framework */,
-				5FF8B4B5256DDAD20002375F /* opencv2.framework */,
-				5FF8B4AD256DD8F90002375F /* openmp.framework */,
+				5F4EDEBC2601DE7C0080E733 /* ncnn.framework */,
+				5F4EDEBE2601DE8A0080E733 /* openmp.framework */,
+				5F4EDEC02601DE970080E733 /* glslang.framework */,
+				5F7FB6322602DB3500245526 /* opencv2.framework */,
 				5FD3E2D424B4171C0049450B /* CameraCapture */,
 				5F40C2AA24B1647800C84041 /* AppDelegate.h */,
 				5F40C2AB24B1647800C84041 /* AppDelegate.m */,
@@ -183,6 +221,7 @@
 				5F40C2B824B1647C00C84041 /* LaunchScreen.storyboard */,
 				5F40C2BB24B1647D00C84041 /* Info.plist */,
 				5F40C2BC24B1647D00C84041 /* main.m */,
+				5F4EDECA2601E2AB0080E733 /* OCR */,
 				5F40C2DA24B171A100C84041 /* res */,
 				5F87CD2F24FFA41C00B60518 /* WelcomeVC.h */,
 				5F87CD3024FFA41C00B60518 /* WelcomeVC.m */,
@@ -221,6 +260,7 @@
 		5F40C2DA24B171A100C84041 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				5F4EDECB2601E2CC0080E733 /* ocr */,
 				5F36C24C25871ABF0033BB1B /* yolact.bin */,
 				5F36C24D25871ABF0033BB1B /* yolact.param */,
 				5F36C24225870CC40033BB1B /* dbface.bin */,
@@ -241,6 +281,8 @@
 				5F70E499257F03DF0011CD78 /* yolov5s_customlayer.param */,
 				5F39AE392570CD6200A1DAB3 /* yolo-fastest-xl.bin */,
 				5F39AE3A2570CD6200A1DAB3 /* yolo-fastest-xl.param */,
+				5F4EDEF32601F10F0080E733 /* yolo-fastest-opt.bin */,
+				5F4EDEF42601F10F0080E733 /* yolo-fastest-opt.param */,
 				5FF8B4C4256DF31D0002375F /* nanodet_m.bin */,
 				5FF8B4C3256DF31D0002375F /* nanodet_m.param */,
 				5FF8B4BF256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.bin */,
@@ -252,6 +294,41 @@
 				5FD3E2CA24B3FDF70049450B /* 000000000650.jpg */,
 			);
 			path = res;
+			sourceTree = "<group>";
+		};
+		5F4EDECA2601E2AB0080E733 /* OCR */ = {
+			isa = PBXGroup;
+			children = (
+				5F7FB6372602DDBF00245526 /* clipper.mm */,
+				5F7FB63B2602DDBF00245526 /* clipper.h */,
+				5F7FB63A2602DDBF00245526 /* NCNNDBNet.mm */,
+				5F7FB6352602DDBF00245526 /* NCNNDBNet.h */,
+				5F7FB63E2602DDC000245526 /* ocr.mm */,
+				5F7FB63D2602DDBF00245526 /* ocr.h */,
+				5F7FB6402602DDC000245526 /* polygon.h */,
+				5F7FB63C2602DDBF00245526 /* RRLib.mm */,
+				5F7FB6382602DDBF00245526 /* RRLib.h */,
+				5F7FB63F2602DDC000245526 /* ZData.h */,
+				5F7FB6392602DDBF00245526 /* ZUtil.mm */,
+				5F7FB6362602DDBF00245526 /* ZUtil.h */,
+				5F4EDEED2601E3F00080E733 /* OCRViewController.h */,
+				5F4EDEEE2601E3F00080E733 /* OCRViewController.mm */,
+			);
+			path = OCR;
+			sourceTree = "<group>";
+		};
+		5F4EDECB2601E2CC0080E733 /* ocr */ = {
+			isa = PBXGroup;
+			children = (
+				5F4EDECD2601E3510080E733 /* angle_op.bin */,
+				5F4EDECE2601E3510080E733 /* angle_op.param */,
+				5F4EDED12601E3510080E733 /* crnn_lite_op.bin */,
+				5F4EDED22601E3510080E733 /* crnn_lite_op.param */,
+				5F4EDED02601E3510080E733 /* dbnet_op.bin */,
+				5F4EDECF2601E3510080E733 /* dbnet_op.param */,
+				5F4EDECC2601E3510080E733 /* keys.txt */,
+			);
+			path = ocr;
 			sourceTree = "<group>";
 		};
 		5FD3E2D424B4171C0049450B /* CameraCapture */ = {
@@ -326,6 +403,7 @@
 				5F40C2D924B16B0B00C84041 /* Main.storyboard in Resources */,
 				5F36C24425870CC40033BB1B /* dbface.bin in Resources */,
 				5F36C2342586FDDF0033BB1B /* Ultralight-Nano-SimplePose.bin in Resources */,
+				5F4EDED62601E3510080E733 /* dbnet_op.param in Resources */,
 				5F37E19F24B97F9600BF9E94 /* yolov4-tiny-opt.bin in Resources */,
 				5F40C2BA24B1647C00C84041 /* LaunchScreen.storyboard in Resources */,
 				5F36C24125870B610033BB1B /* landmark106.param in Resources */,
@@ -337,6 +415,7 @@
 				5F36C2332586FDDF0033BB1B /* Ultralight-Nano-SimplePose.param in Resources */,
 				5F36C24025870B610033BB1B /* yoloface-500k.bin in Resources */,
 				5F5DFF2A25831D1100D6077B /* mbnv3_small.bin in Resources */,
+				5F4EDEF62601F1100080E733 /* yolo-fastest-opt.param in Resources */,
 				5F40C2E624B18C5700C84041 /* yolov5.param in Resources */,
 				5F5DFF30258340BF00D6077B /* fcn_mbv2-sim-opt.param in Resources */,
 				5F36C23E25870B610033BB1B /* yoloface-500k.param in Resources */,
@@ -345,15 +424,22 @@
 				5FF8B4C2256DF2780002375F /* MobileNetV2-YOLOv3-Nano-coco.param in Resources */,
 				5F5DFF31258340BF00D6077B /* fcn_mbv2-sim-opt.bin in Resources */,
 				5FF8B4C6256DF31D0002375F /* nanodet_m.bin in Resources */,
+				5F4EDED72601E3510080E733 /* dbnet_op.bin in Resources */,
 				5F36C24F25871ABF0033BB1B /* yolact.param in Resources */,
 				5F36C24525870CC40033BB1B /* dbface.param in Resources */,
 				5F36C2362586FDDF0033BB1B /* person_detector.bin in Resources */,
+				5F4EDED42601E3510080E733 /* angle_op.bin in Resources */,
+				5F4EDEF52601F1100080E733 /* yolo-fastest-opt.bin in Resources */,
 				5F5DFF2925831D1100D6077B /* mbnv3_small.param in Resources */,
+				5F4EDED92601E3510080E733 /* crnn_lite_op.param in Resources */,
 				5F36C23F25870B610033BB1B /* landmark106.bin in Resources */,
+				5F4EDED32601E3510080E733 /* keys.txt in Resources */,
+				5F4EDED52601E3510080E733 /* angle_op.param in Resources */,
 				5F70E49B257F03DF0011CD78 /* yolov5s_customlayer.param in Resources */,
 				5F40C2E524B18C5700C84041 /* yolov5.bin in Resources */,
 				5FD3E2CB24B3FDF70049450B /* 000000000650.jpg in Resources */,
 				5F36C2352586FDDF0033BB1B /* person_detector.param in Resources */,
+				5F4EDED82601E3510080E733 /* crnn_lite_op.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,15 +452,21 @@
 			files = (
 				5FD3E2DA24B417AA0049450B /* ELCameraBaseCapture.m in Sources */,
 				5FD3E2D924B417AA0049450B /* ELCameraControlCapture.m in Sources */,
+				5F7FB6452602DDC000245526 /* ocr.mm in Sources */,
 				5F40C2B224B1647800C84041 /* ViewController.mm in Sources */,
+				5F7FB6412602DDC000245526 /* clipper.mm in Sources */,
 				5F36C22E2586F4270033BB1B /* SimplePose.mm in Sources */,
 				5F5DFF2D25833DCF00D6077B /* MbnFCN.mm in Sources */,
 				5F87CD3124FFA41C00B60518 /* WelcomeVC.m in Sources */,
 				5FF8B4C9256DF33C0002375F /* NanoDet.mm in Sources */,
+				5F7FB6432602DDC000245526 /* NCNNDBNet.mm in Sources */,
 				5F36C24B25871A9D0033BB1B /* Yolact.mm in Sources */,
 				5F36C24825870CD60033BB1B /* DBFace.mm in Sources */,
+				5F7FB6442602DDC000245526 /* RRLib.mm in Sources */,
 				5F37E1A224B97FD900BF9E94 /* YoloV4.mm in Sources */,
 				5F364A6E2579B50700F45596 /* YoloV5CustomLayer.mm in Sources */,
+				5F7FB6422602DDC000245526 /* ZUtil.mm in Sources */,
+				5F4EDEEF2601E3F00080E733 /* OCRViewController.mm in Sources */,
 				5F5DFF262583176A00D6077B /* MobileNetV3Seg.mm in Sources */,
 				5F36C2392587059C0033BB1B /* FaceLandmark.mm in Sources */,
 				5F40C2AC24B1647800C84041 /* AppDelegate.m in Sources */,
@@ -515,6 +607,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RB5UWYX7Z;
 				ENABLE_BITCODE = NO;
@@ -523,14 +617,16 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/YOLOv5NCNN",
 				);
-				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = YOLOv5NCNN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.teng.YOLONCNNX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teng.YOLONCNN;
 				PRODUCT_NAME = "NCNN Demo";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7";
@@ -541,6 +637,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RB5UWYX7Z;
 				ENABLE_BITCODE = NO;
@@ -549,14 +647,16 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/YOLOv5NCNN",
 				);
-				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = YOLOv5NCNN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.teng.YOLONCNNX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teng.YOLONCNN;
 				PRODUCT_NAME = "NCNN Demo";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7";

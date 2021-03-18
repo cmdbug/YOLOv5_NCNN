@@ -37,6 +37,9 @@ public:
 #if defined __ANDROID__ || defined __linux__
     cpu_set_t cpu_set;
 #endif
+#if __APPLE__
+    unsigned int policy;
+#endif
 };
 
 // test optional cpu features
@@ -52,6 +55,8 @@ int cpu_support_x86_avx2();
 
 // cpu info
 int get_cpu_count();
+int get_little_cpu_count();
+int get_big_cpu_count();
 
 // bind all threads on little clusters if powersave enabled
 // affacts HMP arch cpu like ARM big.LITTLE
