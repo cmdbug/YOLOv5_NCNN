@@ -12,9 +12,7 @@
 ## Android:
 - Android Studio 4.1
 - Win10 20H2
-- Meizu 16x 8.1.0 (CPU:Qualcomm 710 GPU:Adreno 616)
-
-安卓已经增加权限申请，但如果还是闪退请手动确认下相关权限是否允许。
+- CPU:Qualcomm 710 GPU:Adreno 616
 
 > iOS
 ```code
@@ -41,7 +39,7 @@
 | DBFace            | yes | yes |  [Github](https://github.com/yuanluw/DBface_ncnn_demo)   |
 | MBNv2-FCN         | yes | yes |  [Github](https://github.com/open-mmlab/mmsegmentation)   |
 | MBNv3-Seg-small   | yes | yes |  [Github](https://github.com/Tramac/Lightweight-Segmentation)   |
-| Light_OpenPose    | yes | TODO |  [Github](https://github.com/Daniil-Osokin/lightweight-human-pose-estimation.pytorch)   |
+| Light_OpenPose    | yes | yes |  [Github](https://github.com/Daniil-Osokin/lightweight-human-pose-estimation.pytorch)   |
 
 
 ### iOS:
@@ -110,13 +108,13 @@
 |-------------------|-------------|---------|
 | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_fcn.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mbnv3_segmentation_small.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_simple_pose.jpg"/> |
 
+| chineseocr_lite_01 | chineseocr_lite_02 | light_openpose |
+|-------------------|-------------|---------|
+| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_chineseocr_lite_01.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_chineseocr_lite_02.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_lightopenpose.jpg"/> |
+
 |  yolact | yoloface500k-landmark106 | dbface |
 |-------------------|-------------|---------|
 | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolact.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yoloface500k_landmark106.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_dbface.jpg"/> |
-
-| chineseocr_lite_01 | chineseocr_lite_02 | light_openpose |
-|-------------------|-------------|---------|
-| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_chineseocr_lite_01.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_chineseocr_lite_02.jpg"/> | TODO |
 
 
 感谢:<br/>

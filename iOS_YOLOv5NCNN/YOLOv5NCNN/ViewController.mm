@@ -25,6 +25,7 @@
 #include "FaceLandmark.h"
 #include "DBFace.h"
 #include "Yolact.h"
+#include "LightOpenPose.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVMediaFormat.h>
@@ -60,6 +61,7 @@
 @property FaceLandmark *faceLandmark;
 @property DBFace *dbFace;
 @property Yolact *yolact;
+@property LightOpenPose *lightOpenpose;
 
 @property (assign, atomic) Boolean isDetecting;
 @property (assign, atomic) Boolean isPhoto;
@@ -311,6 +313,7 @@
     std::vector<FaceKeyPoint> faceLandmarkResult;
     std::vector<Obj> dbFaceResult;
     std::vector<Object> yolactResult;
+    std::vector<human_pose_estimation::HumanPose> humanPose;
     if (self.USE_MODEL == W_YOLOV5S) {
         result = self.yolo->dectect(image, self.threshold, self.nms_threshold);
     } else if (self.USE_MODEL == W_YOLOV4TINY
@@ -333,6 +336,8 @@
         maskMat = self.mbnFCN->detect_mbnfcn(image);
     } else if (self.USE_MODEL == W_MOBILENETV3_SEG) {
         maskMat = self.mbnv3Seg->detect_mbnseg(image);
+    } else if (self.USE_MODEL == W_LIGHT_OPENPOSE) {
+        humanPose = self.lightOpenpose->detect(image);
     }
     __weak typeof(self) weakSelf = self;
     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -354,6 +359,8 @@
         } else if (weakSelf.USE_MODEL == W_MOBILENETV2_FCN || weakSelf.USE_MODEL == W_MOBILENETV3_SEG) {
             // slow !!!
             weakSelf.imageView.image = [weakSelf drawSegMask:weakSelf.imageView image:image mask:maskMat];
+        } else if (weakSelf.USE_MODEL == W_LIGHT_OPENPOSE) {
+            weakSelf.imageView.image = [weakSelf drawLightOpenpose:weakSelf.imageView image:image humanPose:humanPose];
         }
         
         // include draw
@@ -406,6 +413,9 @@
     } else if (!self.yolov4 && self.USE_MODEL == W_YOLO_FASTEST_XL) {
         NSLog(@"new yolo fastest xl");
         self.yolov4 = new YoloV4(self.USE_GPU, 2);
+    } else if (!self.lightOpenpose && self.USE_MODEL == W_LIGHT_OPENPOSE) {
+        NSLog(@"new light openpose");
+        self.lightOpenpose = new LightOpenPose(self.USE_GPU);
     }
 }
 
@@ -421,6 +431,7 @@
     delete self.faceLandmark;
     delete self.dbFace;
     delete self.yolact;
+    delete self.lightOpenpose;
 }
 
 #pragma mark 获取模型名称
@@ -450,6 +461,8 @@
         name = @"NanoDet";
     } else if (self.USE_MODEL == W_YOLO_FASTEST_XL) {
         name = @"YOLO-Fastest-xl";
+    } else if (self.USE_MODEL == W_LIGHT_OPENPOSE) {
+        name = @"Light Openpose";
     }
     NSString *modelName = self.USE_GPU ? [NSString stringWithFormat:@"[GPU] %@", name] : [NSString stringWithFormat:@"[CPU] %@", name];
     return modelName;
@@ -739,6 +752,48 @@
     UIGraphicsEndImageContext();
     return newImage;
 }
+
+- (UIImage *)drawLightOpenpose:(UIImageView *)imageView image:(UIImage *)image humanPose:(std::vector<human_pose_estimation::HumanPose>)humanPoses {
+    int joint_pairs[19][2] = {{1, 2}, {1, 5}, {2, 3}, {3, 4}, {5, 6}, {6, 7}, {1, 8}, {8, 9}, {9, 10}, {1, 11}, {11, 12}, {12, 13}, {1, 0}, {0, 14}, {14, 16}, {0, 15}, {15, 17}, {2, 16}, {5, 17}};
+    int keyPointNumber = 18;
+    int lineNumber = 17;
+    
+    UIGraphicsBeginImageContext(image.size);
+    [image drawAtPoint:CGPointMake(0,0)];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, fmax(image.size.width / 200, 1));
+    
+    for (int i = 0; i < humanPoses.size(); i++) {
+        human_pose_estimation::HumanPose humanPose = humanPoses[i];
+        srand(i + 2020);
+        UIColor *color = [UIColor colorWithRed:rand()%256/255.0f green:rand()%256/255.0f blue:rand()%255/255.0f alpha:1.0f];
+        CGContextSetStrokeColorWithColor(context, [color CGColor]);
+        CGContextStrokePath(context);
+        
+        // draw line
+        for (int j = 0; j < lineNumber; j++) {
+            if (humanPose.keypoints[joint_pairs[j][0]].x == -1 || humanPose.keypoints[joint_pairs[j][1]].y == -1) {
+                continue;
+            }
+            CGContextMoveToPoint(context, humanPose.keypoints[joint_pairs[j][0]].x, humanPose.keypoints[joint_pairs[j][0]].y);
+            CGContextAddLineToPoint(context, humanPose.keypoints[joint_pairs[j][1]].x, humanPose.keypoints[joint_pairs[j][1]].y);
+            CGContextStrokePath(context);
+        }
+        // draw point
+        for (int j = 0; j < keyPointNumber; j++) {
+            if (humanPose.keypoints[j].x == -1 || humanPose.keypoints[j].y == -1) {
+                continue;
+            }
+            CGContextFillRect(context, CGRectMake(humanPose.keypoints[j].x - 2, humanPose.keypoints[j].y - 2, 5, 5));
+        }
+    }
+    //创建新图像
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 @end
 

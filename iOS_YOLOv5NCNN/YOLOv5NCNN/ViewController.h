@@ -21,7 +21,7 @@
 #define W_YOLOV5S_CUSTOM_OP 11
 #define W_NANODET 12
 #define W_YOLO_FASTEST_XL 13
-
+#define W_LIGHT_OPENPOSE 14
 
 @interface ViewController : UIViewController
 

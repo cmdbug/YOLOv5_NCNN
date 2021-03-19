@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnYOLOv5sCustomLayer;
 @property (strong, nonatomic) IBOutlet UIButton *btnNanoDet;
 @property (strong, nonatomic) IBOutlet UIButton *btnYOLOFastestXL;
+@property (strong, nonatomic) IBOutlet UIButton *btnLightOpenPose;
 
 
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -88,12 +89,13 @@
     
     int btnWidth = self.view.bounds.size.width;
     int offsetY = self.view.bounds.size.width * 0.6f;
+    int offsetBottom = 30;
     int btnHeight = 35;
     int btnY = 35;
-    int btnCount = 13;
+    int btnCount = 14;
     int i = 0;
     
-    self.boxView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, offsetY + btnHeight * btnCount)];
+    self.boxView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, offsetY + btnHeight * btnCount + offsetBottom)];
 //    self.boxView.backgroundColor = [UIColor redColor];
 
     UIImageView *tipImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, btnWidth, offsetY)];
@@ -163,7 +165,7 @@
     
     _btnYOLOv5sCustomLayer = [[UIButton alloc] initWithFrame:CGRectMake(0, offsetY + btnY * i++, btnWidth, btnHeight)];
     [_btnYOLOv5sCustomLayer setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [_btnYOLOv5sCustomLayer setTitle:@"YOLOv5s-Custom-Layer" forState:UIControlStateNormal];
+    [_btnYOLOv5sCustomLayer setTitle:@"YOLOv5s-Custom-Layer (请看.h说明)" forState:UIControlStateNormal];
     [_btnYOLOv5sCustomLayer addTarget:self action:@selector(pressYOLOv5CustomOP:) forControlEvents:UIControlEventTouchUpInside];
     [self.boxView addSubview:_btnYOLOv5sCustomLayer];
     
@@ -178,6 +180,12 @@
     [_btnYOLOFastestXL setTitle:@"YOLO-Fastest-xl" forState:UIControlStateNormal];
     [_btnYOLOFastestXL addTarget:self action:@selector(pressYOLOFastestXL:) forControlEvents:UIControlEventTouchUpInside];
     [self.boxView addSubview:_btnYOLOFastestXL];
+    
+    _btnLightOpenPose = [[UIButton alloc] initWithFrame:CGRectMake(0, offsetY + btnY * i++, btnWidth, btnHeight)];
+    [_btnLightOpenPose setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [_btnLightOpenPose setTitle:@"Light Openpose" forState:UIControlStateNormal];
+    [_btnLightOpenPose addTarget:self action:@selector(pressLightOpenpose:) forControlEvents:UIControlEventTouchUpInside];
+    [self.boxView addSubview:_btnLightOpenPose];
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     self.scrollView.contentSize = self.boxView.frame.size;
@@ -272,6 +280,13 @@
 - (void)pressYOLOFastestXL:(UIButton *)btn {
     ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     vc.USE_MODEL = W_YOLO_FASTEST_XL;
+    vc.USE_GPU = self.useGPU;
+    [self.navigationController pushViewController:vc animated:NO];
+}
+
+- (void)pressLightOpenpose:(UIButton *)btn {
+    ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+    vc.USE_MODEL = W_LIGHT_OPENPOSE;
     vc.USE_GPU = self.useGPU;
     [self.navigationController pushViewController:vc animated:NO];
 }
