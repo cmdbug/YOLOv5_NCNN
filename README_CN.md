@@ -1,4 +1,4 @@
-[English](https://github.com/cmdbug/YOLOv5_NCNN/blob/master/README.md)
+[English](./README.md)
 
 ## :rocket: 如果有帮助，点个star！:star: ##
 
@@ -65,56 +65,56 @@
 
 | Android | iOS |
 |:-----:|:-----:|
-|<img width="324" height="145" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_CPU_or_GPU.jpg"/>| <img width="320" height="166" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_CPU_or_GPU.jpg"/> |
+|<img width="324" height="145" src="./Screenshots/Android_CPU_or_GPU.jpg"/>| <img width="320" height="166" src="./Screenshots/iOS_CPU_or_GPU.jpg"/> |
 
 > Android
 
 | mbnv2-yolov3-nano | yolov4-tiny | yolov5s |
 |-------------------|-------------|---------|
-|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_mobilenetv2_yolov3_nano.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_yolov4_tiny.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_yolov5s.jpg"/>|
+|<img width="270" height="500" src="./Screenshots/Android_Meizu16x_mobilenetv2_yolov3_nano.jpg"/>|<img width="270" height="500" src="./Screenshots/Android_Meizu16x_yolov4_tiny.jpg"/>|<img width="270" height="500" src="./Screenshots/Android_Meizu16x_yolov5s.jpg"/>|
 
 | simple_pose | yolact | chineseocr_lite_01 |
 |-------------------|-------------|---------|
-|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_simple_pose.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_yolact.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_meizu16x_chineseocr_lite_01.jpg"/>|
+|<img width="270" height="500" src="./Screenshots/Android_Meizu16x_simple_pose.jpg"/>|<img width="270" height="500" src="./Screenshots/Android_Meizu16x_yolact.jpg"/>|<img width="270" height="500" src="./Screenshots/Android_meizu16x_chineseocr_lite_01.jpg"/>|
 
 | chineseocr_lite_02 | ENet | yoloface500k-landmark106 |
 |-------------------|-------------|---------|
-|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_meizu16x_chineseocr_lite_02.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_ENet.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_yoloface500k-landmark106.jpg"/>|
+|<img width="270" height="500" src="./Screenshots/Android_meizu16x_chineseocr_lite_02.jpg"/>|<img width="270" height="500" src="./Screenshots/Android_Meizu16x_ENet.jpg"/>|<img width="270" height="500" src="./Screenshots/Android_Meizu16x_yoloface500k-landmark106.jpg"/>|
 
 |  dbface | mbnv2_fcn | mbnv3_seg_small |
 |-------------------|-------------|---------|
-| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_dbface.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_MBNFCN.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_MBNV3_Seg_small.jpg"/>|
+| <img width="270" height="500" src="./Screenshots/Android_Meizu16x_dbface.jpg"/>|<img width="270" height="500" src="./Screenshots/Android_Meizu16x_MBNFCN.jpg"/>|<img width="270" height="500" src="./Screenshots/Android_Meizu16x_MBNV3_Seg_small.jpg"/>|
 
 |  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
-| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_meizu16x_yolov5s_custom_layer.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_meizu16x_nanodet.jpg"/>|<img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_meizu16x_yolo_fastest_xl.jpg"/>|
+| <img width="270" height="500" src="./Screenshots/Android_meizu16x_yolov5s_custom_layer.jpg"/>|<img width="270" height="500" src="./Screenshots/Android_meizu16x_nanodet.jpg"/>|<img width="270" height="500" src="./Screenshots/Android_meizu16x_yolo_fastest_xl.jpg"/>|
 
 |  light_openpose  |
 |-------------------|
-| <img width="270" height="500" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/Android_Meizu16x_lightopenpose.jpg"/>|
+| <img width="270" height="500" src="./Screenshots/Android_Meizu16x_lightopenpose.jpg"/>|
 
 
 > iOS
 
 |  mbnv2-yolov3-nano | yolov4-tiny | yolov5s |
 |-------------------|-------------|---------|
-| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_yolov3_nano.jpg"/> |<img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov4_tiny.jpg"/>| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s.jpg"/> |
+| <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_mobilenetv2_yolov3_nano.jpg"/> |<img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_yolov4_tiny.jpg"/>| <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_yolov5s.jpg"/> |
 
 |  yolov5s_custom_op | nanodet | yolo-fastest-xl |
 |-------------------|-------------|---------|
-| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolov5s_custom_op.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_nanodet.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolo_fastest_xl.jpg"/> |
+| <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_yolov5s_custom_op.jpg"/> | <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_nanodet.jpg"/> | <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_yolo_fastest_xl.jpg"/> |
 
 |  mbnv2_fcn | mbnv3_seg_small | simple_pose |
 |-------------------|-------------|---------|
-| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mobilenetv2_fcn.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_mbnv3_segmentation_small.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_simple_pose.jpg"/> |
+| <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_mobilenetv2_fcn.jpg"/> | <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_mbnv3_segmentation_small.jpg"/> | <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_simple_pose.jpg"/> |
 
 | chineseocr_lite_01 | chineseocr_lite_02 | light_openpose |
 |-------------------|-------------|---------|
-| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_chineseocr_lite_01.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_chineseocr_lite_02.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_lightopenpose.jpg"/> |
+| <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_chineseocr_lite_01.jpg"/> | <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_chineseocr_lite_02.jpg"/> | <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_lightopenpose.jpg"/> |
 
 |  yolact | yoloface500k-landmark106 | dbface |
 |-------------------|-------------|---------|
-| <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yolact.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_yoloface500k_landmark106.jpg"/> | <img width="270" height="480" src="https://github.com/cmdbug/YOLOv5_NCNN/blob/master/Screenshots/iOS_iPhone6sp_dbface.jpg"/> |
+| <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_yolact.jpg"/> | <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_yoloface500k_landmark106.jpg"/> | <img width="270" height="480" src="./Screenshots/iOS_iPhone6sp_dbface.jpg"/> |
 
 
 感谢:<br/>
