@@ -435,6 +435,7 @@ std::vector<OCRResult> OCR::detect(UIImage *image, int short_size) {
         resutls.push_back(ocrInfo);
 //        LOGD("jni ocr ocrresult:%s", ocrInfo.pre_res[0].c_str());
     }
+    delete[] rgba;
     return resutls;
 
 }

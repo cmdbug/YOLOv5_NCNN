@@ -473,6 +473,7 @@ void LightOpenPose::preprocess(UIImage *image, ncnn::Mat &in) {
     float norm[3] = {1.0f / 255.0f, 1.0f / 255.0f, 1.0f / 255.0f};
     float mean[3] = {127.5f, 127.5f, 127.5f};
     in.substract_mean_normalize(mean, norm);
+    delete[] rgba;
 }
 
 std::vector<human_pose_estimation::HumanPose> LightOpenPose::detect(UIImage *image) {
