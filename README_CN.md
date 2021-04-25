@@ -23,13 +23,13 @@
 从界面中选择需要测试的模型。
 ```
 ### 模型
-| model | android | iOS | from |
-|-------------------|:--------:|:--------:|:--------:|
-| YOLOv5s           | yes | yes |  [Github](https://github.com/ultralytics/yolov5)   |
+| model | android | iOS | from | other |
+|-------------------|:--------:|:--------:|:--------:|:--------:|
+| YOLOv5s           | yes | yes |  [Github](https://github.com/ultralytics/yolov5)   | [TNN](https://github.com/cmdbug/TNN_Demo) |
 | YOLOv4-tiny       | yes | yes |  [Github](https://github.com/ultralytics/yolov3)   |
 | YOLOv3-nano       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | YOLOv5s_custom_op | yes | yes |  [zhihu](https://zhuanlan.zhihu.com/p/275989233)   |
-| NanoDet           | yes | yes |  [Github](https://github.com/RangiLyu/nanodet)   |
+| NanoDet           | yes | yes |  [Github](https://github.com/RangiLyu/nanodet)   | [TNN](https://github.com/cmdbug/TNN_Demo) [MNN](https://github.com/cmdbug/MNN_Demo) |
 | YOLO-Fastest-xl   | yes | yes |  [Github](https://github.com/dog-qiuqiu/Yolo-Fastest)   |
 | Simple-Pose       | yes | yes |  [Github](https://github.com/dog-qiuqiu/MobileNet-Yolo)   |
 | Yolact            | yes | yes |  [Github](https://github.com/dbolya/yolact) [zhihu](https://zhuanlan.zhihu.com/p/128974102)  |
