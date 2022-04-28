@@ -54,6 +54,7 @@ Select the model to be tested directly on the interface.
 * Because the opencv library is too large, only arm64-v8a/armeabi-v7a is reserved. If you need other versions, go to the official download.
 * ncnn temporarily uses the vulkan version, and acceleration needs to be turned on before loading, which is not turned on in this project. If you want to use the ncnn version, you need to modify the CMakeLists.txt configuration.
 * Different AS versions may have various problems with compilation. If the compilation error cannot be solved, it is recommended to use AS4.0 or higher to try.
+* ncnn has been updated to a new version, which includes ncnn The official import method of cmake.
 
 This project is more about practicing the use and deployment of various models, without too much processing in terms of speed. If you have requirements for speed, you can directly obtain data such as YUV for direct input or use methods such as texture and opengl to achieve data input, reducing intermediate data transmission and conversion.
 
