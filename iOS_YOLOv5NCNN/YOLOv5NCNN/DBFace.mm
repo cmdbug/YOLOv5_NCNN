@@ -85,6 +85,7 @@ std::vector<Obj> DBFace::detect(UIImage *image, double threshold, double nms_thr
     //get each box and key point information
     decode(hmWeight, ids, tlrb, landmark, objs);
 
+    delete[] rgba;
     return nms(objs, (float) (1 - nms_threshold));  // 注意这里: 1 - iou
 }
 
